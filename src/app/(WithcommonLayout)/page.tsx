@@ -10,7 +10,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h2>Welcome to nextmart home page</h2>
+      <h2>Welcome to Nestly home page</h2>
     </div>
   );
 };
