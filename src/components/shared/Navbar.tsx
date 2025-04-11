@@ -45,8 +45,8 @@ export default function Navbar() {
   return (
     <header className="border-b w-full">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
-        <h1 className="text-3xl font-black flex items-center">
-          <Image src={logo} width={50} height={50} alt="Logo" />
+        <h1 className="text-2xl font-semibold flex items-center">
+          <Image src={logo} width={30} height={40} alt="Logo" />
           <span> Nestly</span>
         </h1>
         <div className="max-w-md  flex-grow">

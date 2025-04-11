@@ -7,7 +7,7 @@ type TButtonProps = {
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const NLButton = ({ children, variant = "primary", className, ...otherProps }: TButtonProps) => {
-  const baseStyles = "px-2 py-1 rounded font-medium transition duration-300 text-sm cursor-pointer";
+  const baseStyles = "px-3 py-2 rounded font-medium transition duration-300 text-sm cursor-pointer";
   const variantStyles = {
     primary: "bg-primary-500 hover:bg-primary-600 text-white",
     secondary: "bg-gray-600 hover:bg-gray-700",

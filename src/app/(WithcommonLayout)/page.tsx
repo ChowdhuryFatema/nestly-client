@@ -1,5 +1,6 @@
 "use client"
 
+import Banner from '@/components/modules/banner/Banner';
 import { useUser } from '@/context/UserContext';
 import React from 'react';
 
@@ -10,7 +11,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h2>Welcome to Nestly home page</h2>
+      <Banner />
     </div>
   );
 };

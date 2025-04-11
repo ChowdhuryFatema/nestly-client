@@ -1,0 +1,164 @@
+[
+    {
+        "location": "Dhanmondi, Dhaka",
+        "description": "Spacious 3-bedroom apartment near Dhanmondi Lake with a balcony and natural light.",
+        "rent": 30000,
+        "images": [
+            "https://t4.ftcdn.net/jpg/02/09/12/47/360_F_209124760_sEIPfgAurKyrJMIUmdg2cLyiDdxZ8dBr.jpg",
+            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+            "https://www.home-interiors.in/wp-content/uploads/2024/11/Slop-Roof-3400-1.jpg"
+        ],
+        "bedrooms": 3,
+        "amenities": [
+            "Parking",
+            "Lift",
+            "Generator",
+            "Security",
+            "Balcony"
+        ]
+    },
+    {
+        "location": "Bashundhara R/A, Dhaka",
+        "description": "Modern 2-bedroom flat in a quiet neighborhood close to NSU and IUB.",
+        "rent": 25000,
+        "images": [
+            "https://t4.ftcdn.net/jpg/02/09/12/47/360_F_209124760_sEIPfgAurKyrJMIUmdg2cLyiDdxZ8dBr.jpg",
+            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+            "https://www.home-interiors.in/wp-content/uploads/2024/11/Slop-Roof-3400-1.jpg"
+        ],
+        "bedrooms": 2,
+        "amenities": [
+            "Elevator",
+            "24/7 Security",
+            "CCTV",
+            "Gas Connection",
+            "Geyser"
+        ]
+    },
+    {
+        "location": "Uttara, Dhaka",
+        "description": "Fully furnished 1-bedroom studio apartment perfect for singles or couples.",
+        "rent": 18000,
+        "images": [
+            "https://t4.ftcdn.net/jpg/02/09/12/47/360_F_209124760_sEIPfgAurKyrJMIUmdg2cLyiDdxZ8dBr.jpg",
+            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+            "https://www.home-interiors.in/wp-content/uploads/2024/11/Slop-Roof-3400-1.jpg"
+        ],
+        "bedrooms": 1,
+        "amenities": [
+            "Furnished",
+            "Wi-Fi",
+            "Generator",
+            "Security",
+            "Lift"
+        ]
+    },
+    {
+        "location": "Mirpur DOHS, Dhaka",
+        "description": "Newly constructed 4-bedroom duplex with garden and garage.",
+        "rent": 45000,
+        "images": [
+            "https://t4.ftcdn.net/jpg/02/09/12/47/360_F_209124760_sEIPfgAurKyrJMIUmdg2cLyiDdxZ8dBr.jpg",
+            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+            "https://www.home-interiors.in/wp-content/uploads/2024/11/Slop-Roof-3400-1.jpg"
+        ],
+        "bedrooms": 4,
+        "amenities": [
+            "Garage",
+            "Garden",
+            "CCTV",
+            "24/7 Water",
+            "Gas Line"
+        ]
+    },
+    {
+        "location": "Mohakhali, Dhaka",
+        "description": "2-bedroom apartment ideal for small families, close to bus stop and markets.",
+        "rent": 22000,
+        "images": [
+            "https://t4.ftcdn.net/jpg/02/09/12/47/360_F_209124760_sEIPfgAurKyrJMIUmdg2cLyiDdxZ8dBr.jpg",
+            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+            "https://www.home-interiors.in/wp-content/uploads/2024/11/Slop-Roof-3400-1.jpg"
+        ],
+        "bedrooms": 2,
+        "amenities": [
+            "Lift",
+            "Gas",
+            "Security Guard",
+            "Backup Power",
+            "Mosque Nearby"
+        ]
+    },
+    {
+        "location": "Baridhara DOHS, Dhaka",
+        "description": "Luxurious 5-bedroom house with private terrace and elegant interiors.",
+        "rent": 70000,
+        "images": [
+            "https://t4.ftcdn.net/jpg/02/09/12/47/360_F_209124760_sEIPfgAurKyrJMIUmdg2cLyiDdxZ8dBr.jpg",
+            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+            "https://www.home-interiors.in/wp-content/uploads/2024/11/Slop-Roof-3400-1.jpg"
+        ],
+        "bedrooms": 5,
+        "amenities": [
+            "Private Terrace",
+            "Garage",
+            "24/7 Security",
+            "AC",
+            "Generator"
+        ]
+    },
+    {
+        "location": "Banani, Dhaka",
+        "description": "Stylish 3-bedroom apartment with rooftop garden and city views.",
+        "rent": 35000,
+        "images": [
+            "https://t4.ftcdn.net/jpg/02/09/12/47/360_F_209124760_sEIPfgAurKyrJMIUmdg2cLyiDdxZ8dBr.jpg",
+            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+            "https://www.home-interiors.in/wp-content/uploads/2024/11/Slop-Roof-3400-1.jpg"
+        ],
+        "bedrooms": 3,
+        "amenities": [
+            "Rooftop Garden",
+            "Lift",
+            "Security",
+            "Hot Water",
+            "Wi-Fi"
+        ]
+    },
+    {
+        "location": "Gulshan 2, Dhaka",
+        "description": "Premium 4-bedroom flat in a diplomatic zone with modern finishes.",
+        "rent": 60000,
+        "images": [
+            "https://t4.ftcdn.net/jpg/02/09/12/47/360_F_209124760_sEIPfgAurKyrJMIUmdg2cLyiDdxZ8dBr.jpg",
+            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+            "https://www.home-interiors.in/wp-content/uploads/2024/11/Slop-Roof-3400-1.jpg"
+        ],
+        "bedrooms": 4,
+        "amenities": [
+            "Lift",
+            "Generator",
+            "Security",
+            "AC",
+            "Swimming Pool"
+        ]
+    },
+    {
+        "location": "Keraniganj, Dhaka",
+        "description": "Affordable 2-bedroom apartment in a peaceful area with nearby schools.",
+        "rent": 12000,
+        "images": [
+            "https://t4.ftcdn.net/jpg/02/09/12/47/360_F_209124760_sEIPfgAurKyrJMIUmdg2cLyiDdxZ8dBr.jpg",
+            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+            "https://www.home-interiors.in/wp-content/uploads/2024/11/Slop-Roof-3400-1.jpg"
+        ],
+        "bedrooms": 2,
+        "amenities": [
+            "Tube Well",
+            "Security",
+            "Playground",
+            "Mosque Nearby",
+            "Gas"
+        ]
+    }
+]

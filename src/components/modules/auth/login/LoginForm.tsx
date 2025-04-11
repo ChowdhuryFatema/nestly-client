@@ -77,9 +77,9 @@ const LoginForm = () => {
   return (
     <div className="flex justify-center items-center">
       <div>
-        <div className="mb-5 space-y-3 text-center">
+        <div className="mb-5 space-y-2 text-center">
           <h2 className="text-2xl font-semibold">Welcome Back Man! 👋</h2>
-          <p className="text-gray-600">Enter Login Details</p>
+          <p className="text-gray-600 text-sm">Enter Login Details</p>
         </div>
         <div>
           <div className="flex justify-center gap-2 mb-5">
@@ -105,7 +105,7 @@ const LoginForm = () => {
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-            <label>Email</label>
+            <label className="text-sm">Email</label>
             <FormField
               control={form.control}
               name="email"
@@ -117,7 +117,7 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <label>Password</label>
+            <label className="text-sm">Password</label>
             <FormField
               control={form.control}
               name="password"
@@ -141,7 +141,7 @@ const LoginForm = () => {
             >
               {isSubmitting ? "Logging in..." : "Login"}
             </NLButton>
-            <p className="text-center">
+            <p className="text-center text-sm">
               Do not have an account yet?{" "}
               <Link href="/register">
                 <span className="text-primary-500 font-semibold">

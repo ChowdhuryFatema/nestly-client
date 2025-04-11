@@ -48,15 +48,15 @@ const RegisterForm = () => {
     <div className="max-w-[60%] mx-auto">
       <div className="flex justify-center items-center">
         <div className="w-full">
-          <div className="mb-5 space-y-3 text-center">
+          <div className="mb-5 space-y-2 text-center">
             <h2 className="text-2xl font-semibold">Hi, Get Started Now 👋</h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-sm">
               Enter details to create your Trek Tales account
             </p>
           </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-              <label>Full Name</label>
+              <label className="text-sm">Full Name</label>
               <FormField
                 control={form.control}
                 name="name"
@@ -68,7 +68,7 @@ const RegisterForm = () => {
                   </FormItem>
                 )}
               />
-              <label>Email</label>
+              <label className="text-sm">Email</label>
               <FormField
                 control={form.control}
                 name="email"
@@ -80,7 +80,7 @@ const RegisterForm = () => {
                   </FormItem>
                 )}
               />
-              <label>Password</label>
+              <label className="text-sm">Password</label>
               <FormField
                 control={form.control}
                 name="password"
@@ -92,7 +92,7 @@ const RegisterForm = () => {
                   </FormItem>
                 )}
               />
-              <label>Confirm Password</label>
+              <label className="text-sm">Confirm Password</label>
               <FormField
                 control={form.control}
                 name="confirmPassword"
@@ -117,7 +117,7 @@ const RegisterForm = () => {
               >
                 {isSubmitting ? "Registering..." : "Register"}
               </NLButton>
-              <p className="text-center">
+              <p className="text-center text-sm">
                 Already have an account?{" "}
                 <Link href="/login" className="text-primary-500 font-semibold ">
                   Login Now
