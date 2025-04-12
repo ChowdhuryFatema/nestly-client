@@ -16,7 +16,7 @@ const RentalHouseDetails = async ({
 
   return (
     <div>
-      <div className="relative w-full h-[40vh]">
+      <div className="relative w-full h-[30vh] md:h-[40vh]">
         {/* Background Image */}
         <Image src={homeImg} fill alt="Home" className="object-cover z-0" />
 
@@ -26,10 +26,11 @@ const RentalHouseDetails = async ({
         {/* Logo and content */}
         <div className="absolute left-1/2 top-[50%] -translate-x-[50%] -translate-y-[50%] z-20 text-center">
           <div className="space-y-2">
-            <h1 className="text-3xl font-black flex items-center justify-center text-white">
+            <p className="text-white text-lg">The ultimate luxury</p>
+            <h1 className="text-xl md:text-3xl lg:text-5xl text-white">
               Explore Rental Details
             </h1>
-            <div className="flex items-center space-x-2 text-white justify-center">
+            <div className="flex items-center space-x-2 text-white justify-center text-sm md:text-xl mt-5">
               <Link href="/">Home</Link>
               <span>/</span>
               <span className="text-gray-300">Details</span>

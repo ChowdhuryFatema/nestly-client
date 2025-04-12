@@ -1,7 +1,7 @@
 "use client";
 
 import logo from "@/app/assets/nestly-logo.png";
-import { LogOut } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -10,14 +10,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { logout } from "@/services/AuthService";
-// import { useUser } from "@/context/UserContext";
 import { usePathname, useRouter } from "next/navigation";
 import { protectedRoutes } from "@/constants";
 import Image from "next/image";
 import NLButton from "../ui/core/ImageUploader/NLButton";
 import clsx from "clsx";
+// import { useUser } from "@/context/UserContext";
 
 export default function Navbar() {
   // const { user, setLoading } = useUser();
@@ -27,7 +28,6 @@ export default function Navbar() {
   const handleLogOut = () => {
     logout();
     // setLoading(true);
-
     if (protectedRoutes.some((route) => pathname.match(route))) {
       router.push("/");
     }
@@ -35,98 +35,107 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About Us" },
+    { href: "/about-us", label: "About Us" },
     { href: "/all-rental", label: "All Listings Rental" },
   ];
+  // const user = null
 
   const user = {
-    role: "admin"
-  }
+    role: "admin",
+  };
 
   return (
     <header className="border-b w-full">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
-        <h1 className="text-2xl font-semibold flex items-center">
+        {/* Logo */}
+        <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
           <Image src={logo} width={30} height={40} alt="Logo" />
-          <span> Nestly</span>
+          <span>Nestly</span>
         </h1>
-        <div className="max-w-md  flex-grow">
-          <ul className="flex justify-center space-x-6 text-sm text-gray-800 font-medium my-4">
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex flex-grow justify-center">
+          <ul className="flex space-x-6 text-sm text-gray-800 font-medium">
             {navLinks.map((link) => (
-              <li key={link.href} className={clsx(pathname === link.href && "text-primary-500", "font-bold")}>
-                <Link
-                  href={link.href}>
-                  {link.label}
-                </Link>
+              <li
+                key={link.href}
+                className={clsx(
+                  pathname === link.href && "text-primary-500",
+                  "font-bold"
+                )}
+              >
+                <Link href={link.href}>{link.label}</Link>
               </li>
             ))}
           </ul>
         </div>
-        <nav className="flex gap-2">
-          <Link href={"/login"}>
-            <NLButton>Login</NLButton>
-          </Link>
-          <Link href={"/register"}>
-            <NLButton>Register</NLButton>
-          </Link>
-          <DropdownMenu>
-            <DropdownMenuTrigger className="outline-none cursor-pointer">
-              <Avatar className="border-2 border-primary-500 rounded-full">
-                <AvatarImage src="https://s.cafebazaar.ir/images/icons/cute.love.dp-fc9c8497-522b-4848-bd66-72ee57b9d195_512x512.png?x-img=v1/resize,h_256,w_256,lossless_false/optimize" />
-                <AvatarFallback>Profile</AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem className="cursor-pointer">
-                My Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                <Link href={`/${user.role}`}>Dashboard</Link>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={handleLogOut}
-                className="cursor-pointer text-red-500"
-              >
-                <LogOut /> <span>Logout</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
 
-          {/* {user ? (
-            <>
-              <Link href={"/create-shop"}>
-                <Button className="cursor-pointer">Create Shop</Button>
-              </Link>
+        <div className="flex items-center">
+          {/* Desktop Buttons + Dropdown */}
+          <nav className="md:flex gap-2 items-center">
+            {user ? (
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
+                <DropdownMenuTrigger className="outline-none cursor-pointer">
+                  <Avatar className="border-2 border-primary-500 rounded-full">
+                    <AvatarImage src="https://s.cafebazaar.ir/images/icons/cute.love.dp-fc9c8497-522b-4848-bd66-72ee57b9d195_512x512.png" />
                     <AvatarFallback>Profile</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Dashboard</DropdownMenuItem>
-                  <DropdownMenuItem>My Shop</DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    My Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    <Link href={`/${user?.role}`}>Dashboard</Link>
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={handleLogOut}
                     className="cursor-pointer text-red-500"
                   >
-                    <LogOut /> <span>Logout</span>
+                    <LogOut className="mr-2 h-4 w-4" /> Logout
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            </>
-          ) : (
-            <Link href={"/login"}>
-              <Button className="cursor-pointer">Login</Button>
-            </Link>
-          )} */}
-        </nav>
+            ) : (
+              <>
+                <Link href={"/login"}>
+                  <NLButton className="mr-2 text-sm">Login</NLButton>
+                </Link>
+                <Link href={"/register"}>
+                  <NLButton>Register</NLButton>
+                </Link>
+              </>
+            )}
+          </nav>
+
+          {/* Mobile Menu Icon */}
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <button className="p-2">
+                  <Menu className="w-6 h-6" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-52">
+                <div className="space-y-4 mt-4 p-5">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={clsx(
+                        pathname === link.href && "text-primary-500",
+                        "block text-sm font-semibold"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
       </div>
     </header>
   );

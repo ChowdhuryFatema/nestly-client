@@ -12,6 +12,7 @@ import banner6 from "@/app/assets/images/home1.jpg";
 import banner7 from "@/app/assets/images/home1.jpg";
 import banner8 from "@/app/assets/images/home1.jpg";
 import NLButton from "@/components/ui/core/ImageUploader/NLButton";
+import Link from "next/link";
 
 const images = [
   banner1,
@@ -58,21 +59,33 @@ function Banner() {
             <div className="text-white absolute z-30 flex justify-center items-center w-full h-[60vh]">
               <div className="text-center lg:w-3xl px-5 py-5 space-y-2">
                 <h2
-                  className="text-3xl md:text-4xl lg:text-5xl leading-snug"
+                  className="text-2xl md:text-4xl lg:text-5xl leading-snug"
                   data-aos="fade-down"
                   data-aos-duration="500"
                 >
-                  Find Your Next <span className="text-primary-500 !pt-5">Home</span> with Ease
+                  Find Your Next{" "}
+                  <span className="text-primary-500 !pt-5">Home</span> with Ease
                 </h2>
                 <p
+                  // data-aos="fade-down"
+                  // data-aos-duration="500"
+                  // data-aos-delay="500"
+                  className="text-sm md:text-xl !font-light"
+                >
+                  Find comfortable, stylish, and affordable rental homes in your preferred location with ease. Nestly makes renting simple, reliable, and stress-free 
+                </p>
+                <div
+                  className="flex justify-center items-center !mt-6 !px-5"
                   data-aos="fade-down"
                   data-aos-duration="500"
-                  data-aos-delay="500"
+                  data-aos-delay="1000"
                 >
-                 Find comfortable, stylish, and affordable rental homes in your preferred location with ease. Nestly makes renting simple, reliable, and stress-free.
-                </p>
-                <div className="flex justify-center items-center !mt-6 !px-5"  data-aos="fade-down" data-aos-duration="500" data-aos-delay="1000">
-                <NLButton variant="primary" className="px-5 py-3 text-lg">Post Rental House Info</NLButton>
+                  <Link href={"/create-rental"}>
+                    {" "}
+                    <NLButton variant="primary" className="lg:px-5 lg:py-3 text-sm lg:text-lg">
+                      Post Rental House Info
+                    </NLButton>
+                  </Link>
                 </div>
               </div>
             </div>

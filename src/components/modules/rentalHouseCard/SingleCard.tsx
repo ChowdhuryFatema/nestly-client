@@ -110,7 +110,7 @@ const SingleCard = ({ info }: TTRentalHouseProps) => {
         {/* <p className="!text-sm text-gray-700">{info?.description}</p> */}
 
         <Link href={`/details/${info.id}`}>
-          <NLButton variant="primary" className="w-full mt-2">
+          <NLButton variant="primary" className="mt-2">
             View Details
           </NLButton>
         </Link>
