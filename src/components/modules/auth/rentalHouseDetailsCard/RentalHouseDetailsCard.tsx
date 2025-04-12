@@ -101,7 +101,7 @@ const RentalHouseDetailsCard = ({
       </div>
 
       <div className="space-y-3">
-        <h3 className="font-bold text-3xl">
+        <h3 className="font-bold text-2xl">
           Location:{" "}
           <span className="text-primary-500">{singleData?.location}</span>
         </h3>
