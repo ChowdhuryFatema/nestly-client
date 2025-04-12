@@ -17,6 +17,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { protectedRoutes } from "@/constants";
 import Image from "next/image";
 import NLButton from "../ui/core/ImageUploader/NLButton";
+import clsx from "clsx";
 
 export default function Navbar() {
   // const { user, setLoading } = useUser();
@@ -52,11 +53,9 @@ export default function Navbar() {
         <div className="max-w-md  flex-grow">
           <ul className="flex justify-center space-x-6 text-sm text-gray-800 font-medium my-4">
             {navLinks.map((link) => (
-              <li key={link.href}>
+              <li key={link.href} className={clsx(pathname === link.href && "text-primary-500", "font-bold")}>
                 <Link
-                  href={link.href}
-                  className="hover:text-primary-500 font-semibold"
-                >
+                  href={link.href}>
                   {link.label}
                 </Link>
               </li>
