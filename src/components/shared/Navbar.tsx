@@ -18,16 +18,16 @@ import { protectedRoutes } from "@/constants";
 import Image from "next/image";
 import NLButton from "../ui/core/ImageUploader/NLButton";
 import clsx from "clsx";
-// import { useUser } from "@/context/UserContext";
+import { useUser } from "@/context/UserContext";
 
 export default function Navbar() {
-  // const { user, setLoading } = useUser();
+  const { user, setLoading } = useUser();
   const pathname = usePathname();
   const router = useRouter();
 
   const handleLogOut = () => {
     logout();
-    // setLoading(true);
+    setLoading(true);
     if (protectedRoutes.some((route) => pathname.match(route))) {
       router.push("/");
     }
@@ -38,11 +38,7 @@ export default function Navbar() {
     { href: "/about-us", label: "About Us" },
     { href: "/all-rental", label: "All Listings Rental" },
   ];
-  // const user = null
 
-  const user = {
-    role: "landlord",
-  };
 
   return (
     <header className="border-b w-full">
