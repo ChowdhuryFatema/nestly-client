@@ -1,7 +1,7 @@
 "use client";
 
 import Banner from "@/components/modules/banner/Banner";
-import Cards from "@/components/modules/rentalHouseCard/Cards";
+import Cards from "@/components/modules/rentalHouse/rentalHouseCard/Cards";
 import { useUser } from "@/context/UserContext";
 import React from "react";
 

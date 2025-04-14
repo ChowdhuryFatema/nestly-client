@@ -105,7 +105,7 @@ const LoginForm = () => {
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-            <label className="text-sm">Email</label>
+            <label className="text-sm">Email or Username</label>
             <FormField
               control={form.control}
               name="email"
