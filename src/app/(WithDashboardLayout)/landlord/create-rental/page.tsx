@@ -1,5 +1,6 @@
-import CreateRentalForm from "@/components/modules/rentalHouse/rentalForm/CreateRentalForm";
+
 import React from "react";
+import CreateRentalForm from "../../../../components/modules/dashboard/rentalHouse/rentalForm/CreateRentalForm";
 
 const CreateRental = () => {
   return (
