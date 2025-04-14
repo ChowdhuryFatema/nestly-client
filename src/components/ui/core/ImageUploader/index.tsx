@@ -3,8 +3,8 @@ import { Input } from "../../input";
 import { cn } from "@/lib/utils";
 
 type TImageUploaderProps = {
-  setImageFiles: Dispatch<React.SetStateAction<[] | File[]>>;
-  setImagePreview: Dispatch<React.SetStateAction<[] | string[]>>;
+  setImageFiles: Dispatch<React.SetStateAction<File[]>>;
+  setImagePreview: Dispatch<React.SetStateAction<string[]>>;
   label: string;
   className?: string;
 };
@@ -16,17 +16,19 @@ const ImageUploader = ({
   setImagePreview,
 }: TImageUploaderProps) => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files![0];
-    setImageFiles((prev) => [...prev, file]);
+    const files = event.target.files;
+    if (!files) return;
 
-    if (file) {
+    const fileArray = Array.from(files);
+    setImageFiles((prev) => [...prev, ...fileArray]);
+
+    fileArray.forEach((file) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview((prev) => [...prev, reader.result as string]);
       };
-
       reader.readAsDataURL(file);
-    }
+    });
 
     event.target.value = "";
   };
@@ -42,7 +44,7 @@ const ImageUploader = ({
         id="image-uploader"
       />
       <label
-        className="w-full h-36 md:size-36 flex justify-center items-center border-2 border-dashed border-gray-300 rounded-md cursor-pointer text-center text-sm text-gray-500 hover:bg-transparent"
+        className="!w-full md:size-36 flex justify-center items-center border-2 border-dashed border-gray-300 rounded-md cursor-pointer text-center text-sm text-gray-500 hover:bg-transparent"
         htmlFor="image-uploader"
       >
         {label}
