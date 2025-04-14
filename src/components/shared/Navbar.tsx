@@ -41,7 +41,7 @@ export default function Navbar() {
   // const user = null
 
   const user = {
-    role: "admin",
+    role: "landlord",
   };
 
   return (
