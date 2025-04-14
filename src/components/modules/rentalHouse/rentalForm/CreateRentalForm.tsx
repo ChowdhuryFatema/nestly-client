@@ -10,24 +10,28 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 // import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { registerUser } from "@/services/AuthService";
 import { toast } from "sonner";
 import NLButton from "@/components/ui/core/ImageUploader/NLButton";
 import { Textarea } from "@/components/ui/textarea";
+import ImagePreviewer from "@/components/ui/core/ImageUploader/ImagePreview";
+import ImageUploader from "@/components/ui/core/ImageUploader";
 // import { rentalSchema } from "./rentalValidation";
 
 const CreateRentalForm = () => {
+  const [imageFiles, setImageFiles] = useState<File[] | []>([]);
+  const [imagePreview, setImagePreview] = useState<string[] | []>([]);
   const form = useForm({
     // resolver: zodResolver(rentalSchema),
   });
 
+  console.log("imageFiles", imageFiles);
+
   const {
     formState: { isSubmitting },
   } = form;
-
-
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
@@ -97,24 +101,42 @@ const CreateRentalForm = () => {
                   </FormItem>
                 )}
               />
-              <label className="text-sm">Description</label>
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel />
-                    <Textarea {...field} value={field.value || ""} />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
 
-              <NLButton
-                variant="primary"
-                className="w-full"
-                type="submit"
-              >
+              <div className="grid grid-cols-3 gap-5">
+                <div className="col-span-2">
+                  <label className="text-sm">Description</label>
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel />
+                        <Textarea className="h-36" {...field} value={field.value || ""} />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="mt-8">
+                  <ImageUploader
+                    setImageFiles={setImageFiles!}
+                    setImagePreview={setImagePreview}
+                    label="Upload Logo"
+                  />
+                </div>
+              </div>
+
+              <div>
+                {imagePreview.length > 0 && (
+                  <ImagePreviewer
+                    setImageFiles={setImageFiles}
+                    imagePreview={imagePreview}
+                    setImagePreview={setImagePreview}
+                    className="grid grid-cols-7 gap-2"
+                  />
+                )}
+              </div>
+              <NLButton variant="primary" className="w-full" type="submit">
                 {isSubmitting ? "Registering..." : "Register"}
               </NLButton>
             </form>
