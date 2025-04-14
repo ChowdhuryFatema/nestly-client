@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { BookOpen, Bot } from "lucide-react";
+import { BookOpen, Bot, LucideIcon } from "lucide-react";
 
 import {
   Sidebar,
@@ -15,61 +15,84 @@ import { NavUser } from "./nav-user";
 import Image from "next/image";
 import logo from "@/app/assets/nestly-logo.png";
 import Link from "next/link";
+import { useUser } from "@/context/UserContext";
 
-// This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-  ],
+type NavItem = {
+  title: string;
+  url: string;
+  icon?: LucideIcon;
+  isActive?: boolean;
+  items?: { title: string; url: string }[];
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user } = useUser();
+
+  const data: {
+    user: {
+      name: string;
+      email: string;
+      avatar: string;
+    };
+    navMain: NavItem[];
+  } = {
+    user: {
+      name: user?.name || "Guest",
+      email: user?.email || "",
+      avatar: "",
+    },
+    navMain: [],
+  };
+
+  if (user?.role === "admin") {
+    data.navMain = [
+      {
+        title: "Manage Users",
+        url: "#",
+        icon: Bot,
+        items: [
+          { title: "Explorer", url: "#" },
+          { title: "Explorer", url: "#" },
+          { title: "Quantum", url: "#" },
+        ],
+      },
+      {
+        title: "Documentation",
+        url: "#",
+        icon: BookOpen,
+        items: [
+          { title: "Introduction", url: "#" },
+          { title: "Get Started", url: "#" },
+          { title: "Tutorials", url: "#" },
+          { title: "Changelog", url: "#" },
+        ],
+      },
+    ];
+  } else if (user?.role === "landlord") {
+    data.navMain = [
+      {
+        title: "Documentation",
+        url: "#",
+        icon: BookOpen,
+        items: [
+          { title: "Get Started", url: "#" },
+          { title: "Tutorials", url: "#" },
+        ],
+      },
+    ];
+  } else if (user?.role === "tenant") {
+    data.navMain = [
+      {
+        title: "Documentation",
+        url: "#",
+        icon: BookOpen,
+        items: [
+          { title: "Get Started", url: "#" },
+          { title: "Tutorials", url: "#" },
+        ],
+      },
+    ];
+  }
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -85,7 +108,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={data.user!} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
