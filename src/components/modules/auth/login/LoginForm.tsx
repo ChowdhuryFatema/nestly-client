@@ -10,13 +10,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import React from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
+import { loginUser } from "@/services/AuthService";
 import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
 import Link from "next/link";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter, useSearchParams } from "next/navigation";
 import NLButton from "@/components/ui/core/ImageUploader/NLButton";
 
@@ -33,8 +32,6 @@ const LoginForm = () => {
     formState: { isSubmitting },
   } = form;
 
-  const [reCaptchaStatus, setReCaptchaStatus] = useState(false);
-
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirectPath");
   const router = useRouter();
@@ -45,7 +42,6 @@ const LoginForm = () => {
       console.log(res);
       if (res?.success) {
         toast.success(res?.message);
-
         if (redirect) {
           router.push(redirect);
         } else {
@@ -56,21 +52,6 @@ const LoginForm = () => {
       }
     } catch (error: any) {
       console.error(error);
-    }
-  };
-
-  const handleRecaptcha = async (value: string | null) => {
-    console.log(value);
-    try {
-      const res = await reCaptchaTokenVerification(value!);
-
-      if (res?.success) {
-        setReCaptchaStatus(true);
-      }
-
-      console.log("res", res);
-    } catch (error: any) {
-      throw Error(error);
     }
   };
 
@@ -129,14 +110,9 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECHAPCHA_CLIENT_KEY!}
-              onChange={handleRecaptcha}
-            />
             <NLButton
               variant="primary"
               className="w-full"
-              disabled={reCaptchaStatus ? false : true}
               type="submit"
             >
               {isSubmitting ? "Logging in..." : "Login"}

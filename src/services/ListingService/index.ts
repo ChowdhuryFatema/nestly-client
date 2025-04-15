@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 
-const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_API}`;
+const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_API}/landlors`;
 
 //  Create Rental House
 export const createRentalHouse = async (formData: FormData) => {
