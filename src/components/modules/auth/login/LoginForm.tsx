@@ -10,31 +10,36 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { loginUser } from "@/services/AuthService";
+import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
 import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import NLButton from "@/components/ui/core/ImageUploader/NLButton";
+import clsx from "clsx";
 
 const LoginForm = () => {
+  const [credential, setCredential] = useState("tenant");
+  const [reCaptchaStatus, setReCaptchaStatus] = useState(false);
+
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirectPath");
+  const router = useRouter();
+
   const form = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "fatema@gmail.com",
-      password: "123456",
+      email: "",
+      password: "",
     },
+    mode: "onChange",
   });
 
   const {
     formState: { isSubmitting },
   } = form;
-
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirectPath");
-  const router = useRouter();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
@@ -45,7 +50,7 @@ const LoginForm = () => {
         if (redirect) {
           router.push(redirect);
         } else {
-          router.push("/profile");
+          router.push("/");
         }
       } else {
         toast.error(res?.message);
@@ -54,6 +59,48 @@ const LoginForm = () => {
       console.error(error);
     }
   };
+
+  const handleRecaptcha = async (value: string | null) => {
+    console.log(value);
+    try {
+      const res = await reCaptchaTokenVerification(value!);
+
+      if (res?.success) {
+        setReCaptchaStatus(true);
+      }
+
+      console.log("res", res);
+    } catch (error: any) {
+      throw Error(error);
+    }
+  };
+
+  // inside the component
+  useEffect(() => {
+    let newValues = {
+      email: "",
+      password: "",
+    };
+
+    if (credential === "admin") {
+      newValues = {
+        email: "admin@gmail.com",
+        password: "123456",
+      };
+    } else if (credential === "tenant") {
+      newValues = {
+        email: "tenant@gmail.com",
+        password: "123456",
+      };
+    } else if (credential === "landlord") {
+      newValues = {
+        email: "landlord@gmail.com",
+        password: "123456",
+      };
+    }
+
+    form.reset(newValues); // 🔥 reset form values
+  }, [credential, form]);
 
   return (
     <div className="flex justify-center items-center">
@@ -65,20 +112,32 @@ const LoginForm = () => {
         <div>
           <div className="flex justify-center gap-2 mb-5">
             <NLButton
+              onClick={() => setCredential("tenant")}
               variant="outline"
-              className="hover:bg-primary-600 hover:!text-white !text-[12px]"
+              className={clsx(
+                credential === "tenant" && "bg-primary-500 !text-white",
+                "hover:bg-primary-600 hover:!text-white !text-[12px]"
+              )}
             >
-              tenant
+              Tenant Credentials
             </NLButton>
             <NLButton
+              onClick={() => setCredential("landlord")}
               variant="outline"
-              className="hover:bg-primary-600 hover:!text-white !text-[12px]"
+              className={clsx(
+                credential === "landlord" && "bg-primary-500 !text-white",
+                "hover:bg-primary-600 hover:!text-white !text-[12px]"
+              )}
             >
-              landlord Credentials
+              Landlord Credentials
             </NLButton>
             <NLButton
+              onClick={() => setCredential("admin")}
               variant="outline"
-              className="hover:bg-primary-600 hover:!text-white !text-[12px]"
+              className={clsx(
+                credential === "admin" && "bg-primary-500 !text-white",
+                "hover:bg-primary-600 hover:!text-white !text-[12px]"
+              )}
             >
               Admin Credentials
             </NLButton>

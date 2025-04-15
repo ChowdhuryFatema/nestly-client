@@ -7,10 +7,10 @@ import logo from "@/app/assets/nestly-logo.png";
 const RegisterPage = () => {
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 justify-between items-center">
-        <div className="relative w-full h-screen">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-between items-center">
+        <div className="relative w-full h-screen hidden lg:flex">
           {/* Background Image */}
-          <Image src={homeImg} fill alt="Home" className="object-cover z-0" />
+          <Image src={homeImg} fill alt="Home" className="object-cover z-0 h-screen" />
 
           {/* Black Overlay */}
           <div className="absolute inset-0 bg-black/60 z-10" />
@@ -27,7 +27,7 @@ const RegisterPage = () => {
             </p>
           </div>
         </div>
-        <div>
+        <div className="my-10">
           <RegisterForm />
         </div>
       </div>

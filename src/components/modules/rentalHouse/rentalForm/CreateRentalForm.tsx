@@ -36,6 +36,8 @@ const CreateRentalForm = ({ defaultValues }: RentalHouseFormProps) => {
     defaultValues: defaultValues || {},
   });
 
+  console.log("imageFiles", imageFiles);
+
   const {
     formState: { isSubmitting },
   } = form;
