@@ -18,10 +18,10 @@ export const registerUser = async (userData: FieldValues) => {
         const result = await res.json()
 
         if (result?.success) {
-            (await cookies()).set("accessToken", result?.data?.accessToken)
+            (await cookies()).set("accessToken", result?.data?.token)
         }
 
-        console.log("result", result?.data?.accessToken)
+        console.log("result", result?.data?.token)
 
         return result;
     } catch (error: any) {
@@ -47,7 +47,7 @@ export const loginUser = async (userData: FieldValues) => {
             (await cookies()).set("accessToken", result?.data?.token)
         }
 
-        console.log("result", result?.data?.accessToken)
+        console.log("result", result?.data?.token)
 
         return result;
     } catch (error: any) {

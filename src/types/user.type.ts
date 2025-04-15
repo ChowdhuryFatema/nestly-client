@@ -1,9 +1,10 @@
-export interface IUser {
-    userId: string;
+export type TUser = {
+    _id: string;
     name: string;
     email: string;
-    phoneNumber: number;
+    password: string;
     role: "tenant" | "landlord" | "admin";
-    iat?: number;
-    exp?: number;
-}
+    isActive: boolean; 
+    createdAt: string;
+    updatedAt: string;
+};
