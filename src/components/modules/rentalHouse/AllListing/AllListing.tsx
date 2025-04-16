@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client"
 import { useState } from "react";
 import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { deleteRentalHouse, getAllRentalHouses } from "@/services/ListingService";
+import { deleteRentalHouse } from "@/services/ListingService";
 import Image from "next/image";
 
 interface AllListingProps {
@@ -15,30 +14,14 @@ interface AllListingProps {
 const AllListing = ({ listings: initialListings }: AllListingProps) => {
   const [listings, setListings] = useState<any[]>(initialListings);
   const [loading, setLoading] = useState(false);
-
-  const fetchListings = async () => {
-    setLoading(true);
-    try {
-      const res = await getAllRentalHouses();
-      if (res?.success) {
-        setListings(res?.data || []);
-      } else {
-        toast.error(res?.message || "Failed to load listings");
-      }
-    } catch (err: any) {
-      toast.error("Something went wrong while fetching listings");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+ console.log("listings...", listings);
   const handleDelete = async (id: string) => {
     try {
       const res = await deleteRentalHouse(id);
       if (res?.success) {
         toast.success("Deleted successfully");
-        fetchListings();
+        // Optionally update the state to remove the deleted listing from UI
+        setListings(listings.filter((listing) => listing._id !== id));
       } else {
         toast.error(res?.message || "Failed to delete");
       }
@@ -57,8 +40,10 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
           <thead className="bg-gray-100">
             <tr>
               <th className="px-4 py-2 text-left">Image</th>
-              <th className="px-4 py-2 text-left">Name</th>
+            
               <th className="px-4 py-2 text-left">Location</th>
+              <th className="px-4 py-2 text-left">Rent Amount</th>
+              <th className="px-4 py-2 text-left">Bed Roodms</th>
               <th className="px-4 py-2 text-left">Actions</th>
             </tr>
           </thead>
@@ -81,8 +66,10 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
                       className="object-cover rounded"
                     />
                   </td>
-                  <td className="px-4 py-2">{listing.name}</td>
+                 
                   <td className="px-4 py-2">{listing.location}</td>
+                  <td className="px-4 py-2">{listing.rentAmount}</td>
+                  <td className="px-4 py-2">{listing. bedrooms}</td>
                   <td className="px-4 py-2">
                     <Button
                       size="sm"

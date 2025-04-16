@@ -16,6 +16,7 @@ import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
 import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
 import Link from "next/link";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter, useSearchParams } from "next/navigation";
 import NLButton from "@/components/ui/core/ImageUploader/NLButton";
 import clsx from "clsx";
@@ -47,6 +48,7 @@ const LoginForm = () => {
       console.log(res);
       if (res?.success) {
         toast.success(res?.message);
+
         if (redirect) {
           router.push(redirect);
         } else {
@@ -169,9 +171,14 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
+            <ReCAPTCHA
+              sitekey={process.env.NEXT_PUBLIC_RECHAPCHA_CLIENT_KEY!}
+              onChange={handleRecaptcha}
+            />
             <NLButton
               variant="primary"
               className="w-full"
+              disabled={reCaptchaStatus ? false : true}
               type="submit"
             >
               {isSubmitting ? "Logging in..." : "Login"}

@@ -9,13 +9,18 @@
 
 // next.config.js
 
-module.exports = {
+/** @type {import('next').NextConfig} */
+
+const nextConfig = {
   images: {
-    domains: [
-      't4.ftcdn.net',
-      'st4.depositphotos.com',
-      'www.home-interiors.in'
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**", // Allows all domains
+      },
     ],
   },
-}
+};
+
+export default nextConfig;
 
