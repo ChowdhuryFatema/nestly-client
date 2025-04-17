@@ -2,12 +2,9 @@
 
 import Banner from "@/components/modules/banner/Banner";
 import Cards from "@/components/modules/rentalHouse/rentalHouseCard/Cards";
-import { useUser } from "@/context/UserContext";
-import React from "react";
 
 const HomePage = () => {
-  const user = useUser();
-  console.log("user", user);
+
 
   return (
     <div>
