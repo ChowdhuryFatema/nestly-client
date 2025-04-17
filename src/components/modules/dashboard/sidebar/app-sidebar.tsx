@@ -71,11 +71,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   } else if (user?.role === "landlord") {
     data.navMain = [
       {
-        title: "Documentation",
+        title: "Listings",
         url: "#",
         icon: BookOpen,
         items: [
-          { title: "Get Started", url: "#" },
+          { title: "AllListings", url: "/landlord/AllListing" },
           { title: "Tutorials", url: "#" },
         ],
       },
