@@ -4,7 +4,7 @@ type Props = {
 };
 
 export const AllRentalRequests =  ({requests} : Props) => {
- 
+  console.log("requests....", requests);
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold mb-4">All Rental Requests</h2>

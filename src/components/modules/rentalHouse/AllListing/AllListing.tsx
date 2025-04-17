@@ -11,16 +11,22 @@ interface AllListingProps {
   listings: any[];
 }
 
+const ITEMS_PER_PAGE = 10;
+
 const AllListing = ({ listings: initialListings }: AllListingProps) => {
   const [listings, setListings] = useState<any[]>(initialListings);
   const [loading, setLoading] = useState(false);
- console.log("listings...", listings);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(listings.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentListings = listings.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
   const handleDelete = async (id: string) => {
     try {
       const res = await deleteRentalHouse(id);
       if (res?.success) {
         toast.success("Deleted successfully");
-        // Optionally update the state to remove the deleted listing from UI
         setListings(listings.filter((listing) => listing._id !== id));
       } else {
         toast.error(res?.message || "Failed to delete");
@@ -29,6 +35,14 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
       toast.error("Error deleting listing");
       console.error(error);
     }
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
   };
 
   return (
@@ -40,7 +54,6 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
           <thead className="bg-gray-100">
             <tr>
               <th className="px-4 py-2 text-left">Image</th>
-            
               <th className="px-4 py-2 text-left">Location</th>
               <th className="px-4 py-2 text-left">Rent Amount</th>
               <th className="px-4 py-2 text-left">Bed Roodms</th>
@@ -50,12 +63,12 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
           <tbody className="divide-y divide-gray-200">
             {loading ? (
               <tr>
-                <td colSpan={4} className="text-center py-4">
+                <td colSpan={5} className="text-center py-4">
                   Loading...
                 </td>
               </tr>
-            ) : listings.length > 0 ? (
-              listings.map((listing) => (
+            ) : currentListings.length > 0 ? (
+              currentListings.map((listing) => (
                 <tr key={listing._id}>
                   <td className="px-4 py-2">
                     <Image
@@ -66,10 +79,9 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
                       className="object-cover rounded"
                     />
                   </td>
-                 
                   <td className="px-4 py-2">{listing.location}</td>
                   <td className="px-4 py-2">{listing.rentAmount}</td>
-                  <td className="px-4 py-2">{listing. bedrooms}</td>
+                  <td className="px-4 py-2">{listing.bedrooms}</td>
                   <td className="px-4 py-2">
                     <Button
                       size="sm"
@@ -83,13 +95,37 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
               ))
             ) : (
               <tr>
-                <td colSpan={4} className="text-center py-4">
+                <td colSpan={5} className="text-center py-4">
                   No listings found.
                 </td>
               </tr>
             )}
           </tbody>
         </table>
+      </div>
+
+      <div className="flex justify-center items-center gap-4 mt-6">
+        <button
+          onClick={handlePrev}
+          disabled={currentPage === 1}
+          className={`px-4 py-2 rounded bg-gray-200 ${
+            currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
+          }`}
+        >
+          {'<'}
+        </button>
+        <span className="text-sm font-medium">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={handleNext}
+          disabled={currentPage === totalPages}
+          className={`px-4 py-2 rounded bg-gray-200 ${
+            currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
+          }`}
+        >
+          {'>'}
+        </button>
       </div>
     </div>
   );
