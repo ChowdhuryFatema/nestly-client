@@ -100,7 +100,7 @@ const ManageUsers = ({ users }: { users: TUser[] }) => {
 
   return (
     <div>
-      <NLTable data={users} columns={columns} />
+      <NLTable data={users} columns={columns || []} />
     </div>
   );
 };
