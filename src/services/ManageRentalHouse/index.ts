@@ -2,17 +2,17 @@
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
-export const getAllUsers = async () => {
+export const getAllAdminRentalHouses = async () => {
     try {
         const token = (await cookies()).get("accessToken")?.value || "";
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/users`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/listings`, {
             method: "GET",
             headers: {
                 Authorization: token,
             },
             next: {
-                tags: ["USER"]
+                tags: ["RENTAL_HOUSES"]
             }
         });
 
@@ -27,34 +27,35 @@ export const getAllUsers = async () => {
 };
 
 
-export const updateUserRole = async (userId: string, newRole: string) => {
+export const updateRentalStatus = async (userId: string, newStatus: string) => {
     try {
         const token = (await cookies()).get("accessToken")?.value || "";
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/user/${userId}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/listings/${userId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: token,
             },
-            body: JSON.stringify({ role: newRole }),
+            body: JSON.stringify({ status: newStatus }),
         });
 
         if (!res.ok) {
-            throw new Error(`Failed to update role: ${res.status}`);
+            throw new Error(`Failed to update status: ${res.statusText}`);
         }
-
+        revalidateTag("RENTAL_HOUSES")
         return { success: true };
     } catch (error: any) {
         return { success: false, message: error.message || "Something went wrong" };
     }
 };
 
-export const deleteUser = async (userId: string) => {
+
+export const deleteAdminRentalHouse = async (userId: string) => {
     try {
         const token = (await cookies()).get("accessToken")?.value || "";
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/user/${userId}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/listings/${userId}`, {
             method: "DELETE",
             headers: {
                 Authorization: token,
@@ -64,10 +65,13 @@ export const deleteUser = async (userId: string) => {
         if (!res.ok) {
             throw new Error(`Failed to delete user: ${res.status}`);
         }
-        revalidateTag("USER")
+        revalidateTag("RENTAL_HOUSES")
 
         return { success: true };
     } catch (error: any) {
         return { success: false, message: error.message || "Something went wrong" };
     }
 };
+
+
+

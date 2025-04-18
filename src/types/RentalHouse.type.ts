@@ -4,6 +4,7 @@ export type TRentalHouse = {
     location: string;
     description: string;
     rentAmount: number;
+    status: string;
     images: string[];
     bedrooms: number;
     amenities: string[];
