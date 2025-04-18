@@ -91,6 +91,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           { title: "Get Started", url: "#" },
           { title: "Tutorials", url: "#" },
           { title: "Edit Profile", url: "/tenant/update-profile" },
+          { title: "Rental Application", url: "/tenant/rental-house-request" },
         ],
       },
     ];

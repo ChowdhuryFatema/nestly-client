@@ -1,45 +1,45 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
-
 import { cookies } from "next/headers";
-import { FieldValues } from "react-hook-form";
+
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API;
 
-// Get the access token from cookies
-const getToken = async () => {
-  return (await cookies()).get("accessToken")?.value;
+
+// Define or import TRentalRequestFormInput
+type TRentalRequestFormInput = {
+  // Add appropriate fields here
+  field1: string;
+  field2: number;
 };
 
-export const createTenantRequest = async (data: FieldValues) => {
+export const createTenantRequest = async (data: TRentalRequestFormInput) => {
   try {
-    const token = await getToken();
+    const token = (await cookies()).get("accessToken")?.value;
 
     const res = await fetch(`${BASE_URL}/tenants/requests`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: token || "",
       },
       body: JSON.stringify(data),
     });
 
-    const result = await res.json();
-    return result;
+    return res.json();
   } catch (error: any) {
-    console.error("Create Tenant Request Error:", error);
     return Error(error);
   }
 };
 
 export const getAllTenantRequests = async () => {
   try {
-    const token = await getToken();
+    const token = (await cookies()).get("accessToken")!.value; 
 
     const res = await fetch(`${BASE_URL}/tenants/requests`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token || "", 
       },
     });
 
