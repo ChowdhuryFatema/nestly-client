@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
 import { User, Phone, Eye, EyeOff, Mail, Shield } from "lucide-react";
-
 export default function UpdateProfileForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -15,7 +14,7 @@ export default function UpdateProfileForm() {
     profileImage: "",
     currentPassword: "",
     newPassword: "",
-    email: "",
+    email:"",
     role: "",
   });
 
