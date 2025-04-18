@@ -2,17 +2,20 @@ import React from "react";
 import homeImg from "@/app/assets/images/home3.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import homeData from "@/data.json";
 import RentalHouseDetailsCard from "@/components/modules/auth/rentalHouseDetailsCard/RentalHouseDetailsCard";
+import { getAllPublicRentalHouses } from "@/services/ListingService";
+import { TRentalHouse } from "@/types";
 
 const RentalHouseDetails = async ({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) => {
-  const { id } = await params;
+  const { id } = params;
 
-  const singleData = homeData?.find((data) => data?.id === Number(id));
+  const allRentalHouses = await getAllPublicRentalHouses([]);
+
+  const singleData = allRentalHouses?.data?.find((data: TRentalHouse) => data?._id == id);
 
   return (
     <div>
