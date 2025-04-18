@@ -28,7 +28,7 @@ const SingleCard = ({ info }: TTRentalHouseProps) => {
   });
 
   return (
-    <div className="shadow-xl border border-gray-300 rounded p-5">
+    <div className="shadow border border-gray-300 rounded p-5">
       {/* card slider */}
       <div>
         <div className="navigation-wrapper">

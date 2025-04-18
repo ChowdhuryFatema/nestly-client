@@ -28,7 +28,7 @@ const SingleCardListView = ({ info }: TTRentalHouseProps) => {
   });
 
   return (
-    <div className="shadow-xl border border-gray-300 rounded p-5">
+    <div className="shadow border border-gray-300 rounded p-5">
       <div className="grid grid-cols-3 gap-5">
         {/* card slider */}
         <div className="col-span-1">
