@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import homeImg from "@/app/assets/images/home3.jpg";
+import About from "@/components/modules/About/About";
 
 const AboutUs = () => {
   return (
@@ -29,7 +30,7 @@ const AboutUs = () => {
         </div>
       </div>
       <div className="container mx-auto px-3 my-10 md:my-20">
-        <h2>This is Home Page</h2>
+        <About/>
       </div>
     </div>
   );
