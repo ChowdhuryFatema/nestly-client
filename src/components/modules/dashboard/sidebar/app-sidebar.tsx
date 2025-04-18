@@ -47,14 +47,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   if (user?.role === "admin") {
     data.navMain = [
       {
-        title: "All Users",
-        url: "/all-users",
+        title: "Manage Users",
+        url: "#",
         icon: Bot,
-        // items: [
-        //   { title: "Explorer", url: "#" },
-        //   { title: "Explorer", url: "#" },
-        //   { title: "Quantum", url: "#" },
-        // ],
+        items: [{ title: "All Users", url: `/${user?.role}/all-users` }],
       },
       {
         title: "Documentation",

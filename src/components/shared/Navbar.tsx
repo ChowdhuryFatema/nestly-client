@@ -19,6 +19,7 @@ import Image from "next/image";
 import NLButton from "../ui/core/ImageUploader/NLButton";
 import clsx from "clsx";
 import { useUser } from "@/context/UserContext";
+import { useEffect } from "react";
 
 export default function Navbar() {
   const { user, setLoading } = useUser();
@@ -36,8 +37,12 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about-us", label: "About Us" },
-    { href: "/all-rental", label: "All Listings Rental" },
+    { href: "/all-listings-rental", label: "All Listings Rental" },
   ];
+
+   useEffect(() => { console.log("user",user)}, [])
+
+console.log("user user", user)
 
 
   return (

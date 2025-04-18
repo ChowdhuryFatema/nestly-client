@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from "@tanstack/react-table"
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -14,32 +14,32 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
 }
 
 export function NLTable<TData, TValue>({
   columns,
-  data,
+  data = [],
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
-    data,
+    data: data ?? [], // fallback to empty array if undefined/null
     columns,
     getCoreRowModel: getCoreRowModel(),
-  })
+  });
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded border">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className="bg-gray-100 font-bold">
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -47,13 +47,13 @@ export function NLTable<TData, TValue>({
                           header.getContext()
                         )}
                   </TableHead>
-                )
+                );
               })}
             </TableRow>
           ))}
         </TableHeader>
         <TableBody>
-          {table.getRowModel().rows?.length ? (
+          {(table.getRowModel().rows || []).length > 0 ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
@@ -68,13 +68,13 @@ export function NLTable<TData, TValue>({
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+              <TableCell colSpan={columns?.length} className="h-24 text-center">
+                No user found.
               </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }
