@@ -11,7 +11,7 @@ const RentalHouseDetails = async ({
 }: {
   params: { id: string };
 }) => {
-  const { id } = params;
+  const { id } = await params;
 
   const allRentalHouses = await getAllPublicRentalHouses([]);
 
