@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { updateProfile } from "@/services/Users"; 
+import Cookies from "js-cookie";
+import { updateProfile } from "@/services/Users";
 import { getCurrentUser } from "@/services/AuthService";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
 import { User, Phone, Eye, EyeOff, Mail, Shield } from "lucide-react";
+
 export default function UpdateProfileForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -14,7 +16,7 @@ export default function UpdateProfileForm() {
     profileImage: "",
     currentPassword: "",
     newPassword: "",
-    email:"",
+    email: "",
     role: "",
   });
 
@@ -48,11 +50,31 @@ export default function UpdateProfileForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { email, role, ...updatableData } = formData; // remove email and role from submission
+      const { email, role, ...updatableData } = formData; // Remove email and role
+
       const res = await updateProfile(updatableData);
+
+      if (res?.data?.token) {
+        Cookies.remove("accessToken");
+        Cookies.set("accessToken", res.data.token, { expires: 7 });
+      }
+
       toast.success(res.message || "Profile updated successfully");
+
+      // Refresh user data after update
+      const updatedUser = await getCurrentUser();
+      setFormData(prev => ({
+        ...prev,
+        name: updatedUser.name || "",
+        phoneNumber: updatedUser.phoneNumber || "",
+        profileImage: updatedUser.profileImage || "",
+        email: updatedUser.email || "",
+        role: updatedUser.role || "",
+        currentPassword: "",
+        newPassword: "",
+      }));
     } catch (err: any) {
-      toast.error(err.message);
+      toast.error(err.message || "Something went wrong!");
     }
   };
 
@@ -65,7 +87,6 @@ export default function UpdateProfileForm() {
         onSubmit={handleSubmit}
         className="bg-white w-full max-w-lg rounded-2xl shadow-xl p-8 space-y-6"
       >
-        {/* Profile Image */}
         <div className="flex justify-center">
           <div className="relative w-24 h-24">
             <Image
@@ -78,9 +99,7 @@ export default function UpdateProfileForm() {
           </div>
         </div>
 
-        {/* Form Inputs */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Name */}
           <div className="relative">
             <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
@@ -92,7 +111,6 @@ export default function UpdateProfileForm() {
             />
           </div>
 
-          {/* Phone Number */}
           <div className="relative">
             <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
@@ -104,7 +122,6 @@ export default function UpdateProfileForm() {
             />
           </div>
 
-          {/* Email (Read-only) */}
           <div className="relative md:col-span-2">
             <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
@@ -116,7 +133,6 @@ export default function UpdateProfileForm() {
             />
           </div>
 
-          {/* Role (Read-only) */}
           <div className="relative md:col-span-2">
             <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
@@ -128,7 +144,6 @@ export default function UpdateProfileForm() {
             />
           </div>
 
-          {/* Profile Image URL */}
           <input
             name="profileImage"
             placeholder="Profile Image URL"
@@ -137,7 +152,6 @@ export default function UpdateProfileForm() {
             className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 md:col-span-2"
           />
 
-          {/* Current Password with toggle */}
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
@@ -155,7 +169,6 @@ export default function UpdateProfileForm() {
             </div>
           </div>
 
-          {/* New Password with toggle */}
           <div className="relative">
             <input
               type={showNewPassword ? "text" : "password"}
@@ -174,7 +187,6 @@ export default function UpdateProfileForm() {
           </div>
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-[#62a812] text-white font-semibold py-2 rounded-lg hover:bg-green-700 transition cursor-pointer"
