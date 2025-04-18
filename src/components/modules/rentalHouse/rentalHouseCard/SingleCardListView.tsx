@@ -29,9 +29,9 @@ const SingleCardListView = ({ info }: TTRentalHouseProps) => {
 
   return (
     <div className="shadow-xl border border-gray-300 rounded p-5">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-3 gap-5">
         {/* card slider */}
-        <div>
+        <div className="col-span-1">
           <div className="navigation-wrapper">
             <div ref={sliderRef} className="keen-slider rounded">
               {info?.images?.map((img, index) => (
@@ -76,7 +76,7 @@ const SingleCardListView = ({ info }: TTRentalHouseProps) => {
         </div>
         {/* card body */}
 
-        <div className="space-y-2">
+        <div className="col-span-2 space-y-2">
           <div className="flex justify-between">
             <p className="text-sm">Bedrooms: {info?.bedrooms}</p>
             <p className="text-sm">Rent: ${info?.rentAmount}</p>
@@ -84,6 +84,7 @@ const SingleCardListView = ({ info }: TTRentalHouseProps) => {
           <p className="font-bold">
             Location: <span className="text-primary-500">{info?.location}</span>
           </p>
+          <p>{info.description}</p>
           <ul className="flex gap-3 flex-wrap py-1">
             {info?.amenities?.map((amenitie, index) => (
               <li
