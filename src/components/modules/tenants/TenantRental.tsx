@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAllTenantRequests } from "@/services/tenants/tenantservice";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { getAllTenantRequests } from "@/services/tenants/tenantservice";
 
 type TenantRequest = {
   _id: string;
@@ -19,19 +20,22 @@ const TenantRental = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       const data = await getAllTenantRequests();
-      if (Array.isArray(data)) {
-        setRequests(data);
+      console.log("Fetched data: ", data);
+  
+      if (data?.success && Array.isArray(data.data)) {
+        setRequests(data.data);
       }
     };
     fetchRequests();
   }, []);
-
+  
+ console.log("requests....", requests);
   return (
     <div className="max-w-6xl mx-auto p-6 mt-8">
       <Card className="overflow-x-auto shadow-xl rounded-2xl p-4">
         <h2 className="text-2xl font-semibold mb-6">My Rental Requests</h2>
         <table className="min-w-full text-sm text-left border rounded-xl">
-          <thead className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+          <thead className="bg-gray-100 dark:bg-gray-800 text-primary-500 dark:text-gray-300">
             <tr>
               <th className="px-4 py-3">Rental House ID</th>
               <th className="px-4 py-3">Message</th>
@@ -50,9 +54,9 @@ const TenantRental = () => {
                   <td className="px-4 py-2 capitalize">{request.paymentStatus}</td>
                   <td className="px-4 py-2 text-center">
                     {request.status === "approved" ? (
-                      <Button className="w-full">Proceed to Payment</Button>
+                      <Button className="w-full text-primary-500">Proceed to Payment</Button>
                     ) : (
-                      <span className="text-gray-400 italic">Pending approval</span>
+                      <span className="text-gray-400 italic ">Pending approval</span>
                     )}
                   </td>
                 </tr>

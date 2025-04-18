@@ -84,14 +84,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   } else if (user?.role === "tenant") {
     data.navMain = [
       {
-        title: "Documentation",
+        title: "Tenant",
         url: "#",
         icon: BookOpen,
         items: [
-          { title: "Get Started", url: "#" },
-          { title: "Tutorials", url: "#" },
-          { title: "Edit Profile", url: "/tenant/update-profile" },
           { title: "Rental Application", url: "/tenant/rental-house-request" },
+          { title: "My Rentals", url: "/tenant/my-requests" },
+          
+          { title: "Edit Profile", url: "/tenant/update-profile" },
+        
         ],
       },
     ];
