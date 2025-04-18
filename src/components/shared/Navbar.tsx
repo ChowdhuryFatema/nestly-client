@@ -37,7 +37,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about-us", label: "About Us" },
-    { href: "/all-rental", label: "All Listings Rental" },
+    { href: "/all-listings-rental", label: "All Listings Rental" },
   ];
 
    useEffect(() => { console.log("user",user)}, [])
