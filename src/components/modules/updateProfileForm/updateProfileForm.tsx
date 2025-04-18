@@ -6,7 +6,7 @@ import { getCurrentUser } from "@/services/AuthService";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
-import { User, Phone, Eye, EyeOff } from "lucide-react";
+import { User, Phone, Eye, EyeOff, Mail, Shield } from "lucide-react";
 
 export default function UpdateProfileForm() {
   const [formData, setFormData] = useState({
@@ -15,6 +15,8 @@ export default function UpdateProfileForm() {
     profileImage: "",
     currentPassword: "",
     newPassword: "",
+    email: "",
+    role: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -26,9 +28,11 @@ export default function UpdateProfileForm() {
         const data = await getCurrentUser();
         setFormData(prev => ({
           ...prev,
-          username: data.name || "",
-          phone: data.phone || "",
-          profileImage: data.profileImage || "", 
+          name: data.name || "",
+          phoneNumber: data.phoneNumber || "",
+          profileImage: data.profileImage || "",
+          email: data.email || "",
+          role: data.role || "",
         }));
       } catch (error) {
         toast.error("Failed to load profile");
@@ -45,7 +49,8 @@ export default function UpdateProfileForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await updateProfile(formData);
+      const { email, role, ...updatableData } = formData; // remove email and role from submission
+      const res = await updateProfile(updatableData);
       toast.success(res.message || "Profile updated successfully");
     } catch (err: any) {
       toast.error(err.message);
@@ -76,27 +81,51 @@ export default function UpdateProfileForm() {
 
         {/* Form Inputs */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Username */}
+          {/* Name */}
           <div className="relative">
             <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
-              name="username"
-              placeholder="Username"
+              name="name"
+              placeholder="Name"
               value={formData.name}
               onChange={handleChange}
               className="pl-10 w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
             />
           </div>
 
-          {/* Phone */}
+          {/* Phone Number */}
           <div className="relative">
             <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
-              name="phone"
-              placeholder="Phone"
+              name="phoneNumber"
+              placeholder="Phone Number"
               value={formData.phoneNumber}
               onChange={handleChange}
               className="pl-10 w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+          </div>
+
+          {/* Email (Read-only) */}
+          <div className="relative md:col-span-2">
+            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              disabled
+              className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
+            />
+          </div>
+
+          {/* Role (Read-only) */}
+          <div className="relative md:col-span-2">
+            <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              name="role"
+              placeholder="Role"
+              value={formData.role}
+              disabled
+              className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
             />
           </div>
 
@@ -104,8 +133,7 @@ export default function UpdateProfileForm() {
           <input
             name="profileImage"
             placeholder="Profile Image URL"
-            value={formData.
-                profileImage}
+            value={formData.profileImage}
             onChange={handleChange}
             className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 md:col-span-2"
           />

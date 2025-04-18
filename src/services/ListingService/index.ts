@@ -98,7 +98,7 @@ export const deleteRentalHouse = async (id: string) => {
 //  Get All Rental Requests (LANDLORD ONLY)
 export const getAllRentalRequests = async () => {
   try {
-    const res = await fetch(`${BASE_URL}/requestes`, {
+    const res = await fetch(`${BASE_URL}/requests`, {
       headers: {
         Authorization: (await cookies()).get("accessToken")!.value,
       },
