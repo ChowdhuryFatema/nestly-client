@@ -20,6 +20,7 @@ import NLButton from "../ui/core/ImageUploader/NLButton";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { TUser } from "@/types";
+import { Skeleton } from "../ui/skeleton";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -81,7 +82,13 @@ export default function Navbar() {
           {/* Desktop Buttons + Dropdown */}
           <nav className="md:flex gap-2 items-center">
             {loading ? (
-              <p>Loading.......</p>
+              <div className="flex items-center gap-4">
+                <Skeleton className="h-10 w-10 rounded-full" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-24" />
+                  <Skeleton className="h-4 w-16" />
+                </div>
+              </div>
             ) : (
               <>
                 {user ? (
