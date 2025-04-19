@@ -17,7 +17,6 @@ export const createTenantRequest = async (formData: TRentalRequest) => {
           Authorization: (await cookies()).get("accessToken")!.value,
         },
       });
-      revalidateTag("Listings");
       return res.json();
     } catch (error: any) {
       return Error(error);

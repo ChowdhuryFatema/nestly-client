@@ -47,15 +47,13 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
         setIsOpen(false);
       } else {
         toast.error(res.message);
-
-      
-
-      reset(); // Clear form
-      setIsOpen(false); // Close modal
+        reset(); // Clear form
+        setIsOpen(false); // Close modal
+      }
     } catch (error) {
       console.error("Error creating tenant request:", error);
     }
-  };
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -80,6 +78,7 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
                   type="date"
                   className="mt-1 w-full"
                   {...field}
+                  value={field.value || ""}
                 />
               )}
             />
@@ -102,6 +101,7 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
                   placeholder="6 months"
                   className="mt-1 w-full"
                   {...field}
+                  value={field.value || ""}
                 />
               )}
             />
@@ -124,6 +124,7 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
                   placeholder="Any special needs or notes..."
                   className="mt-1 w-full"
                   {...field}
+                  value={field.value || ""}
                 />
               )}
             />
