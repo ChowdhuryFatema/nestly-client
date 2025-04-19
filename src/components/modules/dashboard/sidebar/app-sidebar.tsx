@@ -57,6 +57,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         url: "#",
         icon: BookOpen,
         items: [
+          { title: "Introduction", url: "#" },
+          { title: "Get Started", url: "#" },
+          { title: "Tutorials", url: "#" },
+          { title: "Edit Profile", url: "/admin/update-profile" },
           { title: "All Rental Houses", url: `/${user?.role}/all-rental-houses` },
         ],
       },
@@ -70,6 +74,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         items: [
           { title: "AllListings", url: "/landlord/AllListing" },
           { title: "Rental Requests", url: "/landlord/requests" },
+          { title: "Edit Profile", url: "/landlord/update-profile" },
         ],
       },
     ];
@@ -82,6 +87,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         items: [
           { title: "Get Started", url: "#" },
           { title: "Tutorials", url: "#" },
+          { title: "Edit Profile", url: "/tenant/update-profile" },
         ],
       },
     ];
