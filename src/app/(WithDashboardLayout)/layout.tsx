@@ -1,4 +1,5 @@
 
+
 import { AppSidebar } from "@/components/modules/dashboard/sidebar/app-sidebar"
 import {
   SidebarInset,
@@ -16,7 +17,9 @@ export default function DashboardLayout({children}: {children: React.ReactNode})
             <SidebarTrigger className="-ml-1" />
           </div>
         </header>
-        <div className="p-4 min-h-screen">{children}</div>
+        <div className="p-4 min-h-screen">{children}
+         
+        </div>
       </SidebarInset>
     </SidebarProvider>
   )

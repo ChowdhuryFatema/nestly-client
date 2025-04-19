@@ -128,7 +128,9 @@
 *{
   box-sizing: border-box;
 }
-
+.primary{
+  color:#62a812
+}
 .bg-primary-500 {
   background-color: #62a812;
 }

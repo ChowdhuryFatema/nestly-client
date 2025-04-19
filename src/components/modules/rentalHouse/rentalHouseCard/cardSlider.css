@@ -66,3 +66,10 @@
 .arrow--disabled {
     fill: rgba(255, 255, 255, 0.5);
 }
+
+.keen-slider__slide {
+    position: relative;
+    width: 100%;
+    height: 300px; /* or any height you want */
+  }
+  

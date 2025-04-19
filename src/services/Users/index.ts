@@ -25,35 +25,57 @@ export const getAllUsers = async () => {
         return new Error(error.message || "Something went wrong");
     }
 };
-
-export const deleteUser = async (userId: string) => {
+export const updateProfile = async (formData: {
+    name: string;
+    phoneNumber: string;
+    profileImage: string;
+    currentPassword?: string;
+    newPassword?: string;
+  }) => {
     try {
-        const token = (await cookies()).get("accessToken")?.value || "";
-
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/users/${userId}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: token,
-            },
-        });
-
-        if (!res.ok) {
-            throw new Error(`Failed to delete user: ${res.status}`);
-        }
-        revalidateTag("USER")
-
-        return { success: true };
+   
+  
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/update-profile`, {
+        method: "PUT",
+        body: JSON.stringify(formData),
+        headers: {
+            "Content-Type": "application/json",
+          Authorization:  (await cookies()).get("accessToken")?.value || "" 
+        },
+        
+      });
+  
+      const result = await res.json();
+  
+      if (!res.ok) {
+        throw new Error(result?.message || "Something went wrong");
+      }
+  
+      return result;
     } catch (error: any) {
-        return { success: false, message: error.message || "Something went wrong" };
+      throw new Error(error?.message || "An error occurred during the update process");
     }
-};
+  };
+//    try {
+//       const res = await fetch(`${BASE_URL}/listings/${id}`, {
+//         method: "PUT",
+//         body: formData,
+//         headers: {
+//           Authorization: (await cookies()).get("accessToken")!.value,
+//         },
+//       });
+//       revalidateTag("Listings");
+//       return res.json();
+//     } catch (error: any) {
+//       return Error(error);
+//     }
 
 
 export const updateUserRole = async (userId: string, newRole: string) => {
     try {
         const token = (await cookies()).get("accessToken")?.value || "";
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/users/${userId}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/user/${userId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -65,6 +87,28 @@ export const updateUserRole = async (userId: string, newRole: string) => {
         if (!res.ok) {
             throw new Error(`Failed to update role: ${res.status}`);
         }
+
+        return { success: true };
+    } catch (error: any) {
+        return { success: false, message: error.message || "Something went wrong" };
+    }
+};
+
+export const deleteUser = async (userId: string) => {
+    try {
+        const token = (await cookies()).get("accessToken")?.value || "";
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/user/${userId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: token,
+            },
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to delete user: ${res.status}`);
+        }
+        revalidateTag("USER")
 
         return { success: true };
     } catch (error: any) {

@@ -133,9 +133,9 @@ const RegisterForm = () => {
                           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                         >
                           {showPassword ? (
-                            <EyeOff size={18} />
-                          ) : (
                             <Eye size={18} />
+                          ) : (
+                            <EyeOff size={18} />
                           )}
                         </button>
                       </div>
@@ -168,9 +168,9 @@ const RegisterForm = () => {
                           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                         >
                           {showConfirmPassword ? (
-                            <EyeOff size={18} />
-                          ) : (
                             <Eye size={18} />
+                          ) : (
+                            <EyeOff size={18} />
                           )}
                         </button>
                       </div>

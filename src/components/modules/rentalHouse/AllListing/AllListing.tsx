@@ -2,10 +2,11 @@
 "use client"
 import { useState } from "react";
 import { toast } from "sonner";
-import { Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { deleteRentalHouse } from "@/services/ListingService";
 import Image from "next/image";
+import Link from "next/link";
 
 interface AllListingProps {
   listings: any[];
@@ -45,6 +46,12 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
   };
 
+
+
+
+
+  console.log("listings", listings);
+
   return (
     <div className="container py-6">
       <h1 className="text-2xl font-semibold mb-4">All Rental Listings</h1>
@@ -56,7 +63,9 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
               <th className="px-4 py-2 text-left">Image</th>
               <th className="px-4 py-2 text-left">Location</th>
               <th className="px-4 py-2 text-left">Rent Amount</th>
-              <th className="px-4 py-2 text-left">Bed Roodms</th>
+              <th className="px-4 py-2 text-left">Bed Rooms</th>
+              <th className="px-4 py-2 text-left">Status</th>
+              <th className="px-4 py-2 text-left">Edit</th>
               <th className="px-4 py-2 text-left">Actions</th>
             </tr>
           </thead>
@@ -83,10 +92,29 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
                   <td className="px-4 py-2">{listing.rentAmount}</td>
                   <td className="px-4 py-2">{listing.bedrooms}</td>
                   <td className="px-4 py-2">
+                    <span className={`px-4 py-2 rounded ${listing.status === "approved" ? "bg-green-100 text-green-800" : listing.status === "pending" ? "bg-yellow-100 text-yellow-800" : "bg-red-100 text-red-800"}`}>
+                      {listing.status}
+                    </span>
+                  </td>
+                  <td className="px-4 py-2">
+                    <Link href={`/landlord/update-rental/${listing._id}`}>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        // onClick={() => handleEdit(listing._id)}
+                        className="text-blue-500 hover:text-blue-600 cursor-pointer"
+                      >
+                        <Pencil size={16} />
+                      </Button>
+                    </Link>
+                  </td>
+
+                  <td className="px-4 py-2">
                     <Button
                       size="sm"
                       variant="destructive"
                       onClick={() => handleDelete(listing._id)}
+                      className=" cursor-pointer"
                     >
                       <Trash2 size={16} />
                     </Button>
@@ -108,9 +136,8 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
         <button
           onClick={handlePrev}
           disabled={currentPage === 1}
-          className={`px-4 py-2 rounded bg-gray-200 ${
-            currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
-          }`}
+          className={`px-4 py-2 rounded bg-gray-200 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
+            }`}
         >
           {'<'}
         </button>
@@ -120,9 +147,8 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
         <button
           onClick={handleNext}
           disabled={currentPage === totalPages}
-          className={`px-4 py-2 rounded bg-gray-200 ${
-            currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
-          }`}
+          className={`px-4 py-2 rounded bg-gray-200 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
+            }`}
         >
           {'>'}
         </button>

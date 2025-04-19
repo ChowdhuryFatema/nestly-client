@@ -1,179 +1,172 @@
 [
     {
-        "id": 1,
-        "location": "Dhanmondi, Dhaka",
-        "description": "Welcome to your future home in the heart of Dhanmondi, Dhaka — a vibrant and prestigious residential area known for its peaceful surroundings, excellent educational institutions, convenient transport facilities, and beautiful natural views. This spacious 3-bedroom apartment is a perfect blend of comfort, elegance, and functionality, designed to cater to families or professionals seeking a modern yet serene living experience. Nestled near the picturesque Dhanmondi Lake, this apartment offers not just a place to stay, but a lifestyle of tranquility and convenience. Wake up each morning to gentle sunlight pouring in through the large windows, and enjoy a cup of tea on the balcony as the soft morning breeze brushes against your face. The well-ventilated layout ensures natural light and fresh air fill every corner of the home throughout the day, creating a warm and inviting environment for all.",
-        "rent": 30000,
-        "images": [
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
-        ],
-        "bedrooms": 3,
-        "amenities": [
-            "Parking",
-            "Lift",
-            "Generator",
-            "Security",
-            "Balcony"
-        ]
+      "location": "Downtown City Center, Block B",
+      "description": "A cozy 2-bedroom apartment close to shopping malls and parks.",
+      "rentAmount": 1200,
+      "bedrooms": 2,
+      "images": [
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
+      ],
+      "amenities": ["Lift", "Generator", "Security", "AC", "Swimming Pool"],
+      "status": "approved",
+      "available": true,
+      "landlord": "landlord1",
+      "createdAt": "2025-04-15T18:12:29.277Z",
+      "updatedAt": "2025-04-15T18:14:49.428Z"
     },
     {
-        "id": 2,
-        "location": "Bashundhara R/A, Dhaka",
-        "description": "Welcome to your future home in the heart of Dhanmondi, Dhaka — a vibrant and prestigious residential area known for its peaceful surroundings, excellent educational institutions, convenient transport facilities, and beautiful natural views. This spacious 3-bedroom apartment is a perfect blend of comfort, elegance, and functionality, designed to cater to families or professionals seeking a modern yet serene living experience. Nestled near the picturesque Dhanmondi Lake, this apartment offers not just a place to stay, but a lifestyle of tranquility and convenience. Wake up each morning to gentle sunlight pouring in through the large windows, and enjoy a cup of tea on the balcony as the soft morning breeze brushes against your face. The well-ventilated layout ensures natural light and fresh air fill every corner of the home throughout the day, creating a warm and inviting environment for all.",
-        "rent": 25000,
-        "images": [
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
-        ],
-        "bedrooms": 2,
-        "amenities": [
-            "Elevator",
-            "24/7 Security",
-            "CCTV",
-            "Gas Connection",
-            "Geyser"
-        ]
+      "location": "Banani, Dhaka",
+      "description": "Modern studio flat ideal for young professionals.",
+      "rentAmount": 950,
+      "bedrooms": 1,
+      "images": [
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
+      ],
+      "amenities": ["Security", "AC", "Wi-Fi"],
+      "status": "approved",
+      "available": true,
+      "landlord": "landlord2",
+      "createdAt": "2025-04-10T12:00:00.000Z",
+      "updatedAt": "2025-04-12T15:00:00.000Z"
     },
     {
-        "id": 3,
-        "location": "Uttara, Dhaka",
-        "description": "Welcome to your future home in the heart of Dhanmondi, Dhaka — a vibrant and prestigious residential area known for its peaceful surroundings, excellent educational institutions, convenient transport facilities, and beautiful natural views. This spacious 3-bedroom apartment is a perfect blend of comfort, elegance, and functionality, designed to cater to families or professionals seeking a modern yet serene living experience. Nestled near the picturesque Dhanmondi Lake, this apartment offers not just a place to stay, but a lifestyle of tranquility and convenience. Wake up each morning to gentle sunlight pouring in through the large windows, and enjoy a cup of tea on the balcony as the soft morning breeze brushes against your face. The well-ventilated layout ensures natural light and fresh air fill every corner of the home throughout the day, creating a warm and inviting environment for all.",
-        "rent": 18000,
-        "images": [
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
-        ],
-        "bedrooms": 1,
-        "amenities": [
-            "Furnished",
-            "Wi-Fi",
-            "Generator",
-            "Security",
-            "Lift"
-        ]
+      "location": "Gulshan, Dhaka",
+      "description": "Luxury 3-bedroom apartment with lake view.",
+      "rentAmount": 2000,
+      "bedrooms": 3,
+      "images": [
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
+      ],
+      "amenities": ["Lift", "Security", "AC", "Gym"],
+      "status": "approved",
+      "available": true,
+      "landlord": "landlord3",
+      "createdAt": "2025-04-09T10:00:00.000Z",
+      "updatedAt": "2025-04-11T10:00:00.000Z"
     },
     {
-        "id": 4,
-        "location": "Mirpur DOHS, Dhaka",
-        "description": "Welcome to your future home in the heart of Dhanmondi, Dhaka — a vibrant and prestigious residential area known for its peaceful surroundings, excellent educational institutions, convenient transport facilities, and beautiful natural views. This spacious 3-bedroom apartment is a perfect blend of comfort, elegance, and functionality, designed to cater to families or professionals seeking a modern yet serene living experience. Nestled near the picturesque Dhanmondi Lake, this apartment offers not just a place to stay, but a lifestyle of tranquility and convenience. Wake up each morning to gentle sunlight pouring in through the large windows, and enjoy a cup of tea on the balcony as the soft morning breeze brushes against your face. The well-ventilated layout ensures natural light and fresh air fill every corner of the home throughout the day, creating a warm and inviting environment for all.",
-        "rent": 45000,
-        "images": [
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
-        ],
-        "bedrooms": 4,
-        "amenities": [
-            "Garage",
-            "Garden",
-            "CCTV",
-            "24/7 Water",
-            "Gas Line"
-        ]
+      "location": "Mirpur DOHS",
+      "description": "Affordable 2-bedroom flat with basic amenities.",
+      "rentAmount": 800,
+      "bedrooms": 2,
+      "images": [
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
+      ],
+      "amenities": ["Generator", "Security"],
+      "status": "approved",
+      "available": true,
+      "landlord": "landlord4",
+      "createdAt": "2025-04-08T08:00:00.000Z",
+      "updatedAt": "2025-04-10T08:00:00.000Z"
     },
     {
-        "id": 5,
-        "location": "Mohakhali, Dhaka",
-        "description": "2-bedroom apartment ideal for small families, close to bus stop and markets.",
-        "rent": 22000,
-        "images": [
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
-        ],
-        "bedrooms": 2,
-        "amenities": [
-            "Lift",
-            "Gas",
-            "Security Guard",
-            "Backup Power",
-            "Mosque Nearby"
-        ]
+      "location": "Baridhara, Dhaka",
+      "description": "Furnished apartment with excellent security.",
+      "rentAmount": 1500,
+      "bedrooms": 2,
+      "images": [
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
+      ],
+      "amenities": ["Lift", "AC", "Wi-Fi", "Security"],
+      "status": "approved",
+      "available": true,
+      "landlord": "landlord5",
+      "createdAt": "2025-04-07T14:00:00.000Z",
+      "updatedAt": "2025-04-09T14:00:00.000Z"
     },
     {
-        "id": 6,
-        "location": "Baridhara DOHS, Dhaka",
-        "description": "Welcome to your future home in the heart of Dhanmondi, Dhaka — a vibrant and prestigious residential area known for its peaceful surroundings, excellent educational institutions, convenient transport facilities, and beautiful natural views. This spacious 3-bedroom apartment is a perfect blend of comfort, elegance, and functionality, designed to cater to families or professionals seeking a modern yet serene living experience. Nestled near the picturesque Dhanmondi Lake, this apartment offers not just a place to stay, but a lifestyle of tranquility and convenience. Wake up each morning to gentle sunlight pouring in through the large windows, and enjoy a cup of tea on the balcony as the soft morning breeze brushes against your face. The well-ventilated layout ensures natural light and fresh air fill every corner of the home throughout the day, creating a warm and inviting environment for all.",
-        "rent": 70000,
-        "images": [
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
-        ],
-        "bedrooms": 5,
-        "amenities": [
-            "Private Terrace",
-            "Garage",
-            "24/7 Security",
-            "AC",
-            "Generator"
-        ]
+      "location": "Uttara Sector 7",
+      "description": "Spacious apartment with rooftop access.",
+      "rentAmount": 1100,
+      "bedrooms": 2,
+      "images": [
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
+      ],
+      "amenities": ["Lift", "Security", "Parking"],
+      "status": "approved",
+      "available": true,
+      "landlord": "landlord6",
+      "createdAt": "2025-04-06T11:00:00.000Z",
+      "updatedAt": "2025-04-08T11:00:00.000Z"
     },
     {
-        "id": 7,
-        "location": "Banani, Dhaka",
-        "description": "Welcome to your future home in the heart of Dhanmondi, Dhaka — a vibrant and prestigious residential area known for its peaceful surroundings, excellent educational institutions, convenient transport facilities, and beautiful natural views. This spacious 3-bedroom apartment is a perfect blend of comfort, elegance, and functionality, designed to cater to families or professionals seeking a modern yet serene living experience. Nestled near the picturesque Dhanmondi Lake, this apartment offers not just a place to stay, but a lifestyle of tranquility and convenience. Wake up each morning to gentle sunlight pouring in through the large windows, and enjoy a cup of tea on the balcony as the soft morning breeze brushes against your face. The well-ventilated layout ensures natural light and fresh air fill every corner of the home throughout the day, creating a warm and inviting environment for all.",
-        "rent": 35000,
-        "images": [
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
-        ],
-        "bedrooms": 3,
-        "amenities": [
-            "Rooftop Garden",
-            "Lift",
-            "Security",
-            "Hot Water",
-            "Wi-Fi"
-        ]
+      "location": "Mohammadpur, Dhaka",
+      "description": "Perfect family home with nearby school access.",
+      "rentAmount": 1050,
+      "bedrooms": 3,
+      "images": [
+        "https://source.unsplash.com/random/800x600/?family-house",
+        "https://source.unsplash.com/random/800x600/?school"
+      ],
+      "amenities": ["Generator", "Security", "Playground"],
+      "status": "approved",
+      "available": true,
+      "landlord": "landlord7",
+      "createdAt": "2025-04-05T09:00:00.000Z",
+      "updatedAt": "2025-04-07T09:00:00.000Z"
     },
     {
-        "id": 8,
-        "location": "Gulshan 2, Dhaka",
-        "description": "Welcome to your future home in the heart of Dhanmondi, Dhaka — a vibrant and prestigious residential area known for its peaceful surroundings, excellent educational institutions, convenient transport facilities, and beautiful natural views. This spacious 3-bedroom apartment is a perfect blend of comfort, elegance, and functionality, designed to cater to families or professionals seeking a modern yet serene living experience. Nestled near the picturesque Dhanmondi Lake, this apartment offers not just a place to stay, but a lifestyle of tranquility and convenience. Wake up each morning to gentle sunlight pouring in through the large windows, and enjoy a cup of tea on the balcony as the soft morning breeze brushes against your face. The well-ventilated layout ensures natural light and fresh air fill every corner of the home throughout the day, creating a warm and inviting environment for all.",
-        "rent": 60000,
-        "images": [
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
-        ],
-        "bedrooms": 4,
-        "amenities": [
-            "Lift",
-            "Generator",
-            "Security",
-            "AC",
-            "Swimming Pool"
-        ]
+      "location": "Bashundhara R/A",
+      "description": "Premium condo with modern facilities.",
+      "rentAmount": 1800,
+      "bedrooms": 3,
+      "images": [
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
+      ],
+      "amenities": ["AC", "Swimming Pool", "Gym", "Security"],
+      "status": "approved",
+      "available": true,
+      "landlord": "landlord8",
+      "createdAt": "2025-04-04T13:00:00.000Z",
+      "updatedAt": "2025-04-06T13:00:00.000Z"
     },
     {
-        "id": 9,
-        "location": "Keraniganj, Dhaka",
-        "description": "Welcome to your future home in the heart of Dhanmondi, Dhaka — a vibrant and prestigious residential area known for its peaceful surroundings, excellent educational institutions, convenient transport facilities, and beautiful natural views. This spacious 3-bedroom apartment is a perfect blend of comfort, elegance, and functionality, designed to cater to families or professionals seeking a modern yet serene living experience. Nestled near the picturesque Dhanmondi Lake, this apartment offers not just a place to stay, but a lifestyle of tranquility and convenience. Wake up each morning to gentle sunlight pouring in through the large windows, and enjoy a cup of tea on the balcony as the soft morning breeze brushes against your face. The well-ventilated layout ensures natural light and fresh air fill every corner of the home throughout the day, creating a warm and inviting environment for all.",
-        "rent": 12000,
-        "images": [
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
-            "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
-        ],
-        "bedrooms": 2,
-        "amenities": [
-            "Tube Well",
-            "Security",
-            "Playground",
-            "Mosque Nearby",
-            "Gas"
-        ]
+      "location": "Wari, Dhaka",
+      "description": "Budget 1-bedroom apartment near public transport.",
+      "rentAmount": 700,
+      "bedrooms": 1,
+      "images": [
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
+      ],
+      "amenities": ["Security", "Parking"],
+      "status": "approved",
+      "available": true,
+      "landlord": "landlord9",
+      "createdAt": "2025-04-03T07:00:00.000Z",
+      "updatedAt": "2025-04-05T07:00:00.000Z"
+    },
+    {
+      "location": "Dhanmondi 32",
+      "description": "Elegant apartment with wooden floors.",
+      "rentAmount": 1600,
+      "bedrooms": 2,
+      "images": [
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg",
+        "https://st4.depositphotos.com/5163433/20407/i/450/depositphotos_204071260-stock-photo-rendering-modern-cozy-house-river.jpg"
+      ],
+      "amenities": ["AC", "Lift", "Security"],
+      "status": "approved",
+      "available": true,
+      "landlord": "landlord10",
+      "createdAt": "2025-04-02T06:00:00.000Z",
+      "updatedAt": "2025-04-04T06:00:00.000Z"
     }
-]
+  ]
+  
