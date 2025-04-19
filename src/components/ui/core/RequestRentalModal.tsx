@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import {
   Dialog,
   DialogContent,
@@ -22,8 +22,8 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
   const [isOpen, setIsOpen] = useState(false);
 
   const {
-    register,
     handleSubmit,
+    control,
     reset,
     formState: { errors },
   } = useForm<TRentalRequest>();
@@ -38,16 +38,17 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
     console.log("Rental Request:", newData);
 
     try {
-      const res = await createTenantRequest(newData); // Assuming this returns a Response object
-      //   const result = await res.json();
+      const res = await createTenantRequest(newData);
       console.log("Server Response:", res);
+
       if (res.success) {
         toast.success(res.message);
         reset();
         setIsOpen(false);
       } else {
         toast.error(res.message);
-      }
+
+      
 
       reset(); // Clear form
       setIsOpen(false); // Close modal
@@ -69,13 +70,18 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <Label htmlFor="moveInDate">Move-in Date</Label>
-            <Input
-              id="moveInDate"
-              type="date"
-              {...register("moveInDate", {
-                required: "Move-in date is required",
-              })}
-              className="mt-1 w-full"
+            <Controller
+              name="moveInDate"
+              control={control}
+              rules={{ required: "Move-in date is required" }}
+              render={({ field }) => (
+                <Input
+                  id="moveInDate"
+                  type="date"
+                  className="mt-1 w-full"
+                  {...field}
+                />
+              )}
             />
             {errors.moveInDate && (
               <p className="text-red-500 text-sm mt-1">
@@ -86,13 +92,18 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
 
           <div>
             <Label htmlFor="rentalDuration">Rental Duration</Label>
-            <Input
-              id="rentalDuration"
-              placeholder="6 months"
-              {...register("rentalDuration", {
-                required: "Duration is required",
-              })}
-              className="mt-1 w-full"
+            <Controller
+              name="rentalDuration"
+              control={control}
+              rules={{ required: "Duration is required" }}
+              render={({ field }) => (
+                <Input
+                  id="rentalDuration"
+                  placeholder="6 months"
+                  className="mt-1 w-full"
+                  {...field}
+                />
+              )}
             />
             {errors.rentalDuration && (
               <p className="text-red-500 text-sm mt-1">
@@ -101,16 +112,26 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
             )}
           </div>
 
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="message">Special Requirements</Label>
-            <Textarea
-              id="message"
-              placeholder="Any special needs or notes..."
-              {...register("message", {
-                required: "Message is required",
-              })}
-              className="mt-1 w-full"
+            <Controller
+              name="message"
+              control={control}
+              rules={{ required: "Message is required" }}
+              render={({ field }) => (
+                <Textarea
+                  id="message"
+                  placeholder="Any special needs or notes..."
+                  className="mt-1 w-full"
+                  {...field}
+                />
+              )}
             />
+            {errors.message && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.message.message}
+              </p>
+            )}
           </div>
 
           <NLButton type="submit" variant="primary" className="w-full">

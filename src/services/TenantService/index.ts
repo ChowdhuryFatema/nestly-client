@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { revalidateTag } from "next/cache";
 import { TRentalRequest } from "@/types";
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_API}/tenants`;

@@ -42,6 +42,20 @@ export const getRentalHouseById = async (id: string) => {
 
 
 
+// export const getAllPublicRentalHouses = async (filters: { key: string; value: string }[]) => {
+//   try {
+//     const params = new URLSearchParams();
+//     filters.forEach((filter) => {
+//       if (filter.value) params.append(filter.key, filter.value);
+//     });
+
+//     const res = await fetch(`${BASE_URL}/listings?${params.toString()}`);
+//     return res.json();
+//   } catch (error) {
+//     console.log(error)
+//   }
+// };
+
 export const getAllPublicRentalHouses = async (filters: { key: string; value: string }[]) => {
   try {
     const params = new URLSearchParams();
@@ -49,12 +63,28 @@ export const getAllPublicRentalHouses = async (filters: { key: string; value: st
       if (filter.value) params.append(filter.key, filter.value);
     });
 
-    const res = await fetch(`${BASE_URL}/listings?${params.toString()}`);
+    const res = await fetch(`${BASE_URL}/listings?${params.toString()}`, {
+      cache: 'no-store',
+    });
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`API error: ${res.status} - ${text}`);
+    }
+
+    const contentType = res.headers.get("content-type");
+    if (!contentType?.includes("application/json")) {
+      const text = await res.text();
+      throw new Error(`Expected JSON, got: ${text}`);
+    }
+
     return res.json();
   } catch (error) {
-    console.log(error)
+    console.error("Failed to fetch rental houses:", error);
+    return { data: [] }; // or throw again, depending on how you want to handle fallback
   }
 };
+
 
 
 
