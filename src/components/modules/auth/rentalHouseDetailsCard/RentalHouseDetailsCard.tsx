@@ -10,6 +10,7 @@ import {
 } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
+import RequestRentalModal from "@/components/ui/core/RequestRentalModal";
 
 function ThumbnailPlugin(
   mainRef: MutableRefObject<KeenSliderInstance | null>
@@ -108,7 +109,7 @@ const RentalHouseDetailsCard = ({
         <hr />
         <div className="flex justify-between">
           <p className="text-sm">Bedrooms: {singleData?.bedrooms}</p>
-          <p className="text-sm">Rent: ${singleData?.rent}</p>
+          <p className="text-sm">Rent: ${singleData?.rentAmount}</p>
         </div>
 
         <ul className="flex gap-3 flex-wrap py-1">
@@ -124,6 +125,7 @@ const RentalHouseDetailsCard = ({
         </ul>
 
         <p className="!text-sm text-gray-700">{singleData?.description}</p>
+        <RequestRentalModal rentalHouseId={singleData?._id} />
       </div>
     </div>
   );
