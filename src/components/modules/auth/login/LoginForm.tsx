@@ -87,17 +87,17 @@ const LoginForm = () => {
     if (credential === "admin") {
       newValues = {
         email: "admin@gmail.com",
-        password: "123456",
+        password: "$Admin123",
       };
     } else if (credential === "tenant") {
       newValues = {
         email: "tenant@gmail.com",
-        password: "123456",
+        password: "$Tenant123",
       };
     } else if (credential === "landlord") {
       newValues = {
         email: "landlord@gmail.com",
-        password: "123456",
+        password: "$Landloard123",
       };
     }
 

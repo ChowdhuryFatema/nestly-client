@@ -1,8 +1,10 @@
 export type TRentalHouse = {
-    id: number;
+    length: number;
+    _id: string;
     location: string;
     description: string;
-    rent: number;
+    rentAmount: number;
+    status: string;
     images: string[];
     bedrooms: number;
     amenities: string[];

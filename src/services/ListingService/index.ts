@@ -24,18 +24,33 @@ export const createRentalHouse = async (formData: FormData) => {
 
 
 // Get All Rental Houses (PUBLIC)
-export const getAllPublicRentalHouses = async () => {
+// export const getAllPublicRentalHouses = async () => {
+//   try {
+//     const res = await fetch(`${BASE_URL}/listings`, {
+//       next: {
+//         tags: ["Listings"],
+//       },
+//     });
+//     return res.json();
+//   } catch (error: any) {
+//     return Error(error);
+//   }
+// };
+
+export const getAllPublicRentalHouses = async (filters: { key: string; value: string }[]) => {
   try {
-    const res = await fetch(`${BASE_URL}/listings`, {
-      next: {
-        tags: ["Listings"],
-      },
+    const params = new URLSearchParams();
+    filters.forEach((filter) => {
+      if (filter.value) params.append(filter.key, filter.value);
     });
+
+    const res = await fetch(`${BASE_URL}/listings?${params.toString()}`);
     return res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    console.log(error)
   }
 };
+
 
 
 export const getRentalHousesByEmail = async (email: string) => {
