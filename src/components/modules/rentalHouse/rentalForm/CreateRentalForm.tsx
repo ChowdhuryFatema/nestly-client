@@ -9,51 +9,86 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-// import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { registerUser } from "@/services/AuthService";
 import { toast } from "sonner";
 import NLButton from "@/components/ui/core/ImageUploader/NLButton";
 import { Textarea } from "@/components/ui/textarea";
 import ImagePreviewer from "@/components/ui/core/ImageUploader/ImagePreview";
 import ImageUploader from "@/components/ui/core/ImageUploader";
-// import { rentalSchema } from "./rentalValidation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { rentalSchema } from "./rentalValidation";
+import { uploadImageToCloudinary } from "@/services/Cloudinary";
+import { createListing } from "@/services/Landlord/create-listing";
+
 
 const CreateRentalForm = () => {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
+
   const form = useForm({
-    // resolver: zodResolver(rentalSchema),
+    resolver: zodResolver(rentalSchema),
+    defaultValues: {
+      location: "",
+      description: "",
+      rentAmount: "",
+      bedrooms: "",
+      // images: [], 
+    },
   });
 
-  console.log("imageFiles", imageFiles);
 
   const {
     formState: { isSubmitting },
   } = form;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log("data", data);
+
+    if (imageFiles.length === 0) {
+      toast.error("Please upload at least one image");
+      return;
+    }
     try {
-      const res = await registerUser(data);
-      console.log(res);
-      if (res?.success) {
-        toast.success(res?.message);
-      } else {
-        toast.error(res?.message);
+      const upLoadedImagesUrls = [];
+      for (const image of imageFiles) {
+        const res = await uploadImageToCloudinary(image);
+        console.log(res);
+        upLoadedImagesUrls.push(res?.url);
       }
+      const rentalHouseData = {
+        ...data,
+        rentAmount: Number(data.rentAmount),
+        bedrooms: Number(data.bedrooms),
+        images: upLoadedImagesUrls,
+      }
+      console.log("rentalHouseData", rentalHouseData);
+      const res = await createListing(rentalHouseData);
+      console.log(res);
     } catch (error: any) {
       console.error(error);
     }
+
+    // try {
+    //   const res = await registerUser(data);
+    //   console.log(res);
+    //   if (res?.success) {
+    //     toast.success(res?.message);
+    //   } else {
+    //     toast.error(res?.message);
+    //   }
+    // } catch (error: any) {
+    //   console.error(error);
+    // }
   };
 
   return (
-    <div className="max-w-[60%] mx-auto">
+    <div className="max-w-5xl mx-auto">
       <div className="flex justify-center items-center">
         <div className="w-full">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-              <label className="text-sm">Location</label>
+              <label className="text-md">Location</label>
               <FormField
                 control={form.control}
                 name="location"
@@ -65,10 +100,10 @@ const CreateRentalForm = () => {
                   </FormItem>
                 )}
               />
-              <label className="text-sm">Rent amount</label>
+              <label className="text-md">Rent amount</label>
               <FormField
                 control={form.control}
-                name="rent"
+                name="rentAmount"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel />
@@ -77,10 +112,10 @@ const CreateRentalForm = () => {
                   </FormItem>
                 )}
               />
-              <label className="text-sm">Number of bedrooms</label>
+              <label className="text-md">Number of bedrooms</label>
               <FormField
                 control={form.control}
-                name="numberOfBedrooms"
+                name="bedrooms"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel />
@@ -89,41 +124,31 @@ const CreateRentalForm = () => {
                   </FormItem>
                 )}
               />
-              <label className="text-sm">Amenities</label>
-              <FormField
-                control={form.control}
-                name="amenities"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel />
-                    <Input {...field} value={field.value || ""} />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              
 
-              <div className="grid grid-cols-3 gap-5">
-                <div className="col-span-2">
-                  <label className="text-sm">Description</label>
-                  <FormField
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel />
-                        <Textarea className="h-36" {...field} value={field.value || ""} />
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="mt-8">
-                  <ImageUploader
-                    setImageFiles={setImageFiles!}
-                    setImagePreview={setImagePreview}
-                    label="Upload Logo"
-                  />
-                </div>
+              <div className="col-span-2">
+                <label className="text-md">Description</label>
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel />
+                      <Textarea className="h-24" {...field} value={field.value || ""} />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+
+              <div className="space-y-2">
+                <FormLabel className="text-md">Upload Images</FormLabel>
+                <ImageUploader
+                  setImageFiles={setImageFiles!}
+                  setImagePreview={setImagePreview}
+                  label="Upload Images"
+                />
               </div>
 
               <div>
@@ -132,7 +157,7 @@ const CreateRentalForm = () => {
                     setImageFiles={setImageFiles}
                     imagePreview={imagePreview}
                     setImagePreview={setImagePreview}
-                    className="grid grid-cols-7 gap-2"
+                    className=" flex flex-wrap gap-2"
                   />
                 )}
               </div>
