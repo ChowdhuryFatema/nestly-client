@@ -4,7 +4,7 @@ import { Button } from "../../button";
 import { X } from "lucide-react";
 
 type TImangePreviewer = {
-  setImageFiles: React.Dispatch<React.SetStateAction<File[]>>;
+    setImageFiles: React.Dispatch<React.SetStateAction<File[] | string[]>>;
   imagePreview: string[];
   setImagePreview: React.Dispatch<React.SetStateAction<string[]>>;
   className?: string;
@@ -17,7 +17,7 @@ const ImagePreviewer = ({
   className,
 }: TImangePreviewer) => {
   const handleRemove = (index: number) => {
-    setImageFiles((prev) => prev.filter((_, idx) => idx !== index));
+    setImageFiles((prev) => prev.filter((_, idx) => idx !== index) as File[] | string[]);
     setImagePreview((prev) => prev.filter((_, idx) => idx !== index));
   };
 

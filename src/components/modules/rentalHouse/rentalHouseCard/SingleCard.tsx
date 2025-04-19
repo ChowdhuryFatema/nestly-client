@@ -36,8 +36,8 @@ const SingleCard = ({ info }: TTRentalHouseProps) => {
             {info?.images?.map((img, index) => (
               <div
                 key={index}
-                className={`keen-slider__slide number-slide${index + 1}`}
-                style={{ position: "relative", height: "200px" }} // optional but useful
+                className={`keen-slider__slide number-slide${index + 1} rounded`}
+                style={{ position: "relative", height: "200px"  }} // optional but useful
               >
                 <Image
                   className="rounded object-cover"

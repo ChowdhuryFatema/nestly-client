@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { CloudUpload } from "lucide-react";
 
 type TImageUploaderProps = {
-  setImageFiles: Dispatch<React.SetStateAction<File[]>>;
+  setImageFiles: Dispatch<React.SetStateAction<File[] | string[]>>;
   setImagePreview: Dispatch<React.SetStateAction<string[]>>;
   label: string;
   className?: string;
@@ -21,7 +21,7 @@ const ImageUploader = ({
     if (!files) return;
 
     const fileArray = Array.from(files);
-    setImageFiles((prev) => [...prev, ...fileArray]);
+    setImageFiles((prev) => [...prev, ...fileArray] as File[] | string[]);
 
     fileArray.forEach((file) => {
       const reader = new FileReader();
@@ -53,3 +53,4 @@ const ImageUploader = ({
 };
 
 export default ImageUploader;
+  

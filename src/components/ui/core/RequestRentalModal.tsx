@@ -17,7 +17,8 @@ import { createTenantRequest } from "@/services/TenantService";
 import { TRentalRequest } from "@/types";
 import { toast } from "sonner";
 
-const RequestRentalModal = ({ rentalHouseId }: { rentalHouseId: string }) => {
+
+const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: string, landlordId: string }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const {
@@ -30,6 +31,7 @@ const RequestRentalModal = ({ rentalHouseId }: { rentalHouseId: string }) => {
   const onSubmit = async (data: TRentalRequest) => {
     const newData = {
       rentalHouseId,
+      landlordId,
       ...data,
     };
 
@@ -38,11 +40,15 @@ const RequestRentalModal = ({ rentalHouseId }: { rentalHouseId: string }) => {
     try {
       const res = await createTenantRequest(newData);
       console.log("Server Response:", res);
-      if (res?.success) {
-        toast.success(res?.message);
+
+      if (res.success) {
+        toast.success(res.message);
+        reset();
+        setIsOpen(false);
       } else {
-        toast.error(res?.message);
-      }
+        toast.error(res.message);
+
+      
 
       reset(); // Clear form
       setIsOpen(false); // Close modal

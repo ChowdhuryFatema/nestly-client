@@ -23,18 +23,19 @@ import { createRentalHouse } from "@/services/ListingService";
 import { TRentalHouse } from "@/types/RentalHouse.type";
 
 const CreateRentalForm = () => {
-  const [imageFiles, setImageFiles] = useState<File[] | []>([]);
+  const [imageFiles, setImageFiles] = useState<File[] | string[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
 
   const form = useForm({
     resolver: zodResolver(rentalSchema),
     defaultValues: {
-        location: "",
-        rentAmount: "",
-        bedrooms: "",
-        description: "",
+      location: "",
+      amenities: "",
+      rentAmount: "",
+      bedrooms: "",
+      description: "",
     },
-  }); 
+  });
 
 
   const {
@@ -48,35 +49,37 @@ const CreateRentalForm = () => {
       toast.error("Please upload at least one image");
       return;
     }
-      try {
-        const upLoadedImagesUrls = [];
-        for (const image of imageFiles) {
-          const res = await uploadImageToCloudinary(image);
-          console.log(res);
-          upLoadedImagesUrls.push(res?.url);
-        }
-        const rentalHouseData: TRentalHouse = {
-          ...data,
-          location: data.location,
-          description: data.description,
-          rentAmount: String(data.rentAmount),
-          bedrooms: String(data.bedrooms),
-          images: upLoadedImagesUrls,
-        }
-        console.log("rentalHouseData", rentalHouseData);
-        const res = await createRentalHouse(rentalHouseData);
+    try {
+      const upLoadedImagesUrls = [];
+      for (const image of imageFiles as File[]) {
+        const res = await uploadImageToCloudinary(image);
         console.log(res);
-        if (res?.success) {
-          toast.success(res?.message);
-          form.reset();
-          setImageFiles([]);
-          setImagePreview([]);
-        } else {
-          toast.error(res?.message);
-        }
-      } catch (error: any) {
-        console.error(error);
+        upLoadedImagesUrls.push(res?.url);
       }
+
+      const amenities = data.amenities.split(",").map((amenity: string) => amenity.trim());
+      const rentalHouseData: TRentalHouse = {
+        ...data,
+        amenities: amenities,
+        location: data.location,
+        description: data.description,
+        rentAmount: String(data.rentAmount),
+        bedrooms: String(data.bedrooms),
+        images: upLoadedImagesUrls,
+      }
+      console.log("rentalHouseData", rentalHouseData);
+      const res = await createRentalHouse(rentalHouseData);
+      if (res?.success) {
+        toast.success(res?.message);
+        form.reset();
+        setImageFiles([]);
+        setImagePreview([]);
+      } else {
+        toast.error(res?.message);
+      }
+    } catch (error: any) {
+      console.error(error);
+    }
 
   };
 
@@ -94,7 +97,7 @@ const CreateRentalForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel />
-                    <Input {...field} value={field.value || ""} />
+                    <Input placeholder="Enter location" {...field} value={field.value || ""} />
                     <FormMessage />
                   </FormItem>
                 )}
@@ -106,7 +109,7 @@ const CreateRentalForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel />
-                    <Input {...field} value={field.value || ""} />
+                    <Input placeholder="eg: 1000, 2000, 3000, etc." {...field} value={field.value || ""} />
                     <FormMessage />
                   </FormItem>
                 )}
@@ -118,12 +121,27 @@ const CreateRentalForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel />
-                    <Input type="number" {...field} value={field.value || ""} />
+                    <Input type="number" placeholder="eg: 1, 2, 3, etc." {...field} value={field.value || ""} />
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              
+
+              <div>
+                <label className="text-md">Amenities (comma separated)</label>
+                <FormField
+                  control={form.control}
+                  name="amenities"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel />
+                      <Input placeholder="eg: wifi, parking, etc." {...field} value={field.value || ""} />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
 
               <div className="col-span-2">
                 <label className="text-md">Description</label>
@@ -133,7 +151,7 @@ const CreateRentalForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel />
-                      <Textarea className="h-24" {...field} value={field.value || ""} />
+                      <Textarea placeholder="Enter description" className="h-24" {...field} value={field.value || ""} />
                       <FormMessage />
                     </FormItem>
                   )}
@@ -144,7 +162,7 @@ const CreateRentalForm = () => {
               <div className="space-y-2">
                 <FormLabel className="text-md">Upload Images</FormLabel>
                 <ImageUploader
-                  setImageFiles={setImageFiles!}
+                  setImageFiles={setImageFiles as React.Dispatch<React.SetStateAction<File[] | string[]>>}
                   setImagePreview={setImagePreview}
                   label="Upload Images"
                 />
@@ -153,7 +171,7 @@ const CreateRentalForm = () => {
               <div>
                 {imagePreview.length > 0 && (
                   <ImagePreviewer
-                    setImageFiles={setImageFiles}
+                    setImageFiles={setImageFiles as React.Dispatch<React.SetStateAction<File[] | string[]>>}
                     imagePreview={imagePreview}
                     setImagePreview={setImagePreview}
                     className=" flex flex-wrap gap-2"
