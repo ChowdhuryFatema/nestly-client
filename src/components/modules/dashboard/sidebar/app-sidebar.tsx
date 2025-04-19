@@ -86,8 +86,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         url: "#",
         icon: BookOpen,
         items: [
-          { title: "Get Started", url: "#" },
-          { title: "Tutorials", url: "#" },
+          { title: "All Requests", url: "/tenant/all-request" },
           { title: "Edit Profile", url: "/tenant/update-profile" },
         ],
       },

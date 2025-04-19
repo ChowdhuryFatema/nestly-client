@@ -23,7 +23,7 @@ import clsx from "clsx";
 
 const LoginForm = () => {
   const [credential, setCredential] = useState("tenant");
-  const [reCaptchaStatus, setReCaptchaStatus] = useState(false);
+  const [reCaptchaStatus, setReCaptchaStatus] = useState(true);
 
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirectPath");

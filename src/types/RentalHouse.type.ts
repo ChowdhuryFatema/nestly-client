@@ -1,4 +1,7 @@
 export type TRentalHouse = {
+  _id?: string;
+  landlord?: string;
+  amenities: string[];
   location: string;
   rentAmount: string;
   bedrooms: string;

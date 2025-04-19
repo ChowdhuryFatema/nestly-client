@@ -52,6 +52,7 @@ const RentalHouseDetailsCard = ({
 }: {
   singleData: TRentalHouse;
 }) => {
+  console.log("singleData", singleData);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
   });
@@ -125,7 +126,7 @@ const RentalHouseDetailsCard = ({
         </ul>
 
         <p className="!text-sm text-gray-700">{singleData?.description}</p>
-        <RequestRentalModal rentalHouseId={singleData?._id} />
+        <RequestRentalModal rentalHouseId={singleData?._id as string} landlordId={singleData?.landlord as string} />
       </div>
     </div>
   );
