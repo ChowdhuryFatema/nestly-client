@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import "./Banner.css";
 import { useKeenSlider } from "keen-slider/react";
@@ -13,6 +15,9 @@ import banner7 from "@/app/assets/images/home1.jpg";
 import banner8 from "@/app/assets/images/home1.jpg";
 import NLButton from "@/components/ui/core/ImageUploader/NLButton";
 import Link from "next/link";
+import { getCurrentUser } from "@/services/AuthService";
+import { TUser } from "@/types";
+import { useEffect, useState } from "react";
 
 const images = [
   banner1,
@@ -28,7 +33,20 @@ const images = [
 const animation = { duration: 1000, easing: (t: number) => t };
 
 function Banner() {
-  const [opacities, setOpacities] = React.useState<number[]>([]);
+  const [opacities, setOpacities] = useState<number[]>([]);
+  const [user, setUser] = useState<TUser | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const handleUser = async () => {
+    const user = await getCurrentUser();
+    setUser(user);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    handleUser();
+  }, [loading]);
+
   const [sliderRef] = useKeenSlider<HTMLDivElement>({
     slides: images.length,
     loop: true,
@@ -72,21 +90,33 @@ function Banner() {
                   // data-aos-delay="500"
                   className="text-sm md:text-xl !font-light"
                 >
-                  Find comfortable, stylish, and affordable rental homes in your preferred location with ease. Nestly makes renting simple, reliable, and stress-free 
+                  Find comfortable, stylish, and affordable rental homes in your
+                  preferred location with ease. Nestly makes renting simple,
+                  reliable, and stress-free
                 </p>
-                <div
-                  className="flex justify-center items-center !mt-6 !px-5"
-                  data-aos="fade-down"
-                  data-aos-duration="500"
-                  data-aos-delay="1000"
-                >
-                  <Link href={"/create-rental"}>
-                    {" "}
-                    <NLButton variant="primary" className="lg:px-5 lg:py-3 text-sm lg:text-lg">
-                      Post Rental House Info
-                    </NLButton>
-                  </Link>
-                </div>
+                {user?.role === "landlord" ? (
+                  <div className="flex justify-center items-center !mt-6 !px-5">
+                    <Link href={"/create-rental"}>
+                      <NLButton
+                        variant="primary"
+                        className="lg:px-5 lg:py-3 text-sm lg:text-lg"
+                      >
+                        Post Rental House Info
+                      </NLButton>
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="flex justify-center items-center !mt-6 !px-5">
+                    <Link href={"/all-listings-rental"}>
+                      <NLButton
+                        variant="primary"
+                        className="lg:px-5 lg:py-3 text-sm lg:text-lg"
+                      >
+                        All Listings Rental
+                      </NLButton>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
             <div className="fader__slide" style={{ opacity: opacities[idx] }}>

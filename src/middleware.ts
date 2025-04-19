@@ -5,8 +5,10 @@ type TRole = keyof typeof roleBasedPrivateRoutes;
 
 const authRoutes = ["/login", "/register"];
 const roleBasedPrivateRoutes = {
-    // user: [/^\/user/,/^\/create-shop/],
-    // admin: [/^\/admin/],
+    // landlord: [/^\/landlord/,/^\/create-shop/],
+    landlord: [/^\/landlord/],
+    tenant: [/^\/tenant/],
+    admin: [/^\/admin/],
 }
 
 export const middleware = async (request: NextRequest) => {
@@ -36,9 +38,11 @@ export const middleware = async (request: NextRequest) => {
 export const config = {
     matcher: [
         "/login",
-        // "/admin",
-        // "/user",
-        // "/admin/:page",
-        // "/user/:page"
+        "/admin",
+        "/landlord",
+        "/tenant",
+        "/admin/:page",
+        "/landlord/:page",
+        "/tenant/:page"
     ]
 }

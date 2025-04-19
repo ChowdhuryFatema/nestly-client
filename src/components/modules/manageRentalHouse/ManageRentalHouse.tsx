@@ -9,46 +9,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { deleteUser, updateUserRole } from "@/services/Users";
-import { TUser } from "@/types";
+import { deleteAdminRentalHouse, updateRentalStatus } from "@/services/ManageRentalHouse";
+import { TRentalHouse } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Trash } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
-const ManageUsers = ({ users }: { users: TUser[] }) => {
+const ManageRentalHouse = ({
+  allRentalHouses,
+}: {
+  allRentalHouses: TRentalHouse[];
+}) => {
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [openModal, setOpenModal] = useState(false);
-
-  // const handleDelete = async (userId: string) => {
-  //   try {
-  //     const confirm = window.confirm(
-  //       "Are you sure you want to delete this user?"
-  //     );
-  //     if (!confirm) return;
-
-  //     const result = await deleteUser(userId);
-
-  //     if (result.success) {
-  //       // Optionally re-fetch users or update state
-  //       // alert("User deleted");
-  //       setOpenModal(true);
-  //     } else {
-  //       alert(result.message);
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert("Error deleting user.");
-  //   }
-  // };
 
   const handleDeleteConfirm = async () => {
     if (!selectedUserId) return;
 
     try {
-      const result = await deleteUser(selectedUserId);
+      const result = await deleteAdminRentalHouse(selectedUserId);
       if (result.success) {
-        toast.success("User deleted successfully!");
+        toast.success("Rental list deleted successfully!");
         // Optionally trigger re-fetch here
       } else {
         toast.error(result.message || "Something went wrong.");
@@ -62,37 +44,42 @@ const ManageUsers = ({ users }: { users: TUser[] }) => {
     }
   };
 
-  const columns: ColumnDef<TUser>[] = [
+  const columns: ColumnDef<TRentalHouse>[] = [
     {
-      accessorKey: "name",
-      header: "Name",
+      accessorKey: "location",
+      header: "Location",
     },
     {
-      accessorKey: "email",
-      header: "Email",
+      accessorKey: "rentAmount",
+      header: "RentAmount",
     },
     {
-      accessorKey: "role",
-      header: "Role",
+      accessorKey: "bedrooms",
+      header: "Bedrooms",
+    },
+    {
+      accessorKey: "status",
+      header: "Status",
       cell: ({ row }) => {
-        const user = row.original;
+        const item = row.original;
+        
 
-        const handleRoleChange = async (newRole: string) => {
-          const result = await updateUserRole(user?._id, newRole);
+        const handleStatusChange = async (newStatus: string) => {
+          const result = await updateRentalStatus(item?._id, newStatus);
           if (result.success) {
-            toast.success("User role updated successfully!");
+            toast.success("Status updated successfully!");
           } else {
             toast.error(result.message);
           }
         };
-        const roles = ["admin", "landlord", "tenant"];
+        const status = ["pending", "approved", "rejected"];
         return (
-          <Select defaultValue={user.role} onValueChange={handleRoleChange}>
+          <Select defaultValue={item?.status} onValueChange={handleStatusChange}>
             <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder="Select role" />
+              <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
-              {roles.map((role) => (
+              {status.map((role) => (
                 <SelectItem key={role} value={role}>
                   {role}
                 </SelectItem>
@@ -126,7 +113,7 @@ const ManageUsers = ({ users }: { users: TUser[] }) => {
 
   return (
     <div>
-      <NLTable data={users} columns={columns || []} />
+      <NLTable data={allRentalHouses} columns={columns || []} />
 
       <DeleteConfirmModal
         open={openModal}
@@ -137,4 +124,4 @@ const ManageUsers = ({ users }: { users: TUser[] }) => {
   );
 };
 
-export default ManageUsers;
+export default ManageRentalHouse;

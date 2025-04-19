@@ -1,4 +1,6 @@
-import Image from "next/image";
+"use client";
+
+// import Image from "next/image";
 import React, { useState } from "react";
 import "./cardSlider.css";
 import { useKeenSlider } from "keen-slider/react";
@@ -6,6 +8,7 @@ import "keen-slider/keen-slider.min.css";
 import NLButton from "@/components/ui/core/ImageUploader/NLButton";
 import Link from "next/link";
 import { TRentalHouse } from "@/types/RentalHouse.type";
+import Image from "next/image";
 
 type TTRentalHouseProps = {
   info: TRentalHouse;
@@ -25,7 +28,7 @@ const SingleCard = ({ info }: TTRentalHouseProps) => {
   });
 
   return (
-    <div className="shadow-xl border border-gray-300 rounded p-5">
+    <div className="shadow border border-gray-300 rounded p-5">
       {/* card slider */}
       <div>
         <div className="navigation-wrapper">
@@ -34,12 +37,14 @@ const SingleCard = ({ info }: TTRentalHouseProps) => {
               <div
                 key={index}
                 className={`keen-slider__slide number-slide${index + 1}`}
+                style={{ position: "relative", height: "200px" }} // optional but useful
               >
                 <Image
-                  className="rounded"
+                  className="rounded object-cover"
                   src={img}
-                  fill
                   alt={`Apartment image ${index + 1}`}
+                  fill
+                  sizes="100%"
                 />
               </div>
             ))}
@@ -90,7 +95,7 @@ const SingleCard = ({ info }: TTRentalHouseProps) => {
       <div className="space-y-2">
         <div className="flex justify-between">
           <p className="text-sm">Bedrooms: {info?.bedrooms}</p>
-          <p className="text-sm">Rent: ${info?.rent}</p>
+          <p className="text-sm">Rent: ${info?.rentAmount}</p>
         </div>
         <p className="font-bold">
           Location: <span className="text-primary-500">{info?.location}</span>
@@ -109,10 +114,8 @@ const SingleCard = ({ info }: TTRentalHouseProps) => {
 
         {/* <p className="!text-sm text-gray-700">{info?.description}</p> */}
 
-        <Link href={`/details/${info.id}`}>
-          <NLButton variant="primary" className="mt-2">
-            View Details
-          </NLButton>
+        <Link href={`/details/${info._id}`}>
+          <NLButton variant="primary">View Details</NLButton>
         </Link>
       </div>
     </div>

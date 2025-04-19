@@ -1,10 +1,17 @@
 export type TRentalHouse = {
-    id: number;
-    location: string;
-    description: string;
-    rent: number;
-    images: string[];
-    bedrooms: number;
-    amenities: string[];
-  };
-  
+  length: number;
+  _id: string;
+  location: string;
+  description: string;
+  rentAmount: number;
+  status: string;
+  images: string[];
+  bedrooms: number;
+  amenities: string[];
+};
+
+export type TRentalRequest = {
+  moveInDate: string;
+  rentalDuration: string;
+  message: string;
+};
