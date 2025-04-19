@@ -2,16 +2,19 @@
 
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
+import { TRentalHouse } from "@/types/RentalHouse.type";
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_API}/landlords`;
 
 //  Create Rental House
-export const createRentalHouse = async (formData: FormData) => {
+export const createRentalHouse = async (data: TRentalHouse) => {
+  console.log("data", data);
   try {
     const res = await fetch(`${BASE_URL}/listings`, {
       method: "POST",
-      body: formData,
+      body: JSON.stringify(data),
       headers: {
+        "Content-Type": "application/json",
         Authorization: (await cookies()).get("accessToken")!.value,
       },
     });

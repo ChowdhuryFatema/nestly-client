@@ -1,19 +1,8 @@
 import { z } from "zod";
 
 export const rentalSchema = z.object({
-    // name: z.string({
-    //     required_error: "Name is required",
-    // }).min(2, { message: "Name must be at least 2 characters" }),
-    
-    // email: z.string({
-    //     required_error: "Email is required",
-    // }).email({ message: "Invalid email address" }),
-
-    // password: z.string({
-    //     required_error: "Password is required",
-    // }).min(6, { message: "Password must be at least 6 characters" }),
-
-    // confirmPassword: z.string({
-    //     required_error: "Confirm Password is required",
-    // }),
-})
+    location: z.string({ required_error: "Location is required" }).min(1, { message: "Location is required" }),
+    rentAmount: z.string({ required_error: "Rent is required" }).min(1, { message: "Rent is required" }),
+    bedrooms: z.string({ required_error: "Number of Bedrooms is required" }).min(1, { message: "Number of Bedrooms is required" }),
+    description: z.string({ required_error: "Description is required" }).min(1, { message: "Description is required" }),
+})  
