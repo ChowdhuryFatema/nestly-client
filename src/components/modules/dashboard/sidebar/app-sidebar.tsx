@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { BookOpen, Bot, LucideIcon } from "lucide-react";
 
 import {
@@ -15,7 +14,9 @@ import { NavUser } from "./nav-user";
 import Image from "next/image";
 import logo from "@/app/assets/nestly-logo.png";
 import Link from "next/link";
-import { useUser } from "@/context/UserContext";
+import { TUser } from "@/types";
+import { useEffect, useState } from "react";
+import { getCurrentUser } from "@/services/AuthService";
 
 type NavItem = {
   title: string;
@@ -26,7 +27,18 @@ type NavItem = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { user } = useUser();
+  const [user, setUser] = useState<TUser | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const handleUser = async () => {
+    const user = await getCurrentUser();
+    setUser(user);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    handleUser();
+  }, [loading]);
 
   const data: {
     user: {
@@ -61,7 +73,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           { title: "Get Started", url: "#" },
           { title: "Tutorials", url: "#" },
           { title: "Edit Profile", url: "/admin/update-profile" },
-          { title: "All Rental Houses", url: `/${user?.role}/all-rental-houses` },
+          {
+            title: "All Rental Houses",
+            url: `/${user?.role}/all-rental-houses`,
+          },
         ],
       },
     ];
