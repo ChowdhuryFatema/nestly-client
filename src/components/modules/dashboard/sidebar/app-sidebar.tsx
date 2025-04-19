@@ -6,7 +6,6 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { NavMain } from "./nav-main";
@@ -110,16 +109,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   }
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
+      {/* <SidebarHeader>
         <Link href={"/"}>
           <h1 className="text-2xl font-black flex items-center">
             <Image src={logo} width={30} height={30} alt="Logo" />
             <span> Nestly</span>
           </h1>
         </Link>
-      </SidebarHeader>
+      </SidebarHeader> */}
 
       <SidebarContent>
+        <Link href={"/"}>
+          <h1 className="text-2xl font-black flex items-center pt-5 pl-3">
+            <Image src={logo} width={30} height={30} alt="Logo" className="mr-2" />
+            <span> Nestly</span>
+          </h1>
+        </Link>
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
