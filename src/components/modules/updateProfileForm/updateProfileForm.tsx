@@ -27,7 +27,7 @@ export default function UpdateProfileForm() {
     const fetchData = async () => {
       try {
         const data = await getCurrentUser();
-        setFormData(prev => ({
+        setFormData((prev) => ({
           ...prev,
           name: data.name || "",
           phoneNumber: data.phoneNumber || "",
@@ -44,7 +44,7 @@ export default function UpdateProfileForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -63,7 +63,7 @@ export default function UpdateProfileForm() {
 
       // Refresh user data after update
       const updatedUser = await getCurrentUser();
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         name: updatedUser.name || "",
         phoneNumber: updatedUser.phoneNumber || "",
@@ -79,7 +79,9 @@ export default function UpdateProfileForm() {
   };
 
   const profileImageSrc =
-    formData.profileImage?.trim() !== "" ? formData.profileImage : "/default-avatar.png";
+    formData.profileImage?.trim() !== ""
+      ? formData.profileImage
+      : "/default-avatar.png";
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4">
@@ -90,7 +92,11 @@ export default function UpdateProfileForm() {
         <div className="flex justify-center">
           <div className="relative w-24 h-24">
             <Image
-              src={profileImageSrc}
+              src={
+                profileImageSrc
+                  ? profileImageSrc
+                  : "https://s.cafebazaar.ir/images/icons/cute.love.dp-fc9c8497-522b-4848-bd66-72ee57b9d195_512x512.png"
+              }
               alt="Profile"
               width={96}
               height={96}
@@ -162,10 +168,10 @@ export default function UpdateProfileForm() {
               className="w-full border rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             <div
-              onClick={() => setShowPassword(prev => !prev)}
+              onClick={() => setShowPassword((prev) => !prev)}
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
             >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
             </div>
           </div>
 
@@ -179,10 +185,10 @@ export default function UpdateProfileForm() {
               className="w-full border rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             <div
-              onClick={() => setShowNewPassword(prev => !prev)}
+              onClick={() => setShowNewPassword((prev) => !prev)}
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
             >
-              {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              {showNewPassword ? <Eye size={20} /> : <EyeOff size={20} />}
             </div>
           </div>
         </div>

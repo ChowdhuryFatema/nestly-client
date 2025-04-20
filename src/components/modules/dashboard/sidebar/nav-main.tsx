@@ -1,41 +1,32 @@
-"use client"
+"use client";
 
-import { ChevronRight, type LucideIcon } from "lucide-react"
-
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+import { Building2, Home, Info, type LucideIcon } from "lucide-react";
 import {
   SidebarGroup,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 export function NavMain({
   items,
 }: {
   items: {
-    title: string
-    url: string
-    icon?: LucideIcon
-    isActive?: boolean
+    title: string;
+    url: string;
+    icon?: LucideIcon;
+    isActive?: boolean;
     items?: {
-      title: string
-      url: string
-    }[]
-  }[]
+      title: string;
+      url: string;
+    }[];
+  }[];
 }) {
   return (
     <SidebarGroup>
       {/* <SidebarGroupLabel>Platform</SidebarGroupLabel> */}
-      <SidebarMenu>
-        {items.map((item) => (
+      <SidebarMenu className="space-y-1">
+        {/* {items.map((item) => (
           <Collapsible
             key={item.title}
             asChild
@@ -65,8 +56,44 @@ export function NavMain({
               </CollapsibleContent>
             </SidebarMenuItem>
           </Collapsible>
+        ))} */}
+
+        {items?.map((item) => (
+          <SidebarMenuSubItem key={item.title}>
+            <SidebarMenuSubButton asChild>
+              <a href={item.url}>
+                {item?.icon && <item.icon />}
+                <span>{item.title}</span>
+              </a>
+            </SidebarMenuSubButton>
+          </SidebarMenuSubItem>
         ))}
+        <hr />
+        <SidebarMenuSubItem>
+          <SidebarMenuSubButton asChild>
+            <a href={"/"}>
+              <Home />
+              <span>Home</span>
+            </a>
+          </SidebarMenuSubButton>
+        </SidebarMenuSubItem>
+        <SidebarMenuSubItem>
+          <SidebarMenuSubButton asChild>
+            <a href={"/all-listings-rental"}>
+              <Building2 />
+              <span>All Listings Rental</span>
+            </a>
+          </SidebarMenuSubButton>
+        </SidebarMenuSubItem>
+        <SidebarMenuSubItem>
+          <SidebarMenuSubButton asChild>
+            <a href={"/about-us"}>
+              <Info />
+              <span>About Us</span>
+            </a>
+          </SidebarMenuSubButton>
+        </SidebarMenuSubItem>
       </SidebarMenu>
     </SidebarGroup>
-  )
+  );
 }

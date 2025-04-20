@@ -96,7 +96,7 @@ function Banner() {
                 </p>
                 {user?.role === "landlord" ? (
                   <div className="flex justify-center items-center !mt-6 !px-5">
-                    <Link href={"/create-rental"}>
+                    <Link href={"/landlord/create-rental"}>
                       <NLButton
                         variant="primary"
                         className="lg:px-5 lg:py-3 text-sm lg:text-lg"
