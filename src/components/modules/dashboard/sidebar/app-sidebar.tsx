@@ -9,6 +9,7 @@ import {
   Users,
   Building2,
   LayoutDashboard,
+  FileText,
 } from "lucide-react";
 
 import {
@@ -93,9 +94,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     ];
   } else if (user?.role === "tenant") {
     data.navMain = [
-      { title: "All Requests", url: "/tenant/all-request" },
-      { title: "Edit Profile", url: "/tenant/update-profile" },
       { title: "Dashboard", url: `/${user?.role}`, icon: LayoutDashboard },
+      { title: "All Requests", url: "/tenant/all-request", icon: FileText },
       { title: "Edit Profile", url: "/tenant/update-profile", icon: UserCog },
     ];
   }
