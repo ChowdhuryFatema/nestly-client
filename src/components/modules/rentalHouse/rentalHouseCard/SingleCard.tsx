@@ -36,8 +36,10 @@ const SingleCard = ({ info }: TTRentalHouseProps) => {
             {info?.images?.map((img, index) => (
               <div
                 key={index}
-                className={`keen-slider__slide number-slide${index + 1} rounded`}
-                style={{ position: "relative", height: "200px"  }} // optional but useful
+                className={`keen-slider__slide number-slide${
+                  index + 1
+                } rounded`}
+                style={{ position: "relative", height: "250px" }} // optional but useful
               >
                 <Image
                   className="rounded object-cover"
@@ -97,9 +99,6 @@ const SingleCard = ({ info }: TTRentalHouseProps) => {
           <p className="text-sm">Bedrooms: {info?.bedrooms}</p>
           <p className="text-sm">Rent: ${info?.rentAmount}</p>
         </div>
-        <p className="font-bold">
-          Location: <span className="text-primary-500">{info?.location}</span>
-        </p>
         <ul className="flex gap-3 flex-wrap py-1">
           {info?.amenities?.map((amenitie, index) => (
             <li
@@ -111,8 +110,12 @@ const SingleCard = ({ info }: TTRentalHouseProps) => {
             </li>
           ))}
         </ul>
-
-        {/* <p className="!text-sm text-gray-700">{info?.description}</p> */}
+        <p className="font-bold">
+          Location: <span className="text-primary-500">{info?.location}</span>
+        </p>
+        <p className="!text-sm text-gray-700">
+          {info?.description.slice(0, 90)}...
+        </p>
 
         <Link href={`/details/${info._id}`}>
           <NLButton variant="primary">View Details</NLButton>

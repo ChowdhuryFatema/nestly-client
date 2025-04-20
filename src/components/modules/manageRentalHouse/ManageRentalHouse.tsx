@@ -9,7 +9,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { deleteAdminRentalHouse, updateRentalStatus } from "@/services/ManageRentalHouse";
+import {
+  deleteAdminRentalHouse,
+  updateRentalStatus,
+} from "@/services/ManageRentalHouse";
 import { TRentalHouse } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Trash } from "lucide-react";
@@ -62,7 +65,6 @@ const ManageRentalHouse = ({
       header: "Status",
       cell: ({ row }) => {
         const item = row.original;
-        
 
         const handleStatusChange = async (newStatus: string) => {
           const result = await updateRentalStatus(item?._id, newStatus);
@@ -73,13 +75,24 @@ const ManageRentalHouse = ({
           }
         };
         const status = ["pending", "approved", "rejected"];
+        const getAvailableStatuses = (current: string) => {
+          if (current === "approved" || current === "rejected") {
+            // "pending" badh dichhi
+            return status.filter((s) => s !== "pending");
+          }
+          return status;
+        };
+
         return (
-          <Select defaultValue={item?.status} onValueChange={handleStatusChange}>
+          <Select
+            defaultValue={item?.status}
+            onValueChange={handleStatusChange}
+          >
             <SelectTrigger className="w-[150px]">
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
-              {status.map((role) => (
+              {getAvailableStatuses(item?.status).map((role) => (
                 <SelectItem key={role} value={role}>
                   {role}
                 </SelectItem>

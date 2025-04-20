@@ -126,7 +126,20 @@ const RentalHouseDetailsCard = ({
         </ul>
 
         <p className="!text-sm text-gray-700">{singleData?.description}</p>
-        <RequestRentalModal rentalHouseId={singleData?._id as string} landlordId={singleData?.landlord as string} />
+        <hr />
+        <p className="!text-sm text-gray-700">
+          This beautifully designed 3-bedroom, 2-bathroom family home is nestled
+          in a peaceful and safe neighborhood, perfect for families, working
+          professionals, or students looking for a comfortable and convenient
+          place to stay. The house features a spacious open-concept living and
+          dining area with large windows that allow plenty of natural light to
+          flood the space. The modern kitchen comes fully equipped with
+          essential appliances, ample cabinet space, and sleek countertops.
+        </p>
+        <RequestRentalModal
+          rentalHouseId={singleData?._id as string}
+          landlordId={singleData?.landlord as string}
+        />
       </div>
     </div>
   );
