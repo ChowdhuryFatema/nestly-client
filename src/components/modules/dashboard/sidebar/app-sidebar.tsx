@@ -65,8 +65,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   if (user?.role === "admin") {
     data.navMain = [
-      { title: "All Users", url: `/${user?.role}/all-users`, icon: Users },
-      { title: "All Rental Houses", url: `/${user?.role}/all-rental-houses`, icon: Building2  },
+      { title: "Manage All Users", url: `/${user?.role}/all-users`, icon: Users },
+      { title: "Manage All Rental Houses", url: `/${user?.role}/all-rental-houses`, icon: Building2  },
       { title: "Edit Profile", url: "/admin/update-profile", icon: UserCog },
     ];
   } else if (user?.role === "landlord") {

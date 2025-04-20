@@ -6,6 +6,7 @@ export type TRentalHouse = {
   description: string;
   images: string[];
   amenities: string[];
+  status: string;
 };
 
 export type TRentalRequest = {
