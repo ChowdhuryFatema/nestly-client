@@ -13,8 +13,10 @@ export type TRentalHouse = {
 };
 
 export type TRentalRequest = {
+  rentalHouseId?: TRentalHouse;
   tenantId?: TUser;
   paymentStatus?: string;
+  landlordId?: { _id: string };
   _id: string;
   moveInDate: string;
   rentalDuration: string;
