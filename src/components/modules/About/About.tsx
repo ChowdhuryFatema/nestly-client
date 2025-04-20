@@ -6,7 +6,7 @@ import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const About = () => {
   return (
-    <div className="container mx-auto px-4 py-12 text-center">
+    <div className="container mx-auto px-4 mb-12 text-center">
       {/* Mission Statement */}
       <section className="mb-10">
         <h2 className="text-3xl font-bold text-primary-600 mb-4">Our Mission</h2>

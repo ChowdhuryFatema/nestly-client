@@ -1,5 +1,6 @@
 "use client";
 
+import { DeleteConfirmModal } from "@/components/ui/core/DeleteConfirmModal";
 import { NLTable } from "@/components/ui/core/NLTable";
 import {
   Select,
@@ -12,10 +13,55 @@ import { deleteUser, updateUserRole } from "@/services/Users";
 import { TUser } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Trash } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "sonner";
 
 const ManageUsers = ({ users }: { users: TUser[] }) => {
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+  const [openModal, setOpenModal] = useState(false);
+
+  // const handleDelete = async (userId: string) => {
+  //   try {
+  //     const confirm = window.confirm(
+  //       "Are you sure you want to delete this user?"
+  //     );
+  //     if (!confirm) return;
+
+  //     const result = await deleteUser(userId);
+
+  //     if (result.success) {
+  //       // Optionally re-fetch users or update state
+  //       // alert("User deleted");
+  //       setOpenModal(true);
+  //     } else {
+  //       alert(result.message);
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("Error deleting user.");
+  //   }
+  // };
+
+  const handleDeleteConfirm = async () => {
+    if (!selectedUserId) return;
+
+    try {
+      const result = await deleteUser(selectedUserId);
+      if (result.success) {
+        toast.success("User deleted successfully!");
+        // Optionally trigger re-fetch here
+      } else {
+        toast.error(result.message || "Something went wrong.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error deleting user.");
+    } finally {
+      setSelectedUserId(null);
+      setOpenModal(false);
+    }
+  };
+
   const columns: ColumnDef<TUser>[] = [
     {
       accessorKey: "name",
@@ -36,7 +82,7 @@ const ManageUsers = ({ users }: { users: TUser[] }) => {
           if (result.success) {
             toast.success("User role updated successfully!");
           } else {
-            alert(result.message);
+            toast.error(result.message);
           }
         };
         const roles = ["admin", "landlord", "tenant"];
@@ -62,33 +108,13 @@ const ManageUsers = ({ users }: { users: TUser[] }) => {
       cell: ({ row }) => {
         const user = row.original;
 
-        console.log("user from delete", user);
-
-        const handleDelete = async (userId: string) => {
-          try {
-            const confirm = window.confirm(
-              "Are you sure you want to delete this user?"
-            );
-            if (!confirm) return;
-
-            const result = await deleteUser(userId);
-
-            if (result.success) {
-              // Optionally re-fetch users or update state
-              alert("User deleted");
-            } else {
-              alert(result.message);
-            }
-          } catch (err) {
-            console.error(err);
-            alert("Error deleting user.");
-          }
-        };
-
         return (
           <button
-            onClick={() => handleDelete(user?._id)}
-            className="text-red-500"
+            onClick={() => {
+              setSelectedUserId(user._id);
+              setOpenModal(true);
+            }}
+            className="text-red-500 cursor-pointer"
             title="Delete"
           >
             <Trash className="w-5 h-5" />
@@ -100,7 +126,13 @@ const ManageUsers = ({ users }: { users: TUser[] }) => {
 
   return (
     <div>
-      <NLTable data={users} columns={columns} />
+      <NLTable data={users} columns={columns || []} />
+
+      <DeleteConfirmModal
+        open={openModal}
+        onOpenChange={setOpenModal}
+        onConfirm={handleDeleteConfirm}
+      />
     </div>
   );
 };

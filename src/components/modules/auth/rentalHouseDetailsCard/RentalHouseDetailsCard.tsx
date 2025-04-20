@@ -10,6 +10,7 @@ import {
 } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
+import RequestRentalModal from "@/components/ui/core/RequestRentalModal";
 
 function ThumbnailPlugin(
   mainRef: MutableRefObject<KeenSliderInstance | null>
@@ -51,6 +52,7 @@ const RentalHouseDetailsCard = ({
 }: {
   singleData: TRentalHouse;
 }) => {
+  console.log("singleData", singleData);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
   });
@@ -108,7 +110,7 @@ const RentalHouseDetailsCard = ({
         <hr />
         <div className="flex justify-between">
           <p className="text-sm">Bedrooms: {singleData?.bedrooms}</p>
-          <p className="text-sm">Rent: ${singleData?.rent}</p>
+          <p className="text-sm">Rent: ${singleData?.rentAmount}</p>
         </div>
 
         <ul className="flex gap-3 flex-wrap py-1">
@@ -124,6 +126,20 @@ const RentalHouseDetailsCard = ({
         </ul>
 
         <p className="!text-sm text-gray-700">{singleData?.description}</p>
+        <hr />
+        <p className="!text-sm text-gray-700">
+          This beautifully designed 3-bedroom, 2-bathroom family home is nestled
+          in a peaceful and safe neighborhood, perfect for families, working
+          professionals, or students looking for a comfortable and convenient
+          place to stay. The house features a spacious open-concept living and
+          dining area with large windows that allow plenty of natural light to
+          flood the space. The modern kitchen comes fully equipped with
+          essential appliances, ample cabinet space, and sleek countertops.
+        </p>
+        <RequestRentalModal
+          rentalHouseId={singleData?._id as string}
+          landlordId={singleData?.landlord as string}
+        />
       </div>
     </div>
   );

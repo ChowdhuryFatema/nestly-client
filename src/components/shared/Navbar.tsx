@@ -12,19 +12,31 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { logout } from "@/services/AuthService";
+import { getCurrentUser, logout } from "@/services/AuthService";
 import { usePathname, useRouter } from "next/navigation";
 import { protectedRoutes } from "@/constants";
 import Image from "next/image";
 import NLButton from "../ui/core/ImageUploader/NLButton";
 import clsx from "clsx";
-import { useUser } from "@/context/UserContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { TUser } from "@/types";
+import { Skeleton } from "../ui/skeleton";
 
 export default function Navbar() {
-  const { user, setLoading } = useUser();
   const pathname = usePathname();
   const router = useRouter();
+  const [user, setUser] = useState<TUser | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const handleUser = async () => {
+    const user = await getCurrentUser();
+    setUser(user);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    handleUser();
+  }, [loading]);
 
   const handleLogOut = () => {
     logout();
@@ -37,13 +49,8 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about-us", label: "About Us" },
-    { href: "/all-rental", label: "All Listings Rental" },
+    { href: "/all-listings-rental", label: "All Listings Rental" },
   ];
-
-   useEffect(() => { console.log("user",user)}, [])
-
-console.log("user user", user)
-
 
   return (
     <header className="border-b w-full">
@@ -51,7 +58,7 @@ console.log("user user", user)
         {/* Logo */}
         <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
           <Image src={logo} width={30} height={40} alt="Logo" />
-          <span>Nestly</span>
+          Nestly
         </h1>
 
         {/* Desktop Menu */}
@@ -74,38 +81,52 @@ console.log("user user", user)
         <div className="flex items-center">
           {/* Desktop Buttons + Dropdown */}
           <nav className="md:flex gap-2 items-center">
-            {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger className="outline-none cursor-pointer">
-                  <Avatar className="border-2 border-primary-500 rounded-full">
-                    <AvatarImage src="https://s.cafebazaar.ir/images/icons/cute.love.dp-fc9c8497-522b-4848-bd66-72ee57b9d195_512x512.png" />
-                    <AvatarFallback>Profile</AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem className="cursor-pointer">
-                    My Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer">
-                    <Link href={`/${user?.role}`}>Dashboard</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    onClick={handleLogOut}
-                    className="cursor-pointer text-red-500"
-                  >
-                    <LogOut className="mr-2 h-4 w-4" /> Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+            {loading ? (
+              <div className="flex items-center gap-4">
+                <Skeleton className="h-10 w-10 rounded-full bg-gray-200" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-24 bg-gray-200" />
+                  <Skeleton className="h-4 w-16 bg-gray-200" />
+                </div>
+              </div>
             ) : (
               <>
-                <Link href={"/login"}>
-                  <NLButton className="mr-2 text-sm">Login</NLButton>
-                </Link>
-                <Link href={"/register"}>
-                  <NLButton>Register</NLButton>
-                </Link>
+                {user ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="outline-none cursor-pointer">
+                      <Avatar className="border-2 border-primary-500 rounded-full">
+                        <AvatarImage src="https://s.cafebazaar.ir/images/icons/cute.love.dp-fc9c8497-522b-4848-bd66-72ee57b9d195_512x512.png" />
+                        <AvatarFallback>Profile</AvatarFallback>
+                      </Avatar>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem className="cursor-pointer">
+                        <Link href={`/${user.role}/update-profile`}>
+                          My Profile
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer">
+                        <Link href={`/${user?.role}`}>Dashboard</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={handleLogOut}
+                        className="cursor-pointer text-red-500"
+                      >
+                        <LogOut className="mr-2 h-4 w-4" /> Logout
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <>
+                    <Link href={"/login"}>
+                      <NLButton className="mr-2 text-sm">Login</NLButton>
+                    </Link>
+                    <Link href={"/register"}>
+                      <NLButton>Register</NLButton>
+                    </Link>
+                  </>
+                )}
               </>
             )}
           </nav>
