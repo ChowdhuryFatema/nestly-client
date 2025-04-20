@@ -58,7 +58,7 @@ export default function Navbar() {
         {/* Logo */}
         <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
           <Image src={logo} width={30} height={40} alt="Logo" />
-          <span>Nestly</span>
+          Nestly
         </h1>
 
         {/* Desktop Menu */}
@@ -83,10 +83,10 @@ export default function Navbar() {
           <nav className="md:flex gap-2 items-center">
             {loading ? (
               <div className="flex items-center gap-4">
-                <Skeleton className="h-10 w-10 rounded-full" />
+                <Skeleton className="h-10 w-10 rounded-full bg-gray-200" />
                 <div className="space-y-2">
-                  <Skeleton className="h-4 w-24" />
-                  <Skeleton className="h-4 w-16" />
+                  <Skeleton className="h-4 w-24 bg-gray-200" />
+                  <Skeleton className="h-4 w-16 bg-gray-200" />
                 </div>
               </div>
             ) : (
@@ -101,7 +101,9 @@ export default function Navbar() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       <DropdownMenuItem className="cursor-pointer">
-                        My Profile
+                        <Link href={`/${user.role}/update-profile`}>
+                          My Profile
+                        </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem className="cursor-pointer">
                         <Link href={`/${user?.role}`}>Dashboard</Link>

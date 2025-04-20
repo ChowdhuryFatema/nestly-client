@@ -1,6 +1,15 @@
 "use client";
 
-import { BookOpen, Bot, LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
+import {
+  PlusSquare,
+  List,
+  MailOpen,
+  UserCog,
+  Users,
+  Building2,
+  LayoutDashboard,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -57,57 +66,41 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   if (user?.role === "admin") {
     data.navMain = [
+      { title: "Dashboard", url: `/${user?.role}`, icon: LayoutDashboard },
       {
-        title: "Manage Users",
-        url: "#",
-        icon: Bot,
-        items: [{ title: "All Users", url: `/${user?.role}/all-users` }],
+        title: "Manage All Users",
+        url: `/${user?.role}/all-users`,
+        icon: Users,
       },
       {
-        title: "Manage Rental Listing",
-        url: "#",
-        icon: BookOpen,
-        items: [
-          { title: "Introduction", url: "#" },
-          { title: "Get Started", url: "#" },
-          { title: "Tutorials", url: "#" },
-          { title: "Edit Profile", url: "/admin/update-profile" },
-          {
-            title: "All Rental Houses",
-            url: `/${user?.role}/all-rental-houses`,
-          },
-        ],
+        title: "Manage All Rental Houses",
+        url: `/${user?.role}/all-rental-houses`,
+        icon: Building2,
       },
+      { title: "Edit Profile", url: "/admin/update-profile", icon: UserCog },
     ];
   } else if (user?.role === "landlord") {
     data.navMain = [
+      { title: "Dashboard", url: `/${user?.role}`, icon: LayoutDashboard },
       {
-        title: "Listings",
-        url: "#",
-        icon: BookOpen,
-        items: [
-          { title: "Create Rental", url: "/landlord/create-rental" },
-          { title: "AllListings", url: "/landlord/AllListing" },
-          { title: "Rental Requests", url: "/landlord/requests" },
-          { title: "Edit Profile", url: "/landlord/update-profile" },
-        ],
+        title: "Create Rental",
+        url: "/landlord/create-rental",
+        icon: PlusSquare,
       },
+      { title: "AllListings", url: "/landlord/AllListing", icon: List },
+      { title: "Rental Requests", url: "/landlord/requests", icon: MailOpen },
+      { title: "Edit Profile", url: "/landlord/update-profile", icon: UserCog },
     ];
   } else if (user?.role === "tenant") {
     data.navMain = [
-      {
-        title: "Documentation",
-        url: "#",
-        icon: BookOpen,
-        items: [
-          { title: "All Requests", url: "/tenant/all-request" },
-          { title: "Edit Profile", url: "/tenant/update-profile" },
-        ],
-      },
+      { title: "All Requests", url: "/tenant/all-request" },
+      { title: "Edit Profile", url: "/tenant/update-profile" },
+      { title: "Dashboard", url: `/${user?.role}`, icon: LayoutDashboard },
+      { title: "Edit Profile", url: "/tenant/update-profile", icon: UserCog },
     ];
   }
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar {...props}>
       {/* <SidebarHeader>
         <Link href={"/"}>
           <h1 className="text-2xl font-black flex items-center">
@@ -120,7 +113,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <Link href={"/"}>
           <h1 className="text-2xl font-black flex items-center pt-5 pl-3">
-            <Image src={logo} width={30} height={30} alt="Logo" className="mr-2" />
+            <Image
+              src={logo}
+              width={30}
+              height={30}
+              alt="Logo"
+              className="mr-2"
+            />
             <span> Nestly</span>
           </h1>
         </Link>

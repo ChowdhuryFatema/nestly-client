@@ -5,7 +5,7 @@ import React from "react";
 const UserHomePage = () => {
   return (
     <div>
-      Tenant Home Page
+      <h1 className='text-xl font-bold pl-7'>Tenant Dashboard</h1>
       <Dashboard/>
     </div>
   );

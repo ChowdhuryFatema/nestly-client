@@ -27,9 +27,6 @@ const RentalHouseSearchableFields = [
   "rentAmount",
   "bedrooms",
   "bathrooms",
-  "size",
-  "availableFrom",
-  "contactInfo",
 ];
 
 const AllListingsRental = ({

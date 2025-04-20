@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   Dialog,
@@ -14,12 +14,27 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import NLButton from "./ImageUploader/NLButton";
 import { createTenantRequest } from "@/services/TenantService";
-import { TRentalRequest } from "@/types";
+import { TRentalRequest, TUser } from "@/types";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { getCurrentUser } from "@/services/AuthService";
 
 
 const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: string, landlordId: string }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const [user, setUser] = useState<TUser | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const handleUser = async () => {
+    const user = await getCurrentUser();
+    setUser(user);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    handleUser();
+  }, [loading]);
 
   const {
     handleSubmit,
@@ -55,10 +70,21 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
     }
   }
 
+  const handleRentalRequest = () => {
+    if (user) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+      router.push("/login");
+    }
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <NLButton variant="primary">Request Rental</NLButton>
+        <NLButton variant="primary" onClick={handleRentalRequest}>
+          Request Rental
+        </NLButton>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
