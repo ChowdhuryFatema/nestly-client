@@ -18,7 +18,7 @@ import RentalCardSkeleton from "../rentalHouseCard/RentalCardSkeleton";
 
 
 const RentalHouses = ({ rentalHouses }: { rentalHouses: TRentalHouse[] }) => {
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(6);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [isGrid, setIsGrid] = useState(true);
@@ -62,10 +62,10 @@ const RentalHouses = ({ rentalHouses }: { rentalHouses: TRentalHouse[] }) => {
                   <SelectValue placeholder="Select limit" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="4">4</SelectItem>
-                  <SelectItem value="8">8</SelectItem>
-                  <SelectItem value="12">12</SelectItem>
-                  <SelectItem value="24">24</SelectItem>
+                  <SelectItem value="4">3</SelectItem>
+                  <SelectItem value="8">6</SelectItem>
+                  <SelectItem value="12">9</SelectItem>
+                  <SelectItem value="24">12</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -95,7 +95,7 @@ const RentalHouses = ({ rentalHouses }: { rentalHouses: TRentalHouse[] }) => {
         ) : (
           <div>
             {isGrid ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {paginatedData?.map((info) => (
                   <SingleCard key={info._id} info={info} />
                 ))}

@@ -354,7 +354,7 @@ const AllListingsRental = ({
             ) : (
               <div>
                 {isGrid ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     {paginatedData?.map((info) => (
                       <SingleCard key={info._id} info={info} />
                     ))}

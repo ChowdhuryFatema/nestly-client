@@ -38,7 +38,11 @@ const SingleCardListView = ({ info }: TTRentalHouseProps) => {
                 <div
                   key={index}
                   className={`keen-slider__slide number-slide${index + 1}`}
-                  style={{ position: "relative", height: "200px", width: "100px" }}
+                  style={{
+                    position: "relative",
+                    height: "240px",
+                    width: "100px",
+                  }}
                 >
                   <Image
                     className="rounded object-cover"
@@ -84,7 +88,12 @@ const SingleCardListView = ({ info }: TTRentalHouseProps) => {
           <p className="font-bold">
             Location: <span className="text-primary-500">{info?.location}</span>
           </p>
-          <p>{info.description}</p>
+          <p>
+            {info.description.length >= 380
+              ? `${info.description.slice(0, 380)}...`
+              : info.description}
+          </p>
+
           <ul className="flex gap-3 flex-wrap py-1">
             {info?.amenities?.map((amenitie, index) => (
               <li
