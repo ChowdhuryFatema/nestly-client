@@ -8,6 +8,7 @@ import {
   UserCog,
   Users,
   Building2,
+  LayoutDashboard,
 } from "lucide-react";
 
 import {
@@ -65,19 +66,36 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   if (user?.role === "admin") {
     data.navMain = [
-      { title: "Manage All Users", url: `/${user?.role}/all-users`, icon: Users },
-      { title: "Manage All Rental Houses", url: `/${user?.role}/all-rental-houses`, icon: Building2  },
+      { title: "Dashboard", url: `/${user?.role}`, icon: LayoutDashboard },
+      {
+        title: "Manage All Users",
+        url: `/${user?.role}/all-users`,
+        icon: Users,
+      },
+      {
+        title: "Manage All Rental Houses",
+        url: `/${user?.role}/all-rental-houses`,
+        icon: Building2,
+      },
       { title: "Edit Profile", url: "/admin/update-profile", icon: UserCog },
     ];
   } else if (user?.role === "landlord") {
     data.navMain = [
-      { title: "Create Rental", url: "/landlord/create-rental", icon: PlusSquare },
-      { title: "AllListings", url: "/landlord/AllListing", icon: 	List },
+      { title: "Dashboard", url: `/${user?.role}`, icon: LayoutDashboard },
+      {
+        title: "Create Rental",
+        url: "/landlord/create-rental",
+        icon: PlusSquare,
+      },
+      { title: "AllListings", url: "/landlord/AllListing", icon: List },
       { title: "Rental Requests", url: "/landlord/requests", icon: MailOpen },
       { title: "Edit Profile", url: "/landlord/update-profile", icon: UserCog },
     ];
   } else if (user?.role === "tenant") {
-    data.navMain = [{ title: "Edit Profile", url: "/tenant/update-profile", icon: UserCog }];
+    data.navMain = [
+      { title: "Dashboard", url: `/${user?.role}`, icon: LayoutDashboard },
+      { title: "Edit Profile", url: "/tenant/update-profile", icon: UserCog },
+    ];
   }
   return (
     <Sidebar {...props}>
