@@ -1,3 +1,5 @@
+import { TUser } from "./user.type";
+
 export type TRentalHouse = {
   _id?: string;
   landlord?: string;
@@ -8,11 +10,14 @@ export type TRentalHouse = {
   bedrooms: string;
   description: string;
   images: string[];
-  amenities: string[];
 };
 
 export type TRentalRequest = {
+  tenantId?: TUser;
+  paymentStatus?: string;
+  _id: string;
   moveInDate: string;
   rentalDuration: string;
   message: string;
+  status: string;
 };

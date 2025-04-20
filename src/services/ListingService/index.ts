@@ -178,7 +178,7 @@ export const handleRentalRequestResponse = async (
       body: JSON.stringify({ action }),
     });
     revalidateTag("RentalRequests");
-    return res.json();
+    return await res.json();
   } catch (error: any) {
     return Error(error);
   }
