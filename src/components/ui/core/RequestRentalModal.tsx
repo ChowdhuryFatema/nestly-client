@@ -41,7 +41,7 @@ const RequestRentalModal = ({
   const onSubmit = async (data: TRentalRequest) => {
     const newData = {
       rentalHouseId,
-      landlordId,
+      landlordId: typeof landlordId === "string" ? { _id: landlordId } : landlordId,
       ...data,
     };
 

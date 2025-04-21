@@ -14,7 +14,7 @@ export type TRentalHouse = {
 };
 
 export type TRentalRequest = {
-  rentalHouseId?: TRentalHouse;
+  rentalHouseId?: string;
   tenantId?: TUser;
   paymentStatus?: string;
   landlordId?: { _id: string };
