@@ -11,9 +11,21 @@ export const createPaymentIntent = async (paymentInfo: any) => {
         headers: {
             "Content-Type": "application/json",
             Authorization: (await cookies()).get("accessToken")!.value,
-          },
+        },
         body: JSON.stringify(paymentInfo),
     });
-    return response.json();
+    return await response.json();
 };
 
+
+export const confirmPayment = async (paymentInfo: any) => {
+    const response = await fetch(`${BASE_URL}/confirm-payment`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: (await cookies()).get("accessToken")!.value,
+        },
+        body: JSON.stringify(paymentInfo),
+    });
+    return await response.json();
+};

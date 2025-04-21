@@ -7,11 +7,10 @@ import { redirect, useRouter } from "next/navigation";
 import { LockKeyhole } from "lucide-react";
 import { TRentalRequest } from "@/types/RentalHouse.type";
 import { useUser } from "@/context/UserContext";
-import { createPaymentIntent } from "@/services/payment";
+import { confirmPayment, createPaymentIntent } from "@/services/payment";
 
 
 const CheckoutForm = ({ info }: { info: TRentalRequest }) => {
-    console.log({ info })
     const router = useRouter();
     const stripe = useStripe();
     const { user } = useUser();
@@ -56,10 +55,11 @@ const CheckoutForm = ({ info }: { info: TRentalRequest }) => {
             rentalHouseId: info?.rentalHouseId,
             landlordId: info?.landlordId,
             amount: String(Number(info?.rentalHouseId?.rentAmount) + 15),
+            tenantRequestId: info?._id,
         }
 
         const response = await createPaymentIntent(paymentInfo);
-        console.log({ response });
+       
         if (!response?.success) {
             toast.error(`${response?.message}`, {
                 duration: 1500,
@@ -73,16 +73,20 @@ const CheckoutForm = ({ info }: { info: TRentalRequest }) => {
             redirect("/login");
             return;
         }
-        const { clientSecret } = response?.data;
+        const clientSecret = response?.data;
+
+        
 
         const paymentResult = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: card,
                 billing_details: {
-                    email: user.email,
+                    name: user?.name,
                 },
             },
         });
+
+        console.log({ paymentResult })
 
         if (paymentResult.error) {
             toast.error(paymentResult.error.message);
@@ -90,9 +94,11 @@ const CheckoutForm = ({ info }: { info: TRentalRequest }) => {
         } else if (paymentResult.paymentIntent.status === "succeeded") {
             const response = await confirmPayment({
                 transactionId: paymentResult.paymentIntent.id,
-                planName: plan.name,
-                amount: plan.total,
-                userEmail: user.email,
+                tenantId: info?.tenantId,
+                rentalHouseId: info?.rentalHouseId,
+                landlordId: info?.landlordId,
+                amount: String(Number(info?.rentalHouseId?.rentAmount) + 15),
+                tenantRequestId: info?._id,
             });
             if (!response?.success) {
                 toast.error(response?.message);
@@ -111,7 +117,6 @@ const CheckoutForm = ({ info }: { info: TRentalRequest }) => {
             setLoading(false);
         }
 
-        console.log(paymentResult);
 
         setLoading(false);
     }
