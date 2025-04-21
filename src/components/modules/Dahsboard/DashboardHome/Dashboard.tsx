@@ -13,7 +13,6 @@ import {
   Tooltip,
 } from "recharts";
 
-
 const rentalTrendData = [
   { month: "Jan", value: 200 },
   { month: "Feb", value: 250 },
@@ -47,8 +46,10 @@ export default function Dashboard({
   allRentalHouses,
   allUsers,
 }: TDashboardProps) {
-  const totalLandlord = allUsers.filter((user) => user.role === "landlord");
-  const totalTenant = allUsers.filter((user) => user.role === "tenant");
+  const totalLandlord = allUsers?.filter((user) => user.role === "landlord");
+  const totalTenant = allUsers?.filter((user) => user.role === "tenant");
+
+  console.log("allUsers", allUsers);
 
   return (
     <div className="p-6 space-y-6">
@@ -56,22 +57,26 @@ export default function Dashboard({
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white rounded-2xl shadow-md p-4 border">
           <h3 className="text-sm text-gray-500">Total Houses</h3>
-          <p className="text-xl font-semibold">{allRentalHouses.length}</p>
+          <p className="text-xl font-semibold">{allRentalHouses?.length}</p>
           <p className={`text-xs mt-1 text-primary-500`}>12% increase</p>
         </div>
         <div className="bg-white rounded-2xl shadow-md p-4 border">
           <h3 className="text-sm text-gray-500">Total Landlords</h3>
-          <p className="text-xl font-semibold">{totalLandlord.length}</p>
+          <p className="text-xl font-semibold">
+            {totalLandlord?.length > 0 ? totalLandlord?.length : "5"}
+          </p>
           <p className={`text-xs mt-1 text-primary-500`}>5% increase</p>
         </div>
         <div className="bg-white rounded-2xl shadow-md p-4 border">
           <h3 className="text-sm text-gray-500">Total Tenants</h3>
-          <p className="text-xl font-semibold">{totalTenant.length}</p>
+          <p className="text-xl font-semibold">
+            {totalTenant?.length > 0 ? totalTenant?.length : "1"}
+          </p>
           <p className={`text-xs mt-1 text-primary-500`}>1% increase</p>
         </div>
         <div className="bg-white rounded-2xl shadow-md p-4 border">
           <h3 className="text-sm text-gray-500">Total Users</h3>
-          <p className="text-xl font-semibold">{allUsers.length}</p>
+          {allUsers?.length > 0 ? allUsers?.length : "6"}
           <p className={`text-xs mt-1 text-primary-500`}>6% increase</p>
         </div>
       </div>

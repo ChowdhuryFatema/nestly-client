@@ -62,10 +62,10 @@ const RentalHouses = ({ rentalHouses }: { rentalHouses: TRentalHouse[] }) => {
                   <SelectValue placeholder="Select limit" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="4">3</SelectItem>
-                  <SelectItem value="8">6</SelectItem>
-                  <SelectItem value="12">9</SelectItem>
-                  <SelectItem value="24">12</SelectItem>
+                  <SelectItem value="3">3</SelectItem>
+                  <SelectItem value="6">6</SelectItem>
+                  <SelectItem value="9">9</SelectItem>
+                  <SelectItem value="12">12</SelectItem>
                 </SelectContent>
               </Select>
             </div>
