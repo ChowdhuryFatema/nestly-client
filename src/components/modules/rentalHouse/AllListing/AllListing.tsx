@@ -2,11 +2,12 @@
 "use client"
 import { useState } from "react";
 import { toast } from "sonner";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { deleteRentalHouse } from "@/services/ListingService";
 import Image from "next/image";
 import Link from "next/link";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
 interface AllListingProps {
   listings: any[];
@@ -45,7 +46,6 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
   };
-
 
 
 
@@ -110,14 +110,32 @@ const AllListing = ({ listings: initialListings }: AllListingProps) => {
                   </td>
 
                   <td className="px-4 py-2">
-                    <Button
+                    {/* <Button
                       size="sm"
                       variant="destructive"
                       onClick={() => handleDelete(listing._id)}
                       className=" cursor-pointer"
-                    >
-                      <Trash2 size={16} />
-                    </Button>
+                    > */}
+
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="outline"><Trash2 size={16} /></Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will permanently remove your data from our servers.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => handleDelete(listing._id)}>Continue</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+
+                    {/* </Button> */}
                   </td>
                 </tr>
               ))
