@@ -14,27 +14,22 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import NLButton from "./ImageUploader/NLButton";
 import { createTenantRequest } from "@/services/TenantService";
-import { TRentalRequest, TUser } from "@/types";
+import { TRentalRequest } from "@/types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { getCurrentUser } from "@/services/AuthService";
+import { useUser } from "../../../context/UserContext";
 
-
-const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: string, landlordId: string }) => {
+const RequestRentalModal = ({
+  rentalHouseId,
+  landlordId,
+}: {
+  rentalHouseId: string;
+  landlordId: string;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const [user, setUser] = useState<TUser | null>(null);
-  const [loading, setLoading] = useState(true);
 
-  const handleUser = async () => {
-    const user = await getCurrentUser();
-    setUser(user);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    handleUser();
-  }, [loading]);
+  const { user, loading } = useUser();
 
   const {
     handleSubmit,
@@ -50,8 +45,6 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
       ...data,
     };
 
-    console.log("Rental Request:", newData);
-
     try {
       const res = await createTenantRequest(newData);
       console.log("Server Response:", res);
@@ -60,6 +53,7 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
         toast.success(res.message);
         reset();
         setIsOpen(false);
+        router.push("/all-listings-rental");
       } else {
         toast.error(res.message);
         reset(); // Clear form
@@ -68,9 +62,9 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
     } catch (error) {
       console.error("Error creating tenant request:", error);
     }
-  }
+  };
 
-  const handleRentalRequest = () => {
+  const handleRentalRequest = async () => {
     if (user) {
       setIsOpen(true);
     } else {
@@ -79,10 +73,18 @@ const RequestRentalModal = ({ rentalHouseId, landlordId }: { rentalHouseId: stri
     }
   };
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <NLButton variant="primary" onClick={handleRentalRequest}>
+        <NLButton
+          disabled={loading}
+          variant="primary"
+          onClick={handleRentalRequest}
+        >
           Request Rental
         </NLButton>
       </DialogTrigger>

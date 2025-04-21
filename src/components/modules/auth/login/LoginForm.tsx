@@ -171,14 +171,14 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <ReCAPTCHA
+            {/* <ReCAPTCHA
               sitekey={process.env.NEXT_PUBLIC_RECHAPCHA_CLIENT_KEY!}
               onChange={handleRecaptcha}
-            />
+            /> */}
             <NLButton
               variant="primary"
               className="w-full"
-              disabled={reCaptchaStatus ? false : true}
+              // disabled={reCaptchaStatus ? false : true}
               type="submit"
             >
               {isSubmitting ? "Logging in..." : "Login"}
