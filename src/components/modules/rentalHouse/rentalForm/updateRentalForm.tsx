@@ -56,7 +56,6 @@ export default function UpdateRentalForm({ rentalHouse }: { rentalHouse: TRental
 
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        console.log("data", data);
         const { previousImageUrls, newImageFiles } = separateImages(imageFiles);
         const updatedImages = [...previousImageUrls];
 
@@ -65,7 +64,6 @@ export default function UpdateRentalForm({ rentalHouse }: { rentalHouse: TRental
             if (newImageFiles.length > 0) {
                 for (const image of newImageFiles) {
                     const res = await uploadImageToCloudinary(image);
-                    console.log(res);
                     updatedImages.push(res?.url);
                 }
             }
@@ -84,9 +82,7 @@ export default function UpdateRentalForm({ rentalHouse }: { rentalHouse: TRental
                 bedrooms: data.bedrooms,
                 images: updatedImages,
             }
-            console.log("rentalHouseData", rentalHouseData);
             const res = await updateRentalHouse(rentalHouse._id as string, rentalHouseData);
-            console.log(res);
             if (res?.success) {
                 toast.success(res?.message);
             } else {

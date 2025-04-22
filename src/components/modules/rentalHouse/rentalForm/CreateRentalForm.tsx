@@ -42,7 +42,6 @@ const CreateRentalForm = () => {
   } = form;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("data", data);
 
     if (imageFiles.length === 0) {
       toast.error("Please upload at least one image");
@@ -52,7 +51,6 @@ const CreateRentalForm = () => {
       const upLoadedImagesUrls = [];
       for (const image of imageFiles as File[]) {
         const res = await uploadImageToCloudinary(image);
-        console.log(res);
         upLoadedImagesUrls.push(res?.url);
       }
 
@@ -68,7 +66,6 @@ const CreateRentalForm = () => {
         bedrooms: data.bedrooms,
         images: upLoadedImagesUrls,
       };
-      console.log("rentalHouseData", rentalHouseData);
       const res = await createRentalHouse(rentalHouseData);
       if (res?.success) {
         toast.success(res?.message);

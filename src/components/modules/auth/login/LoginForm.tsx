@@ -49,7 +49,6 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = await loginUser(data);
-      console.log(res);
       if (res?.success) {
         toast.success(res?.message);
 
@@ -67,7 +66,6 @@ const LoginForm = () => {
   };
 
   const handleRecaptcha = async (value: string | null) => {
-    console.log(value);
     try {
       const res = await reCaptchaTokenVerification(value!);
 
@@ -75,7 +73,6 @@ const LoginForm = () => {
         setReCaptchaStatus(true);
       }
 
-      console.log("res", res);
     } catch (error: any) {
       throw Error(error);
     }

@@ -9,7 +9,6 @@ import UpdateRentalForm from "@/components/modules/rentalHouse/rentalForm/update
 export default function UpdateRental() {
   const { id } = useParams();
   const [rentalHouse, setRentalHouse] = useState<TRentalHouse | null>(null);
-  console.log("id:", id);
 
   useEffect(() => {
     const fetchRentalHouse = async () => {
@@ -19,7 +18,6 @@ export default function UpdateRental() {
     fetchRentalHouse();
   }, [id]);
 
-  console.log("rentalHouse", rentalHouse);
   return <UpdateRentalForm rentalHouse={rentalHouse as TRentalHouse} />;
 }
 

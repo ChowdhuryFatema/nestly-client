@@ -52,7 +52,6 @@ const RentalHouseDetailsCard = ({
 }: {
   singleData: TRentalHouse;
 }) => {
-  console.log("singleData", singleData);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
   });
