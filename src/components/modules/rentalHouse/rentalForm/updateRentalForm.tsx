@@ -24,8 +24,8 @@ export default function UpdateRentalForm({ rentalHouse }: { rentalHouse: TRental
         resolver: zodResolver(rentalSchema),
         defaultValues: {
             location: "",
-            rentAmount: "",
-            bedrooms: "",
+            rentAmount: undefined,
+            bedrooms: undefined,
             amenities: "",
             description: "",
             // images: [],
@@ -80,8 +80,8 @@ export default function UpdateRentalForm({ rentalHouse }: { rentalHouse: TRental
                 amenities: data.amenities.split(",").map((amenity: string) => amenity.trim()),
                 location: data.location,
                 description: data.description,
-                rentAmount: String(data.rentAmount),
-                bedrooms: String(data.bedrooms),
+                rentAmount: data.rentAmount,
+                bedrooms: data.bedrooms,
                 images: updatedImages,
             }
             console.log("rentalHouseData", rentalHouseData);

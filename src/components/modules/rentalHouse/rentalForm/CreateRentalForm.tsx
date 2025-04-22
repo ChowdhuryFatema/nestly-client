@@ -31,8 +31,8 @@ const CreateRentalForm = () => {
     defaultValues: {
       location: "",
       amenities: "",
-      rentAmount: "",
-      bedrooms: "",
+      rentAmount: undefined,
+      bedrooms: undefined,
       description: "",
     },
   });
@@ -64,8 +64,8 @@ const CreateRentalForm = () => {
         amenities: amenities,
         location: data.location,
         description: data.description,
-        rentAmount: String(data.rentAmount),
-        bedrooms: String(data.bedrooms),
+        rentAmount: data.rentAmount,
+        bedrooms: data.bedrooms,
         images: upLoadedImagesUrls,
       };
       console.log("rentalHouseData", rentalHouseData);
@@ -183,7 +183,7 @@ const CreateRentalForm = () => {
                 <div className="space-y-2 w-full">
                   <FormLabel className="text-md">Upload Images</FormLabel>
                   <ImageUploader
-                  className="w-full"
+                    className="w-full"
                     setImageFiles={
                       setImageFiles as React.Dispatch<
                         React.SetStateAction<File[] | string[]>

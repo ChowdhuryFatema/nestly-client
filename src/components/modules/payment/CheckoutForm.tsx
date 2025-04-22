@@ -54,7 +54,7 @@ const CheckoutForm = ({ info }: { info: TRentalRequest }) => {
             tenantId: info?.tenantId,
             rentalHouseId: info?.rentalHouseId,
             landlordId: info?.landlordId,
-            amount: String(Number(info?.rentalHouseId?.rentAmount) + 15),
+            amount: Number(info?.rentalHouseId?.rentAmount) + 15,
             tenantRequestId: info?._id,
         }
 
@@ -97,7 +97,7 @@ const CheckoutForm = ({ info }: { info: TRentalRequest }) => {
                 tenantId: info?.tenantId,
                 rentalHouseId: info?.rentalHouseId,
                 landlordId: info?.landlordId,
-                amount: String(Number(info?.rentalHouseId?.rentAmount) + 15),
+                amount: Number(info?.rentalHouseId?.rentAmount) + 15,
                 tenantRequestId: info?._id,
             });
             if (!response?.success) {

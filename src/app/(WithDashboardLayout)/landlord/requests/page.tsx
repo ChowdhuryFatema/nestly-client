@@ -4,7 +4,6 @@ import { AllRentalRequests } from "@/components/modules/rentalHouse/AllRentalReq
 import { getCurrentUser } from "@/services/AuthService";
 import { getAllRentalRequests } from "@/services/ListingService";
 
-
 export default async function Page() {
     
     const currentUser = await getCurrentUser();

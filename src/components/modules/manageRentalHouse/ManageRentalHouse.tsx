@@ -64,10 +64,10 @@ const ManageRentalHouse = ({
       accessorKey: "status",
       header: "Status",
       cell: ({ row }) => {
-        const item = row.original;
+        const item: TRentalHouse = row.original;
 
         const handleStatusChange = async (newStatus: string) => {
-          const result = await updateRentalStatus(item?._id, newStatus);
+          const result = await updateRentalStatus(item?._id as string, newStatus);
           if (result.success) {
             toast.success("Status updated successfully!");
           } else {
@@ -92,7 +92,7 @@ const ManageRentalHouse = ({
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
-              {getAvailableStatuses(item?.status).map((role) => (
+              {getAvailableStatuses(item?.status as string).map((role) => (
                 <SelectItem key={role} value={role}>
                   {role}
                 </SelectItem>
@@ -111,7 +111,7 @@ const ManageRentalHouse = ({
         return (
           <button
             onClick={() => {
-              setSelectedUserId(user._id);
+              setSelectedUserId(user._id!);
               setOpenModal(true);
             }}
             className="text-red-500 cursor-pointer"

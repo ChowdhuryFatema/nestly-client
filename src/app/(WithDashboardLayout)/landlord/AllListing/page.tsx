@@ -3,7 +3,6 @@ import { getCurrentUser } from "@/services/AuthService";
 import { getRentalHousesByEmail } from "@/services/ListingService";
 
 
-
 export default async function Page() {
     
     const currentUser = await getCurrentUser();

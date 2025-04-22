@@ -21,7 +21,7 @@ export const middleware = async (request: NextRequest) => {
         if (authRoutes.includes(pathname)) {
             return NextResponse.next();
         } else {
-            return NextResponse.redirect(new URL(`http://localhost:5000/api/auth/login?redirectPath=${pathname}`, request.url))
+            return NextResponse.redirect(new URL(`https://nestly-server.vercel.app/api/auth/login?redirectPath=${pathname}`, request.url))
         }
     }
 

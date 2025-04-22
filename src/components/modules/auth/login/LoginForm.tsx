@@ -16,10 +16,10 @@ import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
 import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
 import Link from "next/link";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter, useSearchParams } from "next/navigation";
 import NLButton from "@/components/ui/core/ImageUploader/NLButton";
 import clsx from "clsx";
+import dynamic from "next/dynamic";
 
 const LoginForm = () => {
   const [credential, setCredential] = useState("tenant");
@@ -28,6 +28,10 @@ const LoginForm = () => {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirectPath");
   const router = useRouter();
+
+  const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
+    ssr: false,
+  });
 
   const form = useForm({
     resolver: zodResolver(loginSchema),
@@ -171,10 +175,13 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECHAPCHA_CLIENT_KEY!}
-              onChange={handleRecaptcha}
-            />
+            {typeof window !== "undefined" && (
+              <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_RECHAPCHA_CLIENT_KEY!}
+                onChange={handleRecaptcha}
+              />
+            )}
+
             <NLButton
               variant="primary"
               className="w-full"

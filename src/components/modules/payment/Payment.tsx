@@ -17,7 +17,7 @@ export default function Payment({ request }: { request: TRentalRequest }) {
                                     <div className="space-y-2 mb-4">
                                         <div className="flex justify-between">
                                             <span>Professional Plan</span>
-                                            <span>$ {request?.rentalHouseId?.rentAmount}</span>
+                                            <span>$ {Number(request?.rentalHouseId?.rentAmount)}</span>
                                         </div>
                                         <div className="flex justify-between text-neutral-600">
                                             <span>Tax</span>

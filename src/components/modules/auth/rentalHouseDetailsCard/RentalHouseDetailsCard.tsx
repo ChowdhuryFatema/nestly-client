@@ -137,8 +137,7 @@ const RentalHouseDetailsCard = ({
           essential appliances, ample cabinet space, and sleek countertops.
         </p>
         <RequestRentalModal
-          rentalHouseId={singleData?._id as string}
-          landlordId={singleData?.landlord as string}
+          rentalHouse={singleData}
         />
       </div>
     </div>
