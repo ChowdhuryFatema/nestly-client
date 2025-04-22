@@ -1,4 +1,4 @@
-
+export const dynamic = 'force-dynamic';
 import UpdateProfileForm from "@/components/modules/updateProfileForm/updateProfileForm";
 import { getCurrentUser } from "@/services/AuthService";
 

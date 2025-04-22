@@ -1,9 +1,11 @@
+export const dynamic = 'force-dynamic';
 import Banner from "@/components/modules/banner/Banner";
 import RentingTips from "@/components/modules/Testimonial/RentingTips";
 import Testimonial from "@/components/modules/Testimonial/Testimonial";
 import React from "react";
 import RentalHouses from "@/components/modules/rentalHouse/RentalHouses/RentalHouses";
 import { getAllPublicRentalHouses } from "@/services/ListingService";
+
 
 const HomePage = async () => {
   const filters: { key: string; value: string }[] = [];

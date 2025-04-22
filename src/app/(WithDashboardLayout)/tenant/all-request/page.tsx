@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { getAllMyRequests } from "@/services/TenantService";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";

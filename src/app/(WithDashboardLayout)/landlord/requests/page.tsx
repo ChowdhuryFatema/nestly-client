@@ -1,4 +1,4 @@
-
+export const dynamic = 'force-dynamic';
 
 import { AllRentalRequests } from "@/components/modules/rentalHouse/AllRentalRequests/AllRentalRequests";
 import { getCurrentUser } from "@/services/AuthService";

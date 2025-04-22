@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import ManageRentalHouse from '@/components/modules/manageRentalHouse/ManageRentalHouse';
 import { getAllAdminRentalHouses } from '@/services/ManageRentalHouse';
 import React from 'react';

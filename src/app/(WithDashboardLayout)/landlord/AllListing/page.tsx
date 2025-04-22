@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import AllListing from "@/components/modules/rentalHouse/AllListing/AllListing";
 import { getCurrentUser } from "@/services/AuthService";
 import { getRentalHousesByEmail } from "@/services/ListingService";
