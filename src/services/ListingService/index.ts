@@ -8,7 +8,6 @@ const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_API}/landlords`;
 
 //  Create Rental House
 export const createRentalHouse = async (data: TRentalHouse) => {
-  console.log("data", data);
   try {
     const res = await fetch(`${BASE_URL}/listings`, {
       method: "POST",
@@ -39,22 +38,6 @@ export const getRentalHouseById = async (id: string) => {
     return Error(error);
   }
 };
-
-
-
-// export const getAllPublicRentalHouses = async (filters: { key: string; value: string }[]) => {
-//   try {
-//     const params = new URLSearchParams();
-//     filters.forEach((filter) => {
-//       if (filter.value) params.append(filter.key, filter.value);
-//     });
-
-//     const res = await fetch(`${BASE_URL}/listings?${params.toString()}`);
-//     return res.json();
-//   } catch (error) {
-//     console.log(error)
-//   }
-// };
 
 export const getAllPublicRentalHouses = async (filters: { key: string; value: string }[]) => {
   try {

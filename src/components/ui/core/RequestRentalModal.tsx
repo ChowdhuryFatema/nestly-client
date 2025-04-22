@@ -50,7 +50,6 @@ const RequestRentalModal = ({ rentalHouse }: { rentalHouse: TRentalHouse }) => {
 
     try {
       const res = await createTenantRequest(newData as unknown as TRentalRequest);
-      console.log("Server Response:", res);
 
       if (res.success) {
         toast.success(res.message);
@@ -77,7 +76,6 @@ const RequestRentalModal = ({ rentalHouse }: { rentalHouse: TRentalHouse }) => {
   };
 
   useEffect(() => {
-    console.log(user);
   }, [user]);
 
   return (

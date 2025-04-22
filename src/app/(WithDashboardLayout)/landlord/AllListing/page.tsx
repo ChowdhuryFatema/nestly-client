@@ -10,7 +10,5 @@ export default async function Page() {
         return <div>User is not logged in or email is missing.</div>;
     }
     const listings = await getRentalHousesByEmail(currentUser.email);
-    console.log(currentUser);
-    console.log("Listings......",listings);
     return <AllListing listings = {listings?.data || []} />;
   }

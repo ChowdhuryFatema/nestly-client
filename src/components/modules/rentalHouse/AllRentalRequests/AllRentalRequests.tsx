@@ -11,15 +11,11 @@ type Props = {
 
 
 export const AllRentalRequests = ({ requests }: Props) => {
-  console.log("requests....", requests);
 
   const handleStatusChange = async (status: string, id: string) => {
-    console.log("status....", status, id);
     try {
       const response =  await handleRentalRequestResponse(id, status)
-      console.log("response....", response);
     } catch (error) {
-      console.log("error....", error);
     }
   }
 

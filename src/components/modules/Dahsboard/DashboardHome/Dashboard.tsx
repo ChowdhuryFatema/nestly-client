@@ -49,7 +49,6 @@ export default function Dashboard({
   const totalLandlord = allUsers?.filter((user) => user.role === "landlord");
   const totalTenant = allUsers?.filter((user) => user.role === "tenant");
 
-  console.log("allUsers", allUsers);
 
   return (
     <div className="p-6 space-y-6">

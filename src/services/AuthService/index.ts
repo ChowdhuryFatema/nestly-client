@@ -21,8 +21,6 @@ export const registerUser = async (userData: FieldValues) => {
             (await cookies()).set("accessToken", result?.data?.token)
         }
 
-        console.log("result", result?.data?.token)
-
         return result;
     } catch (error: any) {
         return Error(error)
@@ -41,13 +39,9 @@ export const loginUser = async (userData: FieldValues) => {
 
         const result = await res.json()
 
-        console.log("result", result)
-
         if (result?.success) {
             (await cookies()).set("accessToken", result?.data?.token)
         }
-
-        console.log("result", result?.data?.token)
 
         return result;
     } catch (error: any) {
@@ -83,7 +77,6 @@ export const reCaptchaTokenVerification = async (token: string) => {
 
         return res.json()
     } catch (error: any) {
-        console.log(error)
         return Error(error)
     }
 }

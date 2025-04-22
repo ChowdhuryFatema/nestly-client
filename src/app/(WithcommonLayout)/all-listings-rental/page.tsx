@@ -6,8 +6,6 @@ const AllListingsRental = async() => {
  
     const filters: { key: string; value: string }[] = [];
     const allRentalHouses = await getAllPublicRentalHouses(filters);
-
-    console.log("allRentalHouses", allRentalHouses)
   
   return (
     <div>

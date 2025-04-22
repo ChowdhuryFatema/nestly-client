@@ -86,8 +86,6 @@ const CheckoutForm = ({ info }: { info: TRentalRequest }) => {
             },
         });
 
-        console.log({ paymentResult })
-
         if (paymentResult.error) {
             toast.error(paymentResult.error.message);
             setLoading(false);
