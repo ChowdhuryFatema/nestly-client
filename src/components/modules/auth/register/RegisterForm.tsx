@@ -51,7 +51,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="max-w-[70%] mx-auto">
+    <div className="max-w-[70%] mx-auto px-5">
       <div className="flex justify-center items-center">
         <div className="w-full">
           <div className="mb-5 space-y-2 text-center">
@@ -129,7 +129,7 @@ const RegisterForm = () => {
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
                         >
                           {showPassword ? (
                             <Eye size={18} />
