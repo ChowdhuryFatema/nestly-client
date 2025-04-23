@@ -107,8 +107,8 @@ const LoginForm = () => {
   // }, [credential, form]);
 
   return (
-    <div className="max-w-[70%] mx-auto px-5">
-      <div className="flex justify-center items-center">
+    <div className="max-w-[95%] md:max-w-[70%] mx-auto px-5">
+      <div className="flex justify-center items-center h-screen">
         <div className="w-full">
           <div className="mb-5 space-y-2 text-center">
             <h2 className="text-2xl font-semibold">Welcome Back Man! 👋</h2>
