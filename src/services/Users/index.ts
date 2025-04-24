@@ -43,9 +43,7 @@ export const updateProfile = async (formData: {
         
       });
      
-      const result = await res.json();
-      console.log({result})
-  
+      const result = await res.json();  
       if (!res.ok) {
         throw new Error(result?.message || "Something went wrong");
       }
