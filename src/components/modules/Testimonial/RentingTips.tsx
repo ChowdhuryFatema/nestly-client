@@ -23,11 +23,10 @@ const tips = [
   
   const RentingTips = () => {
     return (
-      <section className="bg-white py-14 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto text-center">
+      <section className="bg-white py-14">
+        <div className="mx-auto text-center">
           <h2 className="text-3xl font-bold text-primary-600 mb-4">Tips for Renters</h2>
           <p className="text-gray-600 mb-10">Advice on finding and renting the right house.</p>
-  
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {tips.map((tip, index) => (
               <div key={index} className="bg-gray-50 border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
