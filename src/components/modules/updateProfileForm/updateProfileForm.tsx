@@ -42,6 +42,12 @@ export default function UpdateProfileForm() {
     fetchData();
   }, []);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -56,7 +62,7 @@ export default function UpdateProfileForm() {
 
       if (res?.data?.token) {
         Cookies.remove("accessToken");
-        Cookies.set("accessToken", res.data.token, { expires: 7 });
+        Cookies.set("accessToken", res?.data?.token, { expires: 7 });
       }
 
       toast.success(res.message || "Profile updated successfully");
@@ -154,6 +160,7 @@ export default function UpdateProfileForm() {
             name="profileImage"
             placeholder="Profile Image URL"
             value={formData.profileImage}
+            onKeyDown={handleKeyDown}
             onChange={handleChange}
             className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 md:col-span-2"
           />
@@ -164,6 +171,7 @@ export default function UpdateProfileForm() {
               name="currentPassword"
               placeholder="Current Password"
               value={formData.currentPassword}
+              onKeyDown={handleKeyDown}
               onChange={handleChange}
               className="w-full border rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
@@ -181,6 +189,7 @@ export default function UpdateProfileForm() {
               name="newPassword"
               placeholder="New Password"
               value={formData.newPassword}
+              onKeyDown={handleKeyDown}
               onChange={handleChange}
               className="w-full border rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
             />

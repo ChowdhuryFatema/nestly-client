@@ -33,8 +33,6 @@ export const updateProfile = async (formData: {
     newPassword?: string;
   }) => {
     try {
-   
-  
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/update-profile`, {
         method: "PUT",
         body: JSON.stringify(formData),
@@ -44,8 +42,9 @@ export const updateProfile = async (formData: {
         },
         
       });
-  
+     
       const result = await res.json();
+      console.log({result})
   
       if (!res.ok) {
         throw new Error(result?.message || "Something went wrong");
@@ -56,19 +55,6 @@ export const updateProfile = async (formData: {
       throw new Error(error?.message || "An error occurred during the update process");
     }
   };
-//    try {
-//       const res = await fetch(`${BASE_URL}/listings/${id}`, {
-//         method: "PUT",
-//         body: formData,
-//         headers: {
-//           Authorization: (await cookies()).get("accessToken")!.value,
-//         },
-//       });
-//       revalidateTag("Listings");
-//       return res.json();
-//     } catch (error: any) {
-//       return Error(error);
-//     }
 
 
 export const updateUserRole = async (userId: string, newRole: string) => {
