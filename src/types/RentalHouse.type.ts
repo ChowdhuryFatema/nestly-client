@@ -5,8 +5,8 @@ export type TRentalHouse = {
   _id?: string;
   landlord?: string;
   location: string;
-  rentAmount: number | undefined;
-  bedrooms: number | undefined;
+  rentAmount: string;
+  bedrooms: string;
   description: string;
   images: string[];
   amenities: string[];
@@ -19,7 +19,7 @@ export type TRentalRequest = {
   paymentStatus?: string;
   landlordId?: string;
   _id: string;
-  rentAmount?: number | undefined;
+  rentAmount?: string;  
   moveInDate: string;
   rentalDuration: string;
   message: string;
