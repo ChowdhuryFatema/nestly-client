@@ -45,7 +45,7 @@ const RequestRentalModal = ({ rentalHouse }: { rentalHouse: TRentalHouse }) => {
     const newData = {
       ...data,
       rentalHouseId: rentalHouse?._id as string,
-      // landlordId: rentalHouse?.landlord,
+      landlordId: rentalHouse?.landlord,
     };
 
     try {
