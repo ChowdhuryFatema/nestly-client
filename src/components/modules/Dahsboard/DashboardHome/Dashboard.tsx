@@ -1,6 +1,8 @@
 "use client";
 
+import { getCurrentUser } from "@/services/AuthService";
 import { TRentalHouse, TUser } from "@/types";
+import { useEffect, useState } from "react";
 import {
   PieChart,
   Pie,
@@ -46,39 +48,55 @@ export default function Dashboard({
   allRentalHouses,
   allUsers,
 }: TDashboardProps) {
+  const [user, setUser] = useState<TUser | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const handleUser = async () => {
+    const user = await getCurrentUser();
+    setUser(user);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    handleUser();
+  }, [loading]);
+
   const totalLandlord = allUsers?.filter((user) => user.role === "landlord");
   const totalTenant = allUsers?.filter((user) => user.role === "tenant");
 
-
   return (
     <div className="p-6 space-y-6">
-      {/* Stat Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-2xl shadow-md p-4 border">
-          <h3 className="text-sm text-gray-500">Total Houses</h3>
-          <p className="text-xl font-semibold">{allRentalHouses?.length}</p>
-          <p className={`text-xs mt-1 text-primary-500`}>12% increase</p>
-        </div>
-        <div className="bg-white rounded-2xl shadow-md p-4 border">
-          <h3 className="text-sm text-gray-500">Total Landlords</h3>
-          <p className="text-xl font-semibold">
-            {totalLandlord?.length > 0 ? totalLandlord?.length : "5"}
-          </p>
-          <p className={`text-xs mt-1 text-primary-500`}>5% increase</p>
-        </div>
-        <div className="bg-white rounded-2xl shadow-md p-4 border">
-          <h3 className="text-sm text-gray-500">Total Tenants</h3>
-          <p className="text-xl font-semibold">
-            {totalTenant?.length > 0 ? totalTenant?.length : "1"}
-          </p>
-          <p className={`text-xs mt-1 text-primary-500`}>1% increase</p>
-        </div>
-        <div className="bg-white rounded-2xl shadow-md p-4 border">
-          <h3 className="text-sm text-gray-500">Total Users</h3>
-          {allUsers?.length > 0 ? allUsers?.length : "6"}
-          <p className={`text-xs mt-1 text-primary-500`}>6% increase</p>
-        </div>
-      </div>
+      {user?.role == "admin" && (
+        <>
+          {/* Stat Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white rounded-2xl shadow-md p-4 border">
+              <h3 className="text-sm text-gray-500">Total Houses</h3>
+              <p className="text-xl font-semibold">{allRentalHouses?.length}</p>
+              <p className={`text-xs mt-1 text-primary-500`}>12% increase</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-md p-4 border">
+              <h3 className="text-sm text-gray-500">Total Landlords</h3>
+              <p className="text-xl font-semibold">
+                {totalLandlord?.length > 0 ? totalLandlord?.length : "5"}
+              </p>
+              <p className={`text-xs mt-1 text-primary-500`}>5% increase</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-md p-4 border">
+              <h3 className="text-sm text-gray-500">Total Tenants</h3>
+              <p className="text-xl font-semibold">
+                {totalTenant?.length > 0 ? totalTenant?.length : "1"}
+              </p>
+              <p className={`text-xs mt-1 text-primary-500`}>1% increase</p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-md p-4 border">
+              <h3 className="text-sm text-gray-500">Total Users</h3>
+              {allUsers?.length > 0 ? allUsers?.length : "6"}
+              <p className={`text-xs mt-1 text-primary-500`}>6% increase</p>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
