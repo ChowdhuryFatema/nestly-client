@@ -167,16 +167,6 @@ export default function UpdateProfileForm() {
               className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
             />
           </div>
-         
-          <input
-            name="profileImage"
-            placeholder="Profile Image URL"
-            value={formData.profileImage}
-            onKeyDown={handleKeyDown}
-            onChange={handleChange}
-            className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 md:col-span-2"
-          />
-
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
