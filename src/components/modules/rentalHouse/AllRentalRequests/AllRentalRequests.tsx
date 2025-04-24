@@ -3,6 +3,7 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { handleRentalRequestResponse } from "@/services/ListingService";
 import { TRentalRequest } from "@/types";
+import { toast } from "sonner";
 
 type Props = {
   requests: TRentalRequest[];
@@ -15,6 +16,11 @@ export const AllRentalRequests = ({ requests }: Props) => {
   const handleStatusChange = async (status: string, id: string) => {
     try {
       const response =  await handleRentalRequestResponse(id, status)
+      if(response?.success){
+        toast.success("Rental request status updated successfully")
+      }else{
+        toast.error(response?.message)
+      }
     } catch (error) {
     }
   }

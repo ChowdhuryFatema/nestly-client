@@ -50,10 +50,6 @@ export const getAllPublicRentalHouses = async (filters: { key: string; value: st
       cache: 'no-store',
     });
 
-    if (!res.ok) {
-      const text = await res.text();
-      throw new Error(`API error: ${res.status} - ${text}`);
-    }
 
     const contentType = res.headers.get("content-type");
     if (!contentType?.includes("application/json")) {

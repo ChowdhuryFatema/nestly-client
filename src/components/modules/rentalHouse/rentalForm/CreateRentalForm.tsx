@@ -31,8 +31,8 @@ const CreateRentalForm = () => {
     defaultValues: {
       location: "",
       amenities: "",
-      rentAmount: undefined,
-      bedrooms: undefined,
+      rentAmount: "",
+      bedrooms: "",
       description: "",
     },
   });

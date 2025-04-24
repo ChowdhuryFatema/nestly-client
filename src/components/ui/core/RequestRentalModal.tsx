@@ -41,6 +41,7 @@ const RequestRentalModal = ({ rentalHouse }: { rentalHouse: TRentalHouse }) => {
     formState: { errors },
   } = useForm<RentalFormValues>();
 
+
   const onSubmit: SubmitHandler<RentalFormValues> = async (data) => {
     const newData = {
       ...data,
@@ -48,8 +49,10 @@ const RequestRentalModal = ({ rentalHouse }: { rentalHouse: TRentalHouse }) => {
       landlordId: rentalHouse?.landlord,
     };
 
+    console.log({newData});
     try {
       const res = await createTenantRequest(newData as unknown as TRentalRequest);
+      console.log({res});
 
       if (res.success) {
         toast.success(res.message);
@@ -165,7 +168,7 @@ const RequestRentalModal = ({ rentalHouse }: { rentalHouse: TRentalHouse }) => {
           </div>
 
           <NLButton type="submit" variant="primary" className="w-full">
-            Submit Request
+            Submit Request 
           </NLButton>
         </form>
       </DialogContent>
