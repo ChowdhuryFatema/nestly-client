@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/services/AuthService";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
-import { User, Phone, Eye, EyeOff, Mail, Shield } from "lucide-react";
+import { User, Phone, Eye, EyeOff, Mail, Shield} from "lucide-react";
 
 export default function UpdateProfileForm() {
   const [formData, setFormData] = useState({
@@ -18,6 +18,7 @@ export default function UpdateProfileForm() {
     newPassword: "",
     email: "",
     role: "",
+    username : ""
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -34,6 +35,7 @@ export default function UpdateProfileForm() {
           profileImage: data.profileImage || "",
           email: data.email || "",
           role: data.role || "",
+          username: data.username || "",
         }));
       } catch (error) {
         toast.error("Failed to load profile");
@@ -56,7 +58,7 @@ export default function UpdateProfileForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { email, role, ...updatableData } = formData; // Remove email and role
+      const { email, role, ...updatableData } = formData;
 
       const res = await updateProfile(updatableData);
 
@@ -67,7 +69,6 @@ export default function UpdateProfileForm() {
 
       toast.success(res.message || "Profile updated successfully");
 
-      // Refresh user data after update
       const updatedUser = await getCurrentUser();
       setFormData((prev) => ({
         ...prev,
@@ -76,6 +77,7 @@ export default function UpdateProfileForm() {
         profileImage: updatedUser.profileImage || "",
         email: updatedUser.email || "",
         role: updatedUser.role || "",
+        username: updatedUser.username || "",
         currentPassword: "",
         newPassword: "",
       }));
@@ -144,6 +146,16 @@ export default function UpdateProfileForm() {
               className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
             />
           </div>
+           <div className="relative md:col-span-2">
+            <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              name="username"
+              placeholder="Username"
+              value={formData.username}
+              disabled
+              className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
+            />
+          </div>
 
           <div className="relative md:col-span-2">
             <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -155,7 +167,7 @@ export default function UpdateProfileForm() {
               className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
             />
           </div>
-
+         
           <input
             name="profileImage"
             placeholder="Profile Image URL"
