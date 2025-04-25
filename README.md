@@ -59,7 +59,7 @@ Nestly is a smart rental housing solution that connects **Landlords**, **Tenants
 Use the following admin credentials to explore the Admin Dashboard:
 
 - **Email:** admin@gmail.com 
-- **Password:** Admin123!
+- **Password:** $Admin123
 ---
 
 
