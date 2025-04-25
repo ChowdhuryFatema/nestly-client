@@ -68,7 +68,7 @@ Use the following admin credentials to explore the Admin Dashboard:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/nestly.git
+git https://github.com/ChowdhuryFatema/nestly-client.git
 cd nestly/client
 
 npm install
