@@ -7,7 +7,7 @@ Nestly is a smart rental housing solution that connects **Landlords**, **Tenants
 
 ## 🚀 Live Site
 
-🌐 [Live Demo](https://your-frontend-link.vercel.app)
+🌐 [Live Demo](https://nextly-client.vercel.app)
 
 ## 🔑 Features
 

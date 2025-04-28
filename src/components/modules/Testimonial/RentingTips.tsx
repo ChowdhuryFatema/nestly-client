@@ -25,7 +25,7 @@ const tips = [
     return (
       <section className="bg-white py-14">
         <div className="mx-auto text-center">
-          <h2 className="text-3xl font-bold text-primary-600 mb-4">Tips for Renters</h2>
+          <h2 className="text-2xl lg:text-2xl font-bold text-primary-600 mb-4">Tips for Renters</h2>
           <p className="text-gray-600 mb-10">Advice on finding and renting the right house.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {tips.map((tip, index) => (
