@@ -32,18 +32,25 @@ export const updateProfile = async (formData: {
     currentPassword?: string;
     newPassword?: string;
   }) => {
-    try {
-   
-  
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/update-profile`, {
-        method: "PUT",
-        body: JSON.stringify(formData),
-        headers: {
-            "Content-Type": "application/json",
-          Authorization:  (await cookies()).get("accessToken")?.value || "" 
-        },
-        
-      });
+    const token = (await cookies()).get("accessToken")?.value;
+
+    if (!token) {
+        throw new Error("Authorization error is missing!")
+    }
+
+    try {  
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/update-profile`, {
+            method: "PUT",
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token 
+            },
+        });
+    //   .then(res => {
+    //     console.log("")
+    //     return res
+    //   });
   
       const result = await res.json();
   
