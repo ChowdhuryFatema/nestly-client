@@ -50,6 +50,8 @@ export default function Navbar() {
     { href: "/", label: "Home" },
     { href: "/about-us", label: "About Us" },
     { href: "/all-listings-rental", label: "All Listings Rental" },
+    { href: "/Tips", label: "Tips for rent" },
+
   ];
 
   return (
