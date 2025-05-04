@@ -58,10 +58,12 @@ export default function Navbar() {
     <header className="border-b w-full">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
         {/* Logo */}
-        <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
+       <Link href={"/"}>
+       <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
           <Image src={logo} width={30} height={40} alt="Logo" />
           Nestly
         </h1>
+       </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex flex-grow justify-center">

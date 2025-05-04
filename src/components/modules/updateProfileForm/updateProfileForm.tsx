@@ -7,8 +7,7 @@ import { getCurrentUser } from "@/services/AuthService";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
-import { User, Phone, Eye, EyeOff, Mail, Shield } from "lucide-react";
-import { updateProfile } from "@/services/Users";
+
 
 export default function UpdateProfileForm() {
   const [formData, setFormData] = useState({
@@ -19,6 +18,7 @@ export default function UpdateProfileForm() {
     newPassword: "",
     email: "",
     role: "",
+    username : ""
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -41,8 +41,15 @@ export default function UpdateProfileForm() {
   };
 
   useEffect(() => {
+
     fetchData();
   }, []);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -54,7 +61,7 @@ export default function UpdateProfileForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { email, role, ...updatableData } = formData; // Remove email and role
+      const { email, role, ...updatableData } = formData;
 
       const res = await updateProfile(updatableData);
 
@@ -62,22 +69,12 @@ export default function UpdateProfileForm() {
 
       if (res?.data?.token) {
         Cookies.remove("accessToken");
-        Cookies.set("accessToken", res.data.token, { expires: 7 });
-        console.log("Access Token...", res.data.token)
+
       }
 
       toast.success(res.message || "Profile updated successfully");
 
-      // Refresh user data after update
-      // const updatedUser = await getCurrentUser();
 
-      setFormData((prev) => ({
-        ...prev,
-        name: res.data.name || "",
-        phoneNumber: res.data.phoneNumber || "",
-        profileImage: res.data.profileImage || "",
-        email: res.data.email || "",
-        role: res.data.role || "",
         currentPassword: "",
         newPassword: "",
       }));
@@ -146,6 +143,16 @@ export default function UpdateProfileForm() {
               className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
             />
           </div>
+           <div className="relative md:col-span-2">
+            <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              name="username"
+              placeholder="Username"
+              value={formData.username}
+              disabled
+              className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
+            />
+          </div>
 
           <div className="relative md:col-span-2">
             <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -157,21 +164,13 @@ export default function UpdateProfileForm() {
               className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
             />
           </div>
-
-          <input
-            name="profileImage"
-            placeholder="Profile Image URL"
-            value={formData.profileImage}
-            onChange={handleChange}
-            className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 md:col-span-2"
-          />
-
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
               name="currentPassword"
               placeholder="Current Password"
               value={formData.currentPassword}
+              onKeyDown={handleKeyDown}
               onChange={handleChange}
               className="w-full border rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
@@ -189,6 +188,7 @@ export default function UpdateProfileForm() {
               name="newPassword"
               placeholder="New Password"
               value={formData.newPassword}
+              onKeyDown={handleKeyDown}
               onChange={handleChange}
               className="w-full border rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
             />

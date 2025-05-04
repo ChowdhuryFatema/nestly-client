@@ -1,7 +1,9 @@
+export const dynamic = 'force-dynamic';
 import Dashboard from '@/components/modules/Dahsboard/DashboardHome/Dashboard';
 import { getAllPublicRentalHouses } from '@/services/ListingService';
 import { getAllUsers } from '@/services/Users';
 import React from 'react';
+
 
 const LandlordHomePage = async () => {
       const allRentalHouses = await getAllPublicRentalHouses([]);

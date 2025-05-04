@@ -42,8 +42,8 @@ export default function UpdateRentalForm({ rentalHouse }: { rentalHouse: TRental
         reset(
             {
                 location: rentalHouse?.location,
-                rentAmount: rentalHouse?.rentAmount,
-                bedrooms: rentalHouse?.bedrooms,
+                rentAmount: rentalHouse?.rentAmount?.toString() || "",
+                bedrooms: rentalHouse?.bedrooms?.toString() || "",
                 amenities: rentalHouse?.amenities.join(", "),
                 description: rentalHouse?.description,
             },
@@ -56,7 +56,6 @@ export default function UpdateRentalForm({ rentalHouse }: { rentalHouse: TRental
 
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        console.log("data", data);
         const { previousImageUrls, newImageFiles } = separateImages(imageFiles);
         const updatedImages = [...previousImageUrls];
 
@@ -65,7 +64,6 @@ export default function UpdateRentalForm({ rentalHouse }: { rentalHouse: TRental
             if (newImageFiles.length > 0) {
                 for (const image of newImageFiles) {
                     const res = await uploadImageToCloudinary(image);
-                    console.log(res);
                     updatedImages.push(res?.url);
                 }
             }
@@ -80,13 +78,11 @@ export default function UpdateRentalForm({ rentalHouse }: { rentalHouse: TRental
                 amenities: data.amenities.split(",").map((amenity: string) => amenity.trim()),
                 location: data.location,
                 description: data.description,
-                rentAmount: String(data.rentAmount),
-                bedrooms: String(data.bedrooms),
+                rentAmount: data.rentAmount,
+                bedrooms: data.bedrooms,
                 images: updatedImages,
             }
-            console.log("rentalHouseData", rentalHouseData);
             const res = await updateRentalHouse(rentalHouse._id as string, rentalHouseData);
-            console.log(res);
             if (res?.success) {
                 toast.success(res?.message);
             } else {

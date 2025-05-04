@@ -35,7 +35,7 @@ const ImageUploader = ({
   };
 
   return (
-    <div className={cn("w-full lg:w-1/2", className)}>
+    <div className={cn("w-full", className)}>
       <Input
         onChange={handleImageChange}
         type="file"

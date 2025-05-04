@@ -2,6 +2,7 @@ import LoginForm from "@/components/modules/auth/login/LoginForm";
 import homeImg from "@/app/assets/images/home1.jpg";
 import Image from "next/image";
 import logo from "@/app/assets/nestly-logo.png";
+import { Suspense } from "react";
 
 const LoginPage = () => {
   return (
@@ -20,12 +21,17 @@ const LoginPage = () => {
               <Image src={logo} width={50} height={50} alt="Logo" />
               <span className="text-white"> Nestly</span>
             </h1>
-            <p className="text-white">Easily find your next home or list your property for rent. Log in or sign up to get started with smart and simple home rentals.</p>
+            <p className="text-white">
+              Easily find your next home or list your property for rent. Log in
+              or sign up to get started with smart and simple home rentals.
+            </p>
           </div>
         </div>
 
         <div className="my-10">
-          <LoginForm />
+          <Suspense fallback={<div>Loading login form...</div>}>
+            <LoginForm />
+          </Suspense>
         </div>
       </div>
     </div>

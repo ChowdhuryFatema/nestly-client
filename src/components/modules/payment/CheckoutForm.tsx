@@ -54,7 +54,7 @@ const CheckoutForm = ({ info }: { info: TRentalRequest }) => {
             tenantId: info?.tenantId,
             rentalHouseId: info?.rentalHouseId,
             landlordId: info?.landlordId,
-            amount: String(Number(info?.rentalHouseId?.rentAmount) + 15),
+            amount: Number(info?.rentalHouseId?.rentAmount) + 15,
             tenantRequestId: info?._id,
         }
 
@@ -86,8 +86,6 @@ const CheckoutForm = ({ info }: { info: TRentalRequest }) => {
             },
         });
 
-        console.log({ paymentResult })
-
         if (paymentResult.error) {
             toast.error(paymentResult.error.message);
             setLoading(false);
@@ -97,7 +95,7 @@ const CheckoutForm = ({ info }: { info: TRentalRequest }) => {
                 tenantId: info?.tenantId,
                 rentalHouseId: info?.rentalHouseId,
                 landlordId: info?.landlordId,
-                amount: String(Number(info?.rentalHouseId?.rentAmount) + 15),
+                amount: Number(info?.rentalHouseId?.rentAmount) + 15,
                 tenantRequestId: info?._id,
             });
             if (!response?.success) {

@@ -5,7 +5,7 @@ import React from "react";
 const CreateRental = () => {
   return (
     <div>
-      <div className="container mx-auto px-3 my-10">
+      <div className="container mx-auto px-3 my-5">
         <CreateRentalForm />
       </div>
     </div>

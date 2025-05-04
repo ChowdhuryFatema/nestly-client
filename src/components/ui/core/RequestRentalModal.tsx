@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import {
   Dialog,
   DialogContent,
@@ -14,18 +14,21 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import NLButton from "./ImageUploader/NLButton";
 import { createTenantRequest } from "@/services/TenantService";
-import { TRentalRequest } from "@/types";
+import { TRentalHouse, TRentalRequest } from "@/types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useUser } from "../../../context/UserContext";
 
-const RequestRentalModal = ({
-  rentalHouseId,
-  landlordId,
-}: {
+type RentalFormValues = {
   rentalHouseId: string;
   landlordId: string;
-}) => {
+  moveInDate: string;
+  rentalDuration: string;
+  message: string;
+};
+
+
+const RequestRentalModal = ({ rentalHouse }: { rentalHouse: TRentalHouse }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -36,18 +39,20 @@ const RequestRentalModal = ({
     control,
     reset,
     formState: { errors },
-  } = useForm<TRentalRequest>();
+  } = useForm<RentalFormValues>();
 
-  const onSubmit = async (data: TRentalRequest) => {
+
+  const onSubmit: SubmitHandler<RentalFormValues> = async (data) => {
     const newData = {
-      rentalHouseId,
-      landlordId: typeof landlordId === "string" ? { _id: landlordId } : landlordId,
       ...data,
+      rentalHouseId: rentalHouse?._id as string,
+      landlordId: rentalHouse?.landlord,
     };
 
+    console.log({newData});
     try {
-      const res = await createTenantRequest(newData);
-      console.log("Server Response:", res);
+      const res = await createTenantRequest(newData as unknown as TRentalRequest);
+      console.log({res});
 
       if (res.success) {
         toast.success(res.message);
@@ -74,7 +79,6 @@ const RequestRentalModal = ({
   };
 
   useEffect(() => {
-    console.log(user);
   }, [user]);
 
   return (
@@ -164,7 +168,7 @@ const RequestRentalModal = ({
           </div>
 
           <NLButton type="submit" variant="primary" className="w-full">
-            Submit Request
+            Submit Request 
           </NLButton>
         </form>
       </DialogContent>

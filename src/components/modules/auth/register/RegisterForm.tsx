@@ -39,10 +39,9 @@ const RegisterForm = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = await registerUser(data);
-      console.log(res);
       if (res?.success) {
         toast.success(res?.message);
-        router.push("/");
+        router.push("/login");
       } else {
         toast.error(res?.message);
       }
@@ -52,8 +51,8 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="max-w-[70%] mx-auto">
-      <div className="flex justify-center items-center">
+    <div className="max-w-[95%] md:max-w-[70%] mx-auto px-5">
+      <div className="flex justify-center items-center h-screen">
         <div className="w-full">
           <div className="mb-5 space-y-2 text-center">
             <h2 className="text-2xl font-semibold">Hi, Get Started Now 👋</h2>
@@ -130,7 +129,7 @@ const RegisterForm = () => {
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
                         >
                           {showPassword ? (
                             <Eye size={18} />
@@ -145,7 +144,6 @@ const RegisterForm = () => {
                 />
               </div>
               <div>
-                <label className="text-sm">Confirm Password</label>
                 <label className="text-sm">Confirm Password</label>
                 <FormField
                   control={form.control}

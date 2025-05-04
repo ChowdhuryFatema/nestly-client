@@ -7,7 +7,7 @@ Nestly is a smart rental housing solution that connects **Landlords**, **Tenants
 
 ## 🚀 Live Site
 
-🌐 [Live Demo](https://your-frontend-link.vercel.app)
+🌐 [Live Demo](https://nextly-client.vercel.app)
 
 ## 🔑 Features
 
@@ -59,7 +59,7 @@ Nestly is a smart rental housing solution that connects **Landlords**, **Tenants
 Use the following admin credentials to explore the Admin Dashboard:
 
 - **Email:** admin@gmail.com 
-- **Password:** Admin123!
+- **Password:** $Admin123
 ---
 
 
@@ -68,7 +68,7 @@ Use the following admin credentials to explore the Admin Dashboard:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/nestly.git
+git https://github.com/ChowdhuryFatema/nestly-client.git
 cd nestly/client
 
 npm install

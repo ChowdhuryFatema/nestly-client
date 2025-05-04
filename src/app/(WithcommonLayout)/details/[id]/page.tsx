@@ -9,13 +9,15 @@ import { TRentalHouse } from "@/types";
 const RentalHouseDetails = async ({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
 
   const allRentalHouses = await getAllPublicRentalHouses([]);
 
-  const singleData = allRentalHouses?.data?.find((data: TRentalHouse) => data?._id == id);
+  const singleData = allRentalHouses?.data?.find(
+    (data: TRentalHouse) => data?._id == id
+  );
 
   return (
     <div>

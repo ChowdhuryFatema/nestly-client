@@ -37,13 +37,11 @@ const CreateRentalForm = () => {
     },
   });
 
-
   const {
     formState: { isSubmitting },
   } = form;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("data", data);
 
     if (imageFiles.length === 0) {
       toast.error("Please upload at least one image");
@@ -53,21 +51,21 @@ const CreateRentalForm = () => {
       const upLoadedImagesUrls = [];
       for (const image of imageFiles as File[]) {
         const res = await uploadImageToCloudinary(image);
-        console.log(res);
         upLoadedImagesUrls.push(res?.url);
       }
 
-      const amenities = data.amenities.split(",").map((amenity: string) => amenity.trim());
+      const amenities = data.amenities
+        .split(",")
+        .map((amenity: string) => amenity.trim());
       const rentalHouseData: TRentalHouse = {
         ...data,
         amenities: amenities,
         location: data.location,
         description: data.description,
-        rentAmount: String(data.rentAmount),
-        bedrooms: String(data.bedrooms),
+        rentAmount: data.rentAmount,
+        bedrooms: data.bedrooms,
         images: upLoadedImagesUrls,
-      }
-      console.log("rentalHouseData", rentalHouseData);
+      };
       const res = await createRentalHouse(rentalHouseData);
       if (res?.success) {
         toast.success(res?.message);
@@ -80,7 +78,6 @@ const CreateRentalForm = () => {
     } catch (error: any) {
       console.error(error);
     }
-
   };
 
   return (
@@ -97,7 +94,11 @@ const CreateRentalForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel />
-                    <Input placeholder="Enter location" {...field} value={field.value || ""} />
+                    <Input
+                      placeholder="Enter location"
+                      {...field}
+                      value={field.value || ""}
+                    />
                     <FormMessage />
                   </FormItem>
                 )}
@@ -109,7 +110,11 @@ const CreateRentalForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel />
-                    <Input placeholder="eg: 1000, 2000, 3000, etc." {...field} value={field.value || ""} />
+                    <Input
+                      placeholder="eg: 1000, 2000, 3000, etc."
+                      {...field}
+                      value={field.value || ""}
+                    />
                     <FormMessage />
                   </FormItem>
                 )}
@@ -121,7 +126,12 @@ const CreateRentalForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel />
-                    <Input type="number" placeholder="eg: 1, 2, 3, etc." {...field} value={field.value || ""} />
+                    <Input
+                      type="number"
+                      placeholder="eg: 1, 2, 3, etc."
+                      {...field}
+                      value={field.value || ""}
+                    />
                     <FormMessage />
                   </FormItem>
                 )}
@@ -135,43 +145,61 @@ const CreateRentalForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel />
-                      <Input placeholder="eg: wifi, parking, etc." {...field} value={field.value || ""} />
+                      <Input
+                        placeholder="eg: wifi, parking, etc."
+                        {...field}
+                        value={field.value || ""}
+                      />
                       <FormMessage />
                     </FormItem>
                   )}
                 />
               </div>
 
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                <div className="col-auto lg:col-span-2">
+                  <label className="text-md">Description</label>
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel />
+                        <Textarea
+                          placeholder="Enter description"
+                          className="h-28"
+                          {...field}
+                          value={field.value || ""}
+                        />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-              <div className="col-span-2">
-                <label className="text-md">Description</label>
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel />
-                      <Textarea placeholder="Enter description" className="h-24" {...field} value={field.value || ""} />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-
-              <div className="space-y-2">
-                <FormLabel className="text-md">Upload Images</FormLabel>
-                <ImageUploader
-                  setImageFiles={setImageFiles as React.Dispatch<React.SetStateAction<File[] | string[]>>}
-                  setImagePreview={setImagePreview}
-                  label="Upload Images"
-                />
+                <div className="space-y-2 w-full">
+                  <FormLabel className="text-md">Upload Images</FormLabel>
+                  <ImageUploader
+                    className="w-full"
+                    setImageFiles={
+                      setImageFiles as React.Dispatch<
+                        React.SetStateAction<File[] | string[]>
+                      >
+                    }
+                    setImagePreview={setImagePreview}
+                    label="Upload Images"
+                  />
+                </div>
               </div>
 
               <div>
                 {imagePreview.length > 0 && (
                   <ImagePreviewer
-                    setImageFiles={setImageFiles as React.Dispatch<React.SetStateAction<File[] | string[]>>}
+                    setImageFiles={
+                      setImageFiles as React.Dispatch<
+                        React.SetStateAction<File[] | string[]>
+                      >
+                    }
                     imagePreview={imagePreview}
                     setImagePreview={setImagePreview}
                     className=" flex flex-wrap gap-2"

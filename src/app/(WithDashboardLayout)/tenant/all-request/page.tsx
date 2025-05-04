@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { getAllMyRequests } from "@/services/TenantService";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -5,7 +6,6 @@ import Link from "next/link";
 
 export default async function AllRequestPage() {
     const myRequests = await getAllMyRequests();
-    console.log("myRequests", myRequests);
     return (
         <div className="container py-6">
             <h1 className="text-2xl font-semibold mb-4">All Rental Listings</h1>

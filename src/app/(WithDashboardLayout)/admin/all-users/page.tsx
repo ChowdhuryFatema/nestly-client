@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import ManageUsers from "@/components/modules/manageUsers/ManageUsers";
 import { getAllUsers } from "@/services/Users";
 import React from "react";
