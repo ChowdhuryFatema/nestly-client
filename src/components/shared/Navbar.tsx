@@ -50,10 +50,12 @@ export default function Navbar() {
     { href: "/", label: "Home" },
     { href: "/about-us", label: "About Us" },
     { href: "/all-listings-rental", label: "All Listings Rental" },
+    { href: "/faq", label: "FAQ" },
+    { href: "/terms", label: "Terms & Conditions" },
   ];
 
   return (
-    <header className="border-b w-full">
+    <header className="border-b w-full sticky top-0 z-50 bg-white shadow-sm">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
         {/* Logo */}
         <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
@@ -64,17 +66,40 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex flex-grow justify-center">
           <ul className="flex space-x-6 text-sm text-gray-800 font-medium">
-            {navLinks.map((link) => (
-              <li
-                key={link.href}
-                className={clsx(
-                  pathname === link.href && "text-primary-500",
-                  "font-bold"
-                )}
-              >
-                <Link href={link.href}>{link.label}</Link>
-              </li>
-            ))}
+            {navLinks
+              .filter(
+                (link) =>
+                  link.label !== "FAQ" &&
+                  link.label !== "Terms & Conditions"
+              )
+              .map((link) => (
+                <li
+                  key={link.href}
+                  className={clsx(
+                    pathname === link.href && "text-primary-500",
+                    "font-bold"
+                  )}
+                >
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+
+            {/* Mega Menu for Explore */}
+            <li className="relative group font-bold cursor-pointer">
+              <span className="group-hover:text-primary-500">
+                Explore ▾
+              </span>
+              <div className="absolute top-full left-0 bg-white shadow-lg border rounded-md mt-2 w-56 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50">
+                <ul className="py-2">
+                  <li className="px-4 py-2 hover:bg-gray-100">
+                    <Link href="/faq">FAQ</Link>
+                  </li>
+                  <li className="px-4 py-2 hover:bg-gray-100">
+                    <Link href="/terms">Terms & Conditions</Link>
+                  </li>
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
 
@@ -141,18 +166,49 @@ export default function Navbar() {
               </SheetTrigger>
               <SheetContent side="left" className="w-52">
                 <div className="space-y-4 mt-4 p-5">
-                  {navLinks.map((link) => (
+                  {navLinks
+                    .filter(
+                      (link) =>
+                        link.label !== "FAQ" &&
+                        link.label !== "Terms & Conditions"
+                    )
+                    .map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={clsx(
+                          pathname === link.href && "text-primary-500",
+                          "block text-sm font-semibold"
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+
+                  {/* Mobile Explore Section */}
+                  <div className="mt-4">
+                    <p className="text-xs uppercase text-gray-400 mb-2">
+                      Explore
+                    </p>
                     <Link
-                      key={link.href}
-                      href={link.href}
+                      href="/faq"
                       className={clsx(
-                        pathname === link.href && "text-primary-500",
+                        pathname === "/faq" && "text-primary-500",
                         "block text-sm font-semibold"
                       )}
                     >
-                      {link.label}
+                      FAQ
                     </Link>
-                  ))}
+                    <Link
+                      href="/terms"
+                      className={clsx(
+                        pathname === "/terms" && "text-primary-500",
+                        "block text-sm font-semibold"
+                      )}
+                    >
+                      Terms & Conditions
+                    </Link>
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>
