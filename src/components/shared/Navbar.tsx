@@ -29,6 +29,7 @@ export default function Navbar() {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
+  const [showExplore, setShowExplore] = useState(false);
   const handleUser = async () => {
     const user = await getCurrentUser();
     setUser(user);
@@ -52,10 +53,12 @@ export default function Navbar() {
     { href: "/all-listings-rental", label: "All Listings Rental" },
     { href: "/about-us", label: "About Us" },
     { href: "/tips", label: "Tips for rent" },
+    { href: "/faq", label: "FAQ" },
+    { href: "/terms", label: "Terms & Conditions" },
   ];
 
   return (
-    <header className="border-b w-full">
+    <header className="border-b w-full sticky top-0 z-50 bg-white shadow-sm">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
         {/* Logo */}
         <Link href={"/"}>
@@ -68,17 +71,40 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex flex-grow justify-center">
           <ul className="flex space-x-6 text-sm text-gray-800 font-medium">
-            {navLinks.map((link) => (
-              <li
-                key={link.href}
-                className={clsx(
-                  pathname === link.href && "text-primary-500",
-                  "font-bold"
-                )}
-              >
-                <Link href={link.href}>{link.label}</Link>
-              </li>
-            ))}
+            {navLinks
+              .filter(
+                (link) =>
+                  link.label !== "FAQ" &&
+                  link.label !== "Terms & Conditions"
+              )
+              .map((link) => (
+                <li
+                  key={link.href}
+                  className={clsx(
+                    pathname === link.href && "text-primary-500",
+                    "font-bold"
+                  )}
+                >
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+
+            {/* Mega Menu for Explore */}
+            <li className="relative group font-bold cursor-pointer">
+              <span className="group-hover:text-primary-500">
+                Explore ▾
+              </span>
+              <div className="absolute top-full left-0 bg-white shadow-lg border rounded-md mt-2 w-56 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50">
+                <ul className="py-2">
+                  <li className="px-4 py-2 hover:bg-gray-100">
+                    <Link href="/faq">FAQ</Link>
+                  </li>
+                  <li className="px-4 py-2 hover:bg-gray-100">
+                    <Link href="/terms">Terms & Conditions</Link>
+                  </li>
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
 
@@ -137,31 +163,71 @@ export default function Navbar() {
 
           {/* Mobile Menu Icon */}
           <div className="md:hidden">
-            <Sheet open={open} onOpenChange={setOpen}>
-              <SheetTrigger asChild>
-                <button className="p-2">
-                  <Menu className="w-6 h-6" />
-                </button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-52">
-                <div className="space-y-4 mt-4 p-5">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      className={clsx(
-                        pathname === link.href && "text-primary-500",
-                        "block text-sm font-semibold"
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+      <Sheet>
+        <SheetTrigger asChild>
+          <button className="p-2">
+            <Menu className="w-6 h-6" />
+          </button>
+        </SheetTrigger>
+        <SheetContent side="left" className="w-64">
+          <div className="space-y-4 mt-4 p-5">
+            {/* Static nav links except Explore */}
+            {navLinks
+              .filter(
+                (link) =>
+                  link.label !== "FAQ" &&
+                  link.label !== "Terms & Conditions"
+              )
+              .map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={clsx(
+                    pathname === link.href && "text-primary-500",
+                    "block text-sm font-semibold"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+
+            {/* Explore Dropdown for Mobile */}
+            <div className="mt-4">
+              <button
+                className="w-full text-left text-sm font-semibold flex items-center justify-between"
+                onClick={() => setShowExplore(!showExplore)}
+              >
+                <span>Explore</span>
+                <span>{showExplore ? "▲" : "▼"}</span>
+              </button>
+
+              {showExplore && (
+                <div className="mt-2 pl-3 space-y-2">
+                  <Link
+                    href="/faq"
+                    className={clsx(
+                      pathname === "/faq" && "text-primary-500",
+                      "block text-sm font-semibold"
+                    )}
+                  >
+                    FAQ
+                  </Link>
+                  <Link
+                    href="/terms"
+                    className={clsx(
+                      pathname === "/terms" && "text-primary-500",
+                      "block text-sm font-semibold"
+                    )}
+                  >
+                    Terms & Conditions
+                  </Link>
                 </div>
-              </SheetContent>
-            </Sheet>
+              )}
+            </div>
           </div>
+        </SheetContent>
+      </Sheet>
+    </div>
         </div>
       </div>
     </header>
