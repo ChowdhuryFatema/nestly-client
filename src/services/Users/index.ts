@@ -32,7 +32,28 @@ export const updateProfile = async (formData: {
     currentPassword?: string;
     newPassword?: string;
   }) => {
+    const token = (await cookies()).get("accessToken")?.value;
 
+    if (!token) {
+        throw new Error("Authorization error is missing!")
+    }
+
+    try {  
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/update-profile`, {
+            method: "PUT",
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token 
+            },
+        });
+    //   .then(res => {
+    //     console.log("")
+    //     return res
+    //   });
+  
+      const result = await res.json();
+  
       if (!res.ok) {
         throw new Error(result?.message || "Something went wrong");
       }
@@ -42,7 +63,6 @@ export const updateProfile = async (formData: {
       throw new Error(error?.message || "An error occurred during the update process");
     }
   };
-
 
 export const updateUserRole = async (userId: string, newRole: string) => {
     try {
