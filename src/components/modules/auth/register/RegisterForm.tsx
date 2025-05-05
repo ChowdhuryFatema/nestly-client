@@ -52,7 +52,7 @@ const RegisterForm = () => {
 
   return (
     <div className="max-w-[95%] md:max-w-[70%] mx-auto px-5">
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen py-10">
         <div className="w-full">
           <div className="mb-5 space-y-2 text-center">
             <h2 className="text-2xl font-semibold">Hi, Get Started Now 👋</h2>
@@ -63,7 +63,7 @@ const RegisterForm = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-3 grid grid-cols-1 md:grid-cols-2 gap-3"
+              className="space-y-1 grid grid-cols-1 md:grid-cols-2 gap-3"
             >
               <div>
                 <label className="text-sm">Full Name</label>

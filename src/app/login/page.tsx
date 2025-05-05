@@ -7,7 +7,7 @@ import { Suspense } from "react";
 const LoginPage = () => {
   return (
     <div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-between items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-5 justify-between items-center">
         <div className="relative w-full h-screen hidden lg:flex">
           {/* Background Image */}
           <Image src={homeImg} fill alt="Home" className="object-cover z-0" />
@@ -28,8 +28,8 @@ const LoginPage = () => {
           </div>
         </div>
 
-        <div className="my-10">
-          <Suspense fallback={<div>Loading login form...</div>}>
+        <div>
+          <Suspense fallback={<div className="text-center">Loading login form...</div>}>
             <LoginForm />
           </Suspense>
         </div>

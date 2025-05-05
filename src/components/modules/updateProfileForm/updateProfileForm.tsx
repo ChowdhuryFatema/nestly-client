@@ -92,19 +92,20 @@ export default function UpdateProfileForm() {
       : "/default-avatar.png";
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4">
+    <div className="flex justify-center items-center min-h-screen px-4 bg-gray-50">
       <form
         onSubmit={handleSubmit}
-        className="bg-white w-full max-w-lg rounded-2xl shadow-xl p-8 space-y-6"
+        className="bg-white w-full max-w-lg rounded-2xl shadow-xl p-8 space-y-6 border border-gray-300"
       >
         <div className="flex justify-center">
-          <div className="relative w-24 h-24">
+          <div className="relative w-28 h-28 border-4 border-primary-500 rounded-full">
             <Image
-              src={
-                profileImageSrc
-                  ? profileImageSrc
-                  : "https://s.cafebazaar.ir/images/icons/cute.love.dp-fc9c8497-522b-4848-bd66-72ee57b9d195_512x512.png"
-              }
+              src="https://s.cafebazaar.ir/images/icons/cute.love.dp-fc9c8497-522b-4848-bd66-72ee57b9d195_512x512.png"
+              // src={
+              //   profileImageSrc
+              //     ? profileImageSrc
+              //     : "https://s.cafebazaar.ir/images/icons/cute.love.dp-fc9c8497-522b-4848-bd66-72ee57b9d195_512x512.png"
+              // }
               alt="Profile"
               width={96}
               height={96}
@@ -143,7 +144,7 @@ export default function UpdateProfileForm() {
               placeholder="Email"
               value={formData.email}
               disabled
-              className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
+              className="text-gray-400 pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
             />
           </div>
            <div className="relative md:col-span-2">
@@ -153,7 +154,7 @@ export default function UpdateProfileForm() {
               placeholder="Username"
               value={formData.username}
               disabled
-              className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
+              className="text-gray-600 pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
             />
           </div>
 
@@ -164,7 +165,7 @@ export default function UpdateProfileForm() {
               placeholder="Role"
               value={formData.role}
               disabled
-              className="pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
+              className="text-gray-400 pl-10 w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
             />
           </div>
           <div className="relative">

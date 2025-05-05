@@ -15,33 +15,61 @@ const Service = () => {
         </h3>
         <p className="text-gray-600">
           At Nestly, we make finding a rental home easy, reliable, and
-          stress-free. Whether you&apos;re looking for a cozy apartment or a spacious
-          house, our platform is designed to connect you with your ideal living
-          space quickly and securely.
+          stress-free. Whether you&apos;re looking for a cozy apartment or a
+          spacious house, our platform is designed to connect you with your
+          ideal living space quickly and securely.
         </p>
 
-        <ul>
-          <li className="flex gap-2 items-center text-gray-600">
-            <IoMdCheckmarkCircleOutline className="text-primary-500" /> Wide selection of verified rental
-            properties across prime locations
-          </li>
-          <li className="flex gap-2 items-center text-gray-600">
-            <IoMdCheckmarkCircleOutline className="text-primary-500" />
-            Easy-to-use search filters to match your lifestyle and budget
-          </li>
-          <li className="flex gap-2 items-center text-gray-600">
-            <IoMdCheckmarkCircleOutline className="text-primary-500" />
-            Direct communication with trusted property owners and managers
-          </li>
-          <li className="flex gap-2 items-center text-gray-600">
-            <IoMdCheckmarkCircleOutline className="text-primary-500" />
-            Transparent pricing with no hidden charges
-          </li>
-          <li className="flex gap-2 items-center text-gray-600">
-            <IoMdCheckmarkCircleOutline className="text-primary-500" />
-            24/7 customer support to assist you at every step
-          </li>
-        </ul>
+        <div>
+          <div className="flex gap-2">
+            <IoMdCheckmarkCircleOutline
+              className="text-primary-500 pt-1"
+              size={20}
+            />
+            <p className="flex gap-2 items-start text-gray-600">
+              Wide selection of verified rental properties across prime
+              locations
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <IoMdCheckmarkCircleOutline
+              className="text-primary-500 pt-1"
+              size={20}
+            />
+            <p className="text-gray-600">
+              Easy-to-use search filters to match your lifestyle and budget
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <IoMdCheckmarkCircleOutline
+              className="text-primary-500 pt-1"
+              size={20}
+            />
+            <p className="text-gray-600">
+              Direct communication with trusted property owners and managers
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <IoMdCheckmarkCircleOutline
+              className="text-primary-500 pt-1"
+              size={20}
+            />
+            <p className="text-gray-600">
+              {" "}
+              Transparent pricing with no hidden charges
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <IoMdCheckmarkCircleOutline
+              className="text-primary-500 pt-1"
+              size={20}
+            />
+            <p className="text-gray-600">
+              {" "}
+              24/7 customer support to assist you at every step
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

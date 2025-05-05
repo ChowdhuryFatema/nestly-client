@@ -27,7 +27,7 @@ const RegisterPage = () => {
             </p>
           </div>
         </div>
-        <div className="my-10">
+        <div>
           <RegisterForm />
         </div>
       </div>

@@ -27,6 +27,7 @@ export default function Navbar() {
   const router = useRouter();
   const [user, setUser] = useState<TUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleUser = async () => {
     const user = await getCurrentUser();
@@ -56,12 +57,12 @@ export default function Navbar() {
     <header className="border-b w-full">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
         {/* Logo */}
-       <Link href={"/"}>
-       <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
-          <Image src={logo} width={30} height={40} alt="Logo" />
-          Nestly
-        </h1>
-       </Link>
+        <Link href={"/"}>
+          <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
+            <Image src={logo} width={30} height={40} alt="Logo" />
+            Nestly
+          </h1>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex flex-grow justify-center">
@@ -135,7 +136,7 @@ export default function Navbar() {
 
           {/* Mobile Menu Icon */}
           <div className="md:hidden">
-            <Sheet>
+            <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <button className="p-2">
                   <Menu className="w-6 h-6" />
@@ -147,6 +148,7 @@ export default function Navbar() {
                     <Link
                       key={link.href}
                       href={link.href}
+                      onClick={() => setOpen(false)}
                       className={clsx(
                         pathname === link.href && "text-primary-500",
                         "block text-sm font-semibold"
