@@ -2,12 +2,12 @@
 "use client";
 
 import Cookies from "js-cookie";
-import { updateProfile } from "@/services/Users";
+
 import { getCurrentUser } from "@/services/AuthService";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
-import { User, Phone, Eye, EyeOff, Mail, Shield} from "lucide-react";
+
 
 export default function UpdateProfileForm() {
   const [formData, setFormData] = useState({
@@ -24,23 +24,24 @@ export default function UpdateProfileForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
 
+  const fetchData = async () => {
+    try {
+      const data = await getCurrentUser();
+      setFormData((prev) => ({
+        ...prev,
+        name: data.name || "",
+        phoneNumber: data.phoneNumber || "",
+        profileImage: data.profileImage || "",
+        email: data.email || "",
+        role: data.role || "",
+      }));
+    } catch (error) {
+      toast.error("Failed to load profile");
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getCurrentUser();
-        setFormData((prev) => ({
-          ...prev,
-          name: data.name || "",
-          phoneNumber: data.phoneNumber || "",
-          profileImage: data.profileImage || "",
-          email: data.email || "",
-          role: data.role || "",
-          username: data.username || "",
-        }));
-      } catch (error) {
-        toast.error("Failed to load profile");
-      }
-    };
+
     fetchData();
   }, []);
 
@@ -52,7 +53,9 @@ export default function UpdateProfileForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    // setFormData((prev) => ({ ...prev, [name]: value }));
+
+    setFormData({...formData, [name]: value})
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -62,22 +65,16 @@ export default function UpdateProfileForm() {
 
       const res = await updateProfile(updatableData);
 
+      console.log("RES: ", res)
+
       if (res?.data?.token) {
         Cookies.remove("accessToken");
-        Cookies.set("accessToken", res?.data?.token, { expires: 7 });
+
       }
 
       toast.success(res.message || "Profile updated successfully");
 
-      const updatedUser = await getCurrentUser();
-      setFormData((prev) => ({
-        ...prev,
-        name: updatedUser.name || "",
-        phoneNumber: updatedUser.phoneNumber || "",
-        profileImage: updatedUser.profileImage || "",
-        email: updatedUser.email || "",
-        role: updatedUser.role || "",
-        username: updatedUser.username || "",
+
         currentPassword: "",
         newPassword: "",
       }));

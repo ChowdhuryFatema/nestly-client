@@ -51,6 +51,7 @@ export default function Navbar() {
     { href: "/", label: "Home" },
     { href: "/all-listings-rental", label: "All Listings Rental" },
     { href: "/about-us", label: "About Us" },
+    { href: "/Tips", label: "Tips for rent" },
   ];
 
   return (

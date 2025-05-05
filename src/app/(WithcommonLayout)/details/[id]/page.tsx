@@ -5,6 +5,7 @@ import Link from "next/link";
 import RentalHouseDetailsCard from "@/components/modules/auth/rentalHouseDetailsCard/RentalHouseDetailsCard";
 import { getAllPublicRentalHouses } from "@/services/ListingService";
 import { TRentalHouse } from "@/types";
+import ReviewCardList from "@/components/modules/Details/ReviewCardList";
 
 const RentalHouseDetails = async ({
   params,
@@ -43,8 +44,9 @@ const RentalHouseDetails = async ({
           </div>
         </div>
       </div>
-      <div className="container mx-auto px-3 my-10 md:my-20">
+      <div className="container mx-auto px-3 mt-10 md:mt-20">
         <RentalHouseDetailsCard singleData={singleData!} />
+        <ReviewCardList />
       </div>
     </div>
   );

@@ -32,18 +32,7 @@ export const updateProfile = async (formData: {
     currentPassword?: string;
     newPassword?: string;
   }) => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/update-profile`, {
-        method: "PUT",
-        body: JSON.stringify(formData),
-        headers: {
-            "Content-Type": "application/json",
-          Authorization:  (await cookies()).get("accessToken")?.value || "" 
-        },
-        
-      });
-     
-      const result = await res.json();  
+
       if (!res.ok) {
         throw new Error(result?.message || "Something went wrong");
       }
