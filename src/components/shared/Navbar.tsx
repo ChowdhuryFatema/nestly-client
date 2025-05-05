@@ -27,7 +27,7 @@ export default function Navbar() {
   const router = useRouter();
   const [user, setUser] = useState<TUser | null>(null);
   const [loading, setLoading] = useState(true);
-
+  const [showExplore, setShowExplore] = useState(false);
   const handleUser = async () => {
     const user = await getCurrentUser();
     setUser(user);
@@ -58,10 +58,11 @@ export default function Navbar() {
     <header className="border-b w-full sticky top-0 z-50 bg-white shadow-sm">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
         {/* Logo */}
-        <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
+       <Link href="/">
+       <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
           <Image src={logo} width={30} height={40} alt="Logo" />
           Nestly
-        </h1>
+        </h1></Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex flex-grow justify-center">
@@ -158,61 +159,71 @@ export default function Navbar() {
 
           {/* Mobile Menu Icon */}
           <div className="md:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <button className="p-2">
-                  <Menu className="w-6 h-6" />
-                </button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-52">
-                <div className="space-y-4 mt-4 p-5">
-                  {navLinks
-                    .filter(
-                      (link) =>
-                        link.label !== "FAQ" &&
-                        link.label !== "Terms & Conditions"
-                    )
-                    .map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className={clsx(
-                          pathname === link.href && "text-primary-500",
-                          "block text-sm font-semibold"
-                        )}
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
+      <Sheet>
+        <SheetTrigger asChild>
+          <button className="p-2">
+            <Menu className="w-6 h-6" />
+          </button>
+        </SheetTrigger>
+        <SheetContent side="left" className="w-64">
+          <div className="space-y-4 mt-4 p-5">
+            {/* Static nav links except Explore */}
+            {navLinks
+              .filter(
+                (link) =>
+                  link.label !== "FAQ" &&
+                  link.label !== "Terms & Conditions"
+              )
+              .map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={clsx(
+                    pathname === link.href && "text-primary-500",
+                    "block text-sm font-semibold"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
 
-                  {/* Mobile Explore Section */}
-                  <div className="mt-4">
-                    <p className="text-xs uppercase text-gray-400 mb-2">
-                      Explore
-                    </p>
-                    <Link
-                      href="/faq"
-                      className={clsx(
-                        pathname === "/faq" && "text-primary-500",
-                        "block text-sm font-semibold"
-                      )}
-                    >
-                      FAQ
-                    </Link>
-                    <Link
-                      href="/terms"
-                      className={clsx(
-                        pathname === "/terms" && "text-primary-500",
-                        "block text-sm font-semibold"
-                      )}
-                    >
-                      Terms & Conditions
-                    </Link>
-                  </div>
+            {/* Explore Dropdown for Mobile */}
+            <div className="mt-4">
+              <button
+                className="w-full text-left text-sm font-semibold flex items-center justify-between"
+                onClick={() => setShowExplore(!showExplore)}
+              >
+                <span>Explore</span>
+                <span>{showExplore ? "▲" : "▼"}</span>
+              </button>
+
+              {showExplore && (
+                <div className="mt-2 pl-3 space-y-2">
+                  <Link
+                    href="/faq"
+                    className={clsx(
+                      pathname === "/faq" && "text-primary-500",
+                      "block text-sm font-semibold"
+                    )}
+                  >
+                    FAQ
+                  </Link>
+                  <Link
+                    href="/terms"
+                    className={clsx(
+                      pathname === "/terms" && "text-primary-500",
+                      "block text-sm font-semibold"
+                    )}
+                  >
+                    Terms & Conditions
+                  </Link>
                 </div>
-              </SheetContent>
-            </Sheet>
+              )}
+            </div>
           </div>
+        </SheetContent>
+      </Sheet>
+    </div>
         </div>
       </div>
     </header>
