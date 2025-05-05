@@ -21,6 +21,7 @@ import NLButton from "@/components/ui/core/ImageUploader/NLButton";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
 import { Eye, EyeOff } from "lucide-react";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 const LoginForm = () => {
   const [credential, setCredential] = useState("tenant");
@@ -80,41 +81,46 @@ const LoginForm = () => {
   };
 
   // inside the component
-  // useEffect(() => {
-  //   let newValues = {
-  //     email: "",
-  //     password: "",
-  //   };
+  useEffect(() => {
+    let newValues = {
+      email: "",
+      password: "",
+    };
 
-  //   if (credential === "admin") {
-  //     newValues = {
-  //       email: "admin@gmail.com",
-  //       password: "$Admin123",
-  //     };
-  //   } else if (credential === "tenant") {
-  //     newValues = {
-  //       email: "tenant@gmail.com",
-  //       password: "$Tenant123",
-  //     };
-  //   } else if (credential === "landlord") {
-  //     newValues = {
-  //       email: "landlord@gmail.com",
-  //       password: "$Landloard123",
-  //     };
-  //   }
+    if (credential === "admin") {
+      newValues = {
+        email: "admin@gmail.com",
+        password: "$Admin123",
+      };
+    } else if (credential === "tenant") {
+      newValues = {
+        email: "tenant@gmail.com",
+        password: "$Tenant123",
+      };
+    } else if (credential === "landlord") {
+      newValues = {
+        email: "landlord@gmail.com",
+        password: "$Landlord123",
+      };
+    }
 
-  //   form.reset(newValues);
-  // }, [credential, form]);
+    form.reset(newValues);
+  }, [credential, form]);
 
   return (
     <div className="max-w-[95%] md:max-w-[70%] mx-auto px-5">
       <div className="flex justify-center items-center h-screen py-10">
         <div className="w-full">
+          <Link href={"/"}>
+                      <button className="flex items-center gap-2 cursor-pointer mb-5">
+                        <FaArrowLeftLong /> Back Home
+                      </button>
+                    </Link>
           <div className="mb-5 space-y-2 text-center">
             <h2 className="text-2xl font-semibold">Welcome Back Man! 👋</h2>
             <p className="text-gray-600 text-sm">Enter Login Details</p>
           </div>
-          {/* <div>
+          <div>
           <div className="flex justify-center gap-2 mb-5">
             <NLButton
               onClick={() => setCredential("tenant")}
@@ -147,7 +153,7 @@ const LoginForm = () => {
               Admin Credentials
             </NLButton>
           </div>
-        </div> */}
+        </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
               <label className="text-sm">Email or Username</label>

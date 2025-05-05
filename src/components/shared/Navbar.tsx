@@ -49,8 +49,8 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/about-us", label: "About Us" },
     { href: "/all-listings-rental", label: "All Listings Rental" },
+    { href: "/about-us", label: "About Us" },
   ];
 
   return (

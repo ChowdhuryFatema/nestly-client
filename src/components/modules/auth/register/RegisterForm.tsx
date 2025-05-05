@@ -19,6 +19,7 @@ import NLButton from "@/components/ui/core/ImageUploader/NLButton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -54,6 +55,11 @@ const RegisterForm = () => {
     <div className="max-w-[95%] md:max-w-[70%] mx-auto px-5">
       <div className="flex justify-center items-center h-screen py-10">
         <div className="w-full">
+          <Link href={"/"}>
+            <button className="flex items-center gap-2 cursor-pointer mb-5">
+              <FaArrowLeftLong /> Back Home
+            </button>
+          </Link>
           <div className="mb-5 space-y-2 text-center">
             <h2 className="text-2xl font-semibold">Hi, Get Started Now 👋</h2>
             <p className="text-gray-600 text-sm">
