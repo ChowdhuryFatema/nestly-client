@@ -7,6 +7,7 @@ import RentalHouses from "@/components/modules/rentalHouse/RentalHouses/RentalHo
 import { getAllPublicRentalHouses } from "@/services/ListingService";
 import Service from "@/components/modules/service/Service";
 import Feature from "@/components/modules/Feature/Feature";
+import NewsLetterForm from "@/components/modules/newsLetter/NewsLetterForm";
 
 
 const HomePage = async () => {
@@ -22,6 +23,7 @@ const HomePage = async () => {
         <RentingTips />
         <Feature />
         <Testimonial />
+        <NewsLetterForm/>
       </div>
     </div>
   );
