@@ -110,7 +110,7 @@ yarn dev
 
 The app will be running locally at http://localhost:3000.
 
-🚀 Future Plans
+🚀 Future Plans 
 
 User Reviews and Ratings: Allow tenants to rate and review listings to help future renters make informed decisions.
 
